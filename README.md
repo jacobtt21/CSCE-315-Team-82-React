@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Quick Notes:
+
+To run the project:
+git clone https://github.tamu.edu/jacobt1206/proj3_client.git
+cd proj3_client
+npm install
+npm start
+^C "to end project"
+
 ## Available Scripts
 
 In the project directory, you can run:
