@@ -21,7 +21,7 @@
 4. ```Ctrl + C``` to kill the client
 
 
-### how to test with data from server
+### how to test with data from the server
 
 To get data from the server, ensure that in one terminal, your server is running on port `5000`. the client will run on port `3000` and will make calls to the server.
 
