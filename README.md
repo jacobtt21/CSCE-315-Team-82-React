@@ -1,79 +1,32 @@
-# Getting Started with Create React App
+### :exclamation:ONLY USE GIT/GITHUB DESKTOP TO INTERACT WITH THIS REPO:exclamation:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## REACT CLIENT FOR POS SYSTEM
 
-## Quick Notes:
+**If you get stuck Google: '*[Whatever you are trying to do] in React*' and follow the tutorial**
 
-To run the project: \
-git clone https://github.tamu.edu/jacobt1206/proj3_client.git  \
-cd proj3_client \
-npm install \
-npm start \
-^C "to end project" \
+### how to get started
 
-## Available Scripts
+1. ```$ git clone https://github.tamu.edu/jacobt1206/proj3_client.git```
+2. ```$ cd proj3_server```
+3. ```npm i```
+4. ```npm start```
+> At this point you can begin working in the src folder. Remember to push and pull frequently.
+7. ```Ctrl + C``` to kill the client
 
-In the project directory, you can run:
+### how to begin work
 
-### `npm start`
+1. ```$ cd proj3_server```
+3. ```npm start```
+> At this point you can begin working in the src folder. Remember to push and pull frequently.
+4. ```Ctrl + C``` to kill the client
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### how to test with data from server
 
-### `npm test`
+To get data from the server, ensure that in one terminal, your server is running on port `5000`. the client will run on port `3000` and will make calls to the server.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### IMPORTANT!
 
-### `npm run build`
+when using npm to install a package, push the changes. This will update the package.json and package-lock.json. Once this is done notify the group of the change.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To install packages run the following command ```npm i```
