@@ -60,6 +60,17 @@ function NavBar() {
                 Extra Features
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/CustomerPage"
+                activeClassName="active"
+                className="nav-links"
+                onClick={handleClick}
+              >
+                Customer View
+              </NavLink>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"}></i>

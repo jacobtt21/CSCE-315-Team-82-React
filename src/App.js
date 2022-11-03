@@ -5,6 +5,7 @@ import { Home } from "./Manager/Components/Home";
 import { MenuItems } from "./Manager/Components/MenuItems";
 import { Inventory } from "./Manager/Components/Inventory";
 import { ExtraFeatures } from "./Manager/Components/ExtraFeatures";
+import { CustomerPage } from "./Manager/Components/CustomerPage";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
             <Route path= "/MenuItems" component={MenuItems} />
             <Route path= "/Inventory" component={Inventory} />
             <Route path= "/ExtraFeatures" component={ExtraFeatures} />
+            <Route path= "/CustomerPage" component={CustomerPage} />
+
           </Switch>
         </div>
       </Router>
