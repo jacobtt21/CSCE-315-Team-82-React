@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
 
 export const MenuItems = () => {
+  const [menuItems, setMenuItems] = useState([{}])
+  useEffect(() => {
+    fetch('/fetch').then(
+      response => response.json()
+    ).then(data => setMenuItems(data.menuItems))
+  }, []);
+
   return (
     <>
       <div className="p-3">
@@ -27,46 +34,21 @@ export const MenuItems = () => {
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Example Name</td>
-                      <td>Example Nickname</td>
-                      <td>Example Type</td>
-                      <td>Example Price</td>
-                      <td>Example Orderable</td>
-                      <td>Example Main Item</td>
-                      <td><a href="MenuItem/1/edit">edit</a></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Example Name</td>
-                      <td>Example Nickname</td>
-                      <td>Example Type</td>
-                      <td>Example Price</td>
-                      <td>Example Orderable</td>
-                      <td>Example Main Item</td>
-                      <td><a href="MenuItem/2/edit">edit</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Example Name</td>
-                      <td>Example Nickname</td>
-                      <td>Example Type</td>
-                      <td>Example Price</td>
-                      <td>Example Orderable</td>
-                      <td>Example Main Item</td>
-                      <td><a href="MenuItem/3/edit">edit</a></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Example Name</td>
-                      <td>Example Nickname</td>
-                      <td>Example Type</td>
-                      <td>Example Price</td>
-                      <td>Example Orderable</td>
-                      <td>Example Main Item</td>
-                      <td><a href="MenuItem/4/edit">edit</a></td>
-                    </tr>
+                  {
+                    menuItems.map((item) => (
+                      <tr key={item.orderTypeKey}>
+                        <td>{item.orderTypeKey}</td>
+                        <td>{item.name}</td>
+                        <td>{item.nickName}</td>
+                        <td>{item.type}</td>
+                        <td>{item.price}</td>
+                        <td>{item.orderable}</td>
+                        <td>{item.mainItem}</td>
+                        <td><a href={"MenuItem/" + item.orderTypeKey + "/edit"}>edit</a></td>
+                      </tr>
+                      )
+                    )
+                  }
                 </tbody>
               </Table>
           </Card.Body>
