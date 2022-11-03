@@ -1,5 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Table from 'react-bootstrap/Table';
+import Card from 'react-bootstrap/Card';
 
 
 export const ExtraFeatures = () => {
@@ -8,7 +11,11 @@ export const ExtraFeatures = () => {
   const handleSubmit = (event) => {(event).preventDefault(); console.log(description)}
   return (
     <div>
-      <h1>Extra Features Page</h1>
+      <Card>
+          <Card.Header>
+            <h3 className="d-inline align-middle">Extra Features</h3>
+          </Card.Header>
+          <Card.Body>
       <p>Enter Date</p>
       <form>
         <input
@@ -17,13 +24,14 @@ export const ExtraFeatures = () => {
           id="description"
           value={description}
           onChange={handleChange}>
-
         </input>
       </form>
-      <p>Sales Report</p>
-      <p>Excess Report</p>
-      <p>What Sells Together?</p>
-
+      <p ></p>
+      <Button variant="primary">Sales Report</Button>
+      <Button variant="primary">Excess Inventory Report</Button>
+      <Button variant="primary">Sale Bundle Report</Button>
+      </Card.Body>
+      </Card>
     </div>
   );
 };
