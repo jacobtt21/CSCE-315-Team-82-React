@@ -2,7 +2,7 @@ import "./App.css";
 import NavBar from "./Manager/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./Manager/Components/Home";
-import { MenuItems } from "./Manager/Components/MenuItems";
+import { MenuItems } from "./Manager/Components/MenuItems/MenuItems";
 import { Inventory } from "./Manager/Components/Inventory";
 import { ExtraFeatures } from "./Manager/Components/ExtraFeatures";
 import { CustomerPage } from "./Manager/Components/CustomerPage";
@@ -19,7 +19,6 @@ function App() {
             <Route path= "/Inventory" component={Inventory} />
             <Route path= "/ExtraFeatures" component={ExtraFeatures} />
             <Route path= "/CustomerPage" component={CustomerPage} />
-
           </Switch>
         </div>
       </Router>

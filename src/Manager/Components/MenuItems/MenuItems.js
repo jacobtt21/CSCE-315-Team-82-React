@@ -3,12 +3,17 @@ import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
 
+import Form from 'react-bootstrap/Form';
+
 export const MenuItems = () => {
+
   const [menuItems, setMenuItems] = useState([{}])
+  const [items, setItems] = useState([{}])
   useEffect(() => {
-    fetch('/fetch').then(
+    fetch('/MenuItems').then(
       response => response.json()
     ).then(data => setMenuItems(data.menuItems))
+    .then(data => setItems(data.items))
   }, []);
 
   return (
