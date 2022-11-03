@@ -16,9 +16,11 @@
 ### how to begin work
 
 1. ```$ cd proj3_server```
-3. ```npm start```
+2. ```git pull origin main --rebase```
+3. ```npm i```
+4. ```npm start```
 > At this point you can begin working in the src folder. Remember to push and pull frequently.
-4. ```Ctrl + C``` to kill the client
+5. ```Ctrl + C``` to kill the client
 
 
 ### how to test with data from the server
