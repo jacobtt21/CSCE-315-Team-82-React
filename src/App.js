@@ -5,7 +5,7 @@ import { Home } from "./Manager/Components/Home";
 import { MenuItems } from "./Manager/Components/MenuItems/MenuItems";
 import { Inventory } from "./Manager/Components/Inventory";
 import { ExtraFeatures } from "./Manager/Components/ExtraFeatures";
-import { CustomerPage } from "./Manager/Components/CustomerPage";
+import { CustomerPage } from "./Manager/Components/Customer/CustomerPage";
 
 function App() {
   return (
