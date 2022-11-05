@@ -7,6 +7,8 @@ import { Inventory } from "./Manager/Components/Inventory";
 import { ExtraFeatures } from "./Manager/Components/ExtraFeatures";
 import { CustomerPage } from "./Manager/Components/Customer/CustomerPage";
 
+import { Edit as MenuItemEdit } from "./Manager/Components/MenuItems/Edit";
+
 function App() {
   return (
     <>
@@ -15,10 +17,11 @@ function App() {
         <div className="pages">
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path= "/MenuItems" component={MenuItems} />
+            <Route exact path= "/MenuItems" component={MenuItems} />
             <Route path= "/Inventory" component={Inventory} />
             <Route path= "/ExtraFeatures" component={ExtraFeatures} />
             <Route path= "/CustomerPage" component={CustomerPage} />
+            <Route exact path= "/MenuItems/:id" component={MenuItemEdit} />
           </Switch>
         </div>
       </Router>

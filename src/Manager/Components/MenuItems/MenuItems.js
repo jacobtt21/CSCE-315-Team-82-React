@@ -5,6 +5,8 @@ import Card from 'react-bootstrap/Card';
 
 import Axios from 'axios';
 
+import {Link} from "react-router-dom";
+
 function myFunction(price) {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -65,7 +67,7 @@ export const MenuItems = () => {
                         <td>{myFunction(item.price)}</td>
                         <td>{item.orderable ? "TRUE" : "FALSE"}</td>
                         <td>{item.mainitemname ? item.mainitemname : "NONE"}</td>
-                        <td><a href={"MenuItem/" + item.order_id + "/edit"}>edit</a></td>
+                        <td><Link to={`MenuItems/${item.order_id}`}>edit</Link></td>
                       </tr>
                       )
                     )
