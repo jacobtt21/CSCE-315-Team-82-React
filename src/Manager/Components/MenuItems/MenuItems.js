@@ -3,18 +3,28 @@ import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
 
-import Form from 'react-bootstrap/Form';
+import Axios from 'axios';
+
+function myFunction(price) {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
+  return formatter.format(price);
+}
 
 export const MenuItems = () => {
 
-  const [menuItems, setMenuItems] = useState([{}])
-  const [items, setItems] = useState([{}])
-  useEffect(() => {
-    fetch('/MenuItems').then(
-      response => response.json()
-    ).then(data => setMenuItems(data.menuItems))
-    .then(data => setItems(data.items))
-  }, []);
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(()=>{
+    Axios.get('http://127.0.0.1:5000/fetch-menu-items')
+      .then(res => {
+        const menuItems = res.data;
+        setMenuItems(menuItems);
+      })
+  },[]);
 
   return (
     <>
@@ -40,16 +50,22 @@ export const MenuItems = () => {
                 </thead>
                 <tbody>
                   {
-                    menuItems.map((item) => (
-                      <tr key={item.orderTypeKey}>
-                        <td>{item.orderTypeKey}</td>
+                    menuItems.sort((a, b) => {
+                      if (a.order_id < b.order_id) {
+                        return -1;
+                      } else {
+                        return 1;
+                      }
+                    }).map((item) => (
+                      <tr key={item.order_id}>
+                        <td>{item.order_id}</td>
                         <td>{item.name}</td>
-                        <td>{item.nickName}</td>
+                        <td>{item.nickname}</td>
                         <td>{item.type}</td>
-                        <td>{item.price}</td>
-                        <td>{item.orderable}</td>
-                        <td>{item.mainItem}</td>
-                        <td><a href={"MenuItem/" + item.orderTypeKey + "/edit"}>edit</a></td>
+                        <td>{myFunction(item.price)}</td>
+                        <td>{item.orderable ? "TRUE" : "FALSE"}</td>
+                        <td>{item.mainitemname ? item.mainitemname : "NONE"}</td>
+                        <td><a href={"MenuItem/" + item.order_id + "/edit"}>edit</a></td>
                       </tr>
                       )
                     )
