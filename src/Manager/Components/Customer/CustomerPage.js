@@ -14,6 +14,15 @@ export const CustomerPage = () => {
 
   const getFood = async () => {
     // Call Data from server here and set it as food using setFood
+
+    // const formData = new FormData(); <-- When you need to send something to the server
+    // formData.append("NAME OF DATA", DATA); <-- This is only when you have something to send to the server
+    // const res = await fetch('URL WHERE SERVER IS HOSTED', {
+    //   method: "POST",
+    //   body: formData <-- if there is something to send to sever otherwise it doesn't have to be there
+    // })
+    // const responseData = await res.json(); <-- The server response, console.log(responseData) to see it
+    
     let data = ["Nachos", "drinks", "Water"]
     setFood(data)
   }
