@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Alert from 'react-bootstrap/Alert';
 
 import { useParams, Link } from "react-router-dom";
 import Axios from 'axios';
@@ -18,7 +19,9 @@ function option ( value, display, actual) {
   return <option value={value}>{display}</option>;
 }
 
-export const Edit = (orderTypeKey) => {
+export const Edit = () => {
+
+  const [submitted, setSubmitted] = useState("");
 
   const [orderType, setOrderType] = useState([]);
   const [items, setItems] = useState([]);
@@ -42,7 +45,23 @@ export const Edit = (orderTypeKey) => {
       })
   },[]);
 
-  return (
+  const form = document.querySelector("form");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      Axios.post(`http://127.0.0.1:5000/edit-menu-item/${id}`, formData, {})
+        .then((res) => {
+          console.log(res);
+          setSubmitted(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  return !submitted ? (
     <>
       <div className="p-3">
       <Card>
@@ -50,7 +69,7 @@ export const Edit = (orderTypeKey) => {
             <h3 className="d-inline align-middle">Edit</h3>
           </Card.Header>
           <Card.Body>
-            <Form autoComplete="off" method="post">
+            <Form autoComplete="off" action={`http://127.0.0.1:5000/edit-menu-item/${id}`} method="POST">
               <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control name="name" value={orderType.name}/>
@@ -65,7 +84,6 @@ export const Edit = (orderTypeKey) => {
                 <Form.Label>Type</Form.Label>
                 <Form.Control name="type" list="typeList" value={orderType.type}/>
                 <datalist id="typeList">
-
                   <option value="Burrito">Burrito</option>
                   <option value="Taco">Taco</option>
                   <option value="Bowl">Bowl</option>
@@ -83,7 +101,7 @@ export const Edit = (orderTypeKey) => {
 
               <Form.Group className="mb-3">
                 <Form.Label>Orderable</Form.Label>
-                <Form.Select>
+                <Form.Select name="orderable">
                   {option("1", "TRUE", orderType.orderable)}
                   {option("0", "FALSE", orderType.orderable)}
                 </Form.Select>
@@ -92,7 +110,7 @@ export const Edit = (orderTypeKey) => {
 
               <Form.Group className="mb-3">
                 <Form.Label>Main Item</Form.Label>
-                <Form.Select>
+                <Form.Select name="item_key">
                 {
                   items.map(function(e) {
                     return option(e.item_id, e.name, orderType.item_key);
@@ -110,5 +128,21 @@ export const Edit = (orderTypeKey) => {
         </Card>
       </div>
     </>
-  );
+  ) : (
+    <>
+      <Card>
+        <Card.Body>
+          <Alert variant="success">
+            <Alert.Heading>Sucessful Update!</Alert.Heading>
+            <p>
+              {orderType.name} has been updated to the database. I'm proud of you. Good job.
+            </p>
+            <hr />
+              <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
+            </Alert>
+
+        </Card.Body>
+      </Card>
+    </>
+  )
 };
