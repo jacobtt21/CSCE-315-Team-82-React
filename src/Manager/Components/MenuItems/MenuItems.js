@@ -24,6 +24,7 @@ export const MenuItems = () => {
     Axios.get('http://127.0.0.1:5000/fetch-menu-items')
       .then(res => {
         const menuItems = res.data;
+        console.log(menuItems);
         setMenuItems(menuItems);
       })
   },[]);
