@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import { useParams, Link } from "react-router-dom";
 import Axios from 'axios';
 
 function option ( value, display, actual) {
 
-  if (actual === true) actual = "1";
-  if (actual === false) actual = "0";
+  if (actual === true) actual = "TRUE";
+  if (actual === false) actual = "FALSE";
 
   if (value === actual) {
     return <option value={value} selected>{display}</option>
@@ -72,17 +72,17 @@ export const Edit = () => {
             <Form autoComplete="off" action={`http://127.0.0.1:5000/edit-menu-item/${id}`} method="POST">
               <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
-                <Form.Control name="name" value={orderType.name}/>
+                <Form.Control name="name" defaultValue={orderType.name}/>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Nickname</Form.Label>
-                <Form.Control name="nickname" value={orderType.nickname}/>
+                <Form.Control name="nickname" defaultValue={orderType.nickname}/>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Type</Form.Label>
-                <Form.Control name="type" list="typeList" value={orderType.type}/>
+                <Form.Control name="type" list="typeList" defaultValue={orderType.type}/>
                 <datalist id="typeList">
                   <option value="Burrito">Burrito</option>
                   <option value="Taco">Taco</option>
@@ -91,19 +91,25 @@ export const Edit = () => {
                   <option value="Side">Side</option>
                   <option value="Drink">Drink</option>
                 </datalist>
-
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Price</Form.Label>
-                <Form.Control name="price" value={orderType.price}/>
+                <InputGroup className="mb-3">
+                  <InputGroup.Text>$</InputGroup.Text>
+                  <Form.Control
+                    name="price"
+                    defaultValue={orderType.price}
+                  />
+                </InputGroup>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Orderable</Form.Label>
                 <Form.Select name="orderable">
-                  {option("1", "TRUE", orderType.orderable)}
-                  {option("0", "FALSE", orderType.orderable)}
+                  {console.log(orderType.orderable)}
+                  {option("TRUE", "TRUE", orderType.orderable)}
+                  {option("FALSE", "FALSE", orderType.orderable)}
                 </Form.Select>
               </Form.Group>
 
