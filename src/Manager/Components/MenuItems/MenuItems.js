@@ -35,7 +35,8 @@ export const MenuItems = () => {
         <Card>
           <Card.Header>
             <h3 className="d-inline align-middle">Menu Items</h3>
-            <Button variant="primary" className="float-end d-inline" href="MenuItem/new">Add Menu Item</Button>
+            <Link to="MenuItems/new"><Button variant="primary" className="float-end d-inline">Add Menu Item</Button></Link>
+
           </Card.Header>
           <Card.Body>
             <Table striped bordered hover responsive>
@@ -66,9 +67,9 @@ export const MenuItems = () => {
                         <td>{item.nickname}</td>
                         <td>{item.type}</td>
                         <td>{myFunction(item.price)}</td>
-                        <td>{item.orderable ? "TRUE" : "FALSE"}</td>
+                        <td>{item.orderable ? <span class="badge bg-success">TRUE</span> : <span class="badge bg-danger">FALSE</span>}</td>
                         <td>{item.mainitemname ? item.mainitemname : "NONE"}</td>
-                        <td><Link to={`MenuItems/${item.order_id}`}>edit</Link></td>
+                        <td><Link to={`MenuItems/${item.order_id}/edit`}>edit</Link></td>
                       </tr>
                       )
                     )

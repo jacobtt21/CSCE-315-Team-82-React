@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Axios from 'axios';
 
 function option ( value, display, actual) {
@@ -19,22 +19,11 @@ function option ( value, display, actual) {
   return <option value={value}>{display}</option>;
 }
 
-export const Edit = () => {
+export const New = () => {
 
   const [submitted, setSubmitted] = useState("");
 
-  const [orderType, setOrderType] = useState([]);
   const [items, setItems] = useState([]);
-
-  const { id } = useParams();
-
-  useEffect(()=>{
-    Axios.get(`http://127.0.0.1:5000/get-order-type/${id}`)
-      .then(res => {
-        const orderType = res.data;
-        setOrderType(orderType[0]);
-      })
-  },[]);
 
   useEffect(()=>{
     Axios.get("http://127.0.0.1:5000/fetch-items")
@@ -50,7 +39,7 @@ export const Edit = () => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const formData = new FormData(form);
-      Axios.post(`http://127.0.0.1:5000/edit-menu-item/${id}`, formData, {})
+      Axios.post(`http://127.0.0.1:5000/new-menu-item`, formData, {})
         .then((res) => {
           console.log(res);
           setSubmitted(true);
@@ -66,23 +55,23 @@ export const Edit = () => {
       <div className="p-3">
       <Card>
           <Card.Header>
-            <h3 className="d-inline align-middle">Edit</h3>
+            <h3 className="d-inline align-middle">New</h3>
           </Card.Header>
           <Card.Body>
-            <Form autoComplete="off" action={`http://127.0.0.1:5000/edit-menu-item/${id}`} method="POST">
+            <Form autoComplete="off" action={`http://127.0.0.1:5000/new-menu-item`} method="POST">
               <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
-                <Form.Control name="name" defaultValue={orderType.name}/>
+                <Form.Control name="name" defaultValue=""/>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Nickname</Form.Label>
-                <Form.Control name="nickname" defaultValue={orderType.nickname}/>
+                <Form.Control name="nickname" defaultValue=""/>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Type</Form.Label>
-                <Form.Control name="type" list="typeList" defaultValue={orderType.type}/>
+                <Form.Control name="type" list="typeList" defaultValue=""/>
                 <datalist id="typeList">
                   <option value="Burrito">Burrito</option>
                   <option value="Taco">Taco</option>
@@ -95,21 +84,14 @@ export const Edit = () => {
 
               <Form.Group className="mb-3">
                 <Form.Label>Price</Form.Label>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>$</InputGroup.Text>
-                  <Form.Control
-                    name="price"
-                    defaultValue={orderType.price}
-                  />
-                </InputGroup>
+                <Form.Control name="price" defaultValue=""/>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Orderable</Form.Label>
                 <Form.Select name="orderable">
-                  {console.log(orderType.orderable)}
-                  {option("TRUE", "TRUE", orderType.orderable)}
-                  {option("FALSE", "FALSE", orderType.orderable)}
+                  {option("TRUE", "TRUE", "")}
+                  {option("FALSE", "FALSE", "")}
                 </Form.Select>
               </Form.Group>
 
@@ -119,7 +101,7 @@ export const Edit = () => {
                 <Form.Select name="item_key">
                 {
                   items.map(function(e) {
-                    return option(e.item_id, e.name, orderType.item_key);
+                    return option(e.item_id, e.name, "NONE");
                   })
                 }
                 { option("", "NONE", "") }
@@ -141,7 +123,7 @@ export const Edit = () => {
           <Alert variant="success">
             <Alert.Heading>Sucessful Update!</Alert.Heading>
             <p>
-              {orderType.name} has been updated to the database. I'm proud of you. Good job.
+              You just added a new menu item to the database. I'm proud of you. Good job.
             </p>
             <hr />
               <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
