@@ -22,6 +22,7 @@ function option ( value, display, actual) {
 export const Edit = () => {
 
   const [submitted, setSubmitted] = useState("");
+  const [deleted, setDeleted] = useState("");
 
   const [orderType, setOrderType] = useState([]);
   const [items, setItems] = useState([]);
@@ -58,94 +59,141 @@ export const Edit = () => {
       });
   }
 
-  return !submitted ? (
-    <>
-      <div className="p-3">
-      <Card>
-          <Card.Header>
-            <h3 className="d-inline align-middle">Edit</h3>
-          </Card.Header>
+  const deleteHandler = e => {
+    e.preventDefault();
+    Axios.post(`http://127.0.0.1:5000/delete-menu-item/${id}`)
+      .then((res) => {
+        setDeleted(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const htmlForm = () => {
+    return (
+      <>
+        <div className="p-3">
+        <Card>
+            <Card.Header>
+              <h3 className="d-inline align-middle">Edit</h3>
+              <Button variant="danger" onClick={deleteHandler} className="float-end d-inline">Delete Menu Item</Button>
+            </Card.Header>
+            <Card.Body>
+              <Form autoComplete="off" onSubmit={onSubmitHandler}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control name="name" defaultValue={orderType.name}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Nickname</Form.Label>
+                  <Form.Control name="nickname" defaultValue={orderType.nickname}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Type</Form.Label>
+                  <Form.Control name="type" list="typeList" defaultValue={orderType.type}/>
+                  <datalist id="typeList">
+                    <option value="Burrito">Burrito</option>
+                    <option value="Taco">Taco</option>
+                    <option value="Bowl">Bowl</option>
+                    <option value="Salad">Salad</option>
+                    <option value="Side">Side</option>
+                    <option value="Drink">Drink</option>
+                  </datalist>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Price</Form.Label>
+                  <InputGroup className="mb-3">
+                    <InputGroup.Text>$</InputGroup.Text>
+                    <Form.Control
+                      name="price"
+                      defaultValue={orderType.price}
+                    />
+                  </InputGroup>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Orderable</Form.Label>
+                  <Form.Select name="orderable">
+                    {console.log(orderType.orderable)}
+                    {option("TRUE", "TRUE", orderType.orderable)}
+                    {option("FALSE", "FALSE", orderType.orderable)}
+                  </Form.Select>
+                </Form.Group>
+
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Main Item</Form.Label>
+                  <Form.Select name="item_key">
+                  {
+                    items.map(function(e) {
+                      return option(e.item_id, e.name, orderType.item_key);
+                    })
+                  }
+                  { option("", "NONE", "") }
+                  </Form.Select>
+                </Form.Group>
+
+                <Button type="submit" variant="primary">Submit</Button>
+                <Link to={"/MenuItems"}><Button variant="secondary">Cancel</Button></Link>
+
+              </Form>
+            </Card.Body>
+          </Card>
+        </div>
+      </>
+    )
+  }
+
+  const htmlDeleted = () => {
+    return (
+      <>
+        <Card>
           <Card.Body>
-            <Form autoComplete="off" onSubmit={onSubmitHandler}>
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control name="name" defaultValue={orderType.name}/>
-              </Form.Group>
+            <Alert variant="success">
+              <Alert.Heading>Sucessful Deletion!</Alert.Heading>
+              <p>
+                You have successfully deleted a menu item. Scary!
+              </p>
+              <hr />
+                <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
+              </Alert>
 
-              <Form.Group className="mb-3">
-                <Form.Label>Nickname</Form.Label>
-                <Form.Control name="nickname" defaultValue={orderType.nickname}/>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Type</Form.Label>
-                <Form.Control name="type" list="typeList" defaultValue={orderType.type}/>
-                <datalist id="typeList">
-                  <option value="Burrito">Burrito</option>
-                  <option value="Taco">Taco</option>
-                  <option value="Bowl">Bowl</option>
-                  <option value="Salad">Salad</option>
-                  <option value="Side">Side</option>
-                  <option value="Drink">Drink</option>
-                </datalist>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Price</Form.Label>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>$</InputGroup.Text>
-                  <Form.Control
-                    name="price"
-                    defaultValue={orderType.price}
-                  />
-                </InputGroup>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Orderable</Form.Label>
-                <Form.Select name="orderable">
-                  {console.log(orderType.orderable)}
-                  {option("TRUE", "TRUE", orderType.orderable)}
-                  {option("FALSE", "FALSE", orderType.orderable)}
-                </Form.Select>
-              </Form.Group>
-
-
-              <Form.Group className="mb-3">
-                <Form.Label>Main Item</Form.Label>
-                <Form.Select name="item_key">
-                {
-                  items.map(function(e) {
-                    return option(e.item_id, e.name, orderType.item_key);
-                  })
-                }
-                { option("", "NONE", "") }
-                </Form.Select>
-              </Form.Group>
-
-              <Button type="submit" variant="primary">Submit</Button>
-              <Link to={"/MenuItems"}><Button variant="secondary">Cancel</Button></Link>
-
-            </Form>
           </Card.Body>
         </Card>
-      </div>
-    </>
-  ) : (
-    <>
-      <Card>
-        <Card.Body>
-          <Alert variant="success">
-            <Alert.Heading>Sucessful Update!</Alert.Heading>
-            <p>
-              {orderType.name} has been updated to the database. I'm proud of you. Good job.
-            </p>
-            <hr />
-              <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
-            </Alert>
+      </>
+    )
+  }
 
-        </Card.Body>
-      </Card>
-    </>
-  )
+  const htmlSubmitted = () => {
+    return (
+      <>
+        <Card>
+          <Card.Body>
+            <Alert variant="success">
+              <Alert.Heading>Sucessful Update!</Alert.Heading>
+              <p>
+                You have successfully updated a menu item. I'm proud of you. Good job.
+              </p>
+              <hr />
+                <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
+              </Alert>
+
+          </Card.Body>
+        </Card>
+      </>
+    )
+  }
+
+  if (deleted) {
+    return htmlDeleted();
+  } else if (submitted) {
+    return htmlSubmitted();
+  } else {
+    return htmlForm();
+  }
+
 };
