@@ -45,20 +45,17 @@ export const Edit = () => {
       })
   },[]);
 
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      Axios.post(`http://127.0.0.1:5000/edit-menu-item/${id}`, formData, {})
-        .then((res) => {
-          console.log(res);
-          setSubmitted(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+  const onSubmitHandler = e => {
+    e.preventDefault();
+    const form = document.querySelector("form");
+    const formData = new FormData(form);
+    Axios.post(`http://127.0.0.1:5000/edit-menu-item/${id}`, formData, {})
+      .then((res) => {
+        setSubmitted(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return !submitted ? (
@@ -69,7 +66,7 @@ export const Edit = () => {
             <h3 className="d-inline align-middle">Edit</h3>
           </Card.Header>
           <Card.Body>
-            <Form autoComplete="off" action={`http://127.0.0.1:5000/edit-menu-item/${id}`} method="POST">
+            <Form autoComplete="off" onSubmit={onSubmitHandler}>
               <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control name="name" defaultValue={orderType.name}/>
