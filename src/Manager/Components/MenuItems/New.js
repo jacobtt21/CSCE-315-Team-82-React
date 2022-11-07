@@ -80,9 +80,14 @@ export const New = () => {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Price</Form.Label>
-                <Form.Control name="price" defaultValue=""/>
-              </Form.Group>
+                  <Form.Label>Price</Form.Label>
+                  <InputGroup className="mb-3">
+                    <InputGroup.Text>$</InputGroup.Text>
+                    <Form.Control
+                      name="price"
+                    />
+                  </InputGroup>
+                </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Orderable</Form.Label>
