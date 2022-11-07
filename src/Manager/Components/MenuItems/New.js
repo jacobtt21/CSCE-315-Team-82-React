@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+
 import { Link } from "react-router-dom";
 import Axios from 'axios';
 
@@ -123,14 +126,13 @@ export const New = () => {
       <Card>
         <Card.Body>
           <Alert variant="success">
-            <Alert.Heading>Sucessful Update!</Alert.Heading>
+            <Alert.Heading><FontAwesomeIcon icon={faPenToSquare}/> Sucessful Creation!</Alert.Heading>
             <p>
               You just added a new menu item to the database. I'm proud of you. Good job.
             </p>
             <hr />
               <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
             </Alert>
-
         </Card.Body>
       </Card>
     </>

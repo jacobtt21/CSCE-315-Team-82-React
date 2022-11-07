@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+
 import { useParams, Link } from "react-router-dom";
 import Axios from 'axios';
 
@@ -59,8 +62,8 @@ export const Edit = () => {
       });
   }
 
-  const deleteHandler = e => {
-    e.preventDefault();
+  const deleteHandler = () => {
+    // e.preventDefault();
     Axios.post(`http://127.0.0.1:5000/delete-menu-item/${id}`)
       .then((res) => {
         setDeleted(true);
@@ -77,7 +80,7 @@ export const Edit = () => {
         <Card>
             <Card.Header>
               <h3 className="d-inline align-middle">Edit</h3>
-              <Button variant="danger" onClick={deleteHandler} className="float-end d-inline">Delete Menu Item</Button>
+              <Button variant="danger" onClick={() => {if(window.confirm('Are you sure you want to delete this item?')){ deleteHandler()};}} className="float-end d-inline">Delete Menu Item</Button>
             </Card.Header>
             <Card.Body>
               <Form autoComplete="off" onSubmit={onSubmitHandler}>
@@ -154,7 +157,7 @@ export const Edit = () => {
         <Card>
           <Card.Body>
             <Alert variant="success">
-              <Alert.Heading>Sucessful Deletion!</Alert.Heading>
+              <Alert.Heading><FontAwesomeIcon icon={faTrash}/> Sucessful Deletion!</Alert.Heading>
               <p>
                 You have successfully deleted a menu item. Scary!
               </p>
@@ -174,7 +177,7 @@ export const Edit = () => {
         <Card>
           <Card.Body>
             <Alert variant="success">
-              <Alert.Heading>Sucessful Update!</Alert.Heading>
+              <Alert.Heading><FontAwesomeIcon icon={faPenToSquare}/> Sucessful Update!</Alert.Heading>
               <p>
                 You have successfully updated a menu item. I'm proud of you. Good job.
               </p>
