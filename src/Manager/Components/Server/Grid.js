@@ -16,7 +16,9 @@ export default function Grid({ foods }) {
       <style jsx>{`
         .grid-container {
           width: 90%;
-          margin-left: 0%;
+          text-align: left;
+          button-align: right;
+          margin-bottom: 2%;
           display: grid;
           grid-template-columns: 1fr;
         }
