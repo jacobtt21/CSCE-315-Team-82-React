@@ -1,6 +1,27 @@
 import React from "react";
+import { OrderContext } from "./lib";
+import { useContext } from "react";
 
 export default function FoodCard({ item }) {
+  const [order, setOrder] = useContext(OrderContext)
+
+  const Add = () => {
+    if (order) {
+      let currentCart = [];
+      var i;
+      for (i = 0; i < order.length; ++i) {
+        currentCart.push(order[i])
+      }
+      currentCart.push(item)
+      setOrder(currentCart)
+    }
+    else {
+      let currentCart = [];
+      currentCart.push(item)
+      setOrder(currentCart)
+    }
+  };
+
   return (
     <>
       <div className="card">
@@ -8,11 +29,12 @@ export default function FoodCard({ item }) {
         <h1 className="name">${item.price}</h1>
         <button
         className="btn"
+        onClick={Add}
         >
           Click to add
         </button>
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .name {
           font-size: 18px;
         }
