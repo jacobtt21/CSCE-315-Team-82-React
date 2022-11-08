@@ -67,7 +67,14 @@ export const CustomerPage = () => {
             <div className="FoodHeaderTwo">
               Your Order
               {order ? (
-                <Bill foods={order} />
+                <>
+                  <Bill foods={order} />
+                  <button
+                  className="btn"
+                  >
+                    Checkout
+                  </button>
+                </>
               ) : (
                 <h4><i>There isn't anything here</i></h4>
               )}
