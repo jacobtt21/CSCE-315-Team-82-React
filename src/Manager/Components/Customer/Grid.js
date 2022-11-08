@@ -13,7 +13,7 @@ export default function Grid({ foods }) {
           );
         })}
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .grid-container {
           width: 90%;
           margin: auto;

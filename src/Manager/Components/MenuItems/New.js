@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+
 import { Link } from "react-router-dom";
 import Axios from 'axios';
 
@@ -34,20 +37,17 @@ export const New = () => {
       })
   },[]);
 
-  const form = document.querySelector("form");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      Axios.post(`http://127.0.0.1:5000/new-menu-item`, formData, {})
-        .then((res) => {
-          console.log(res);
-          setSubmitted(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+  const onSubmitHandler = e => {
+    e.preventDefault();
+    const form = document.querySelector("form");
+    const formData = new FormData(form);
+    Axios.post(`http://127.0.0.1:5000/new-menu-item`, formData, {})
+      .then((res) => {
+        setSubmitted(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return !submitted ? (
@@ -58,7 +58,7 @@ export const New = () => {
             <h3 className="d-inline align-middle">New</h3>
           </Card.Header>
           <Card.Body>
-            <Form autoComplete="off" action={`http://127.0.0.1:5000/new-menu-item`} method="POST">
+            <Form autoComplete="off" onSubmit={onSubmitHandler}>
               <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control name="name" defaultValue=""/>
@@ -83,9 +83,14 @@ export const New = () => {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Price</Form.Label>
-                <Form.Control name="price" defaultValue=""/>
-              </Form.Group>
+                  <Form.Label>Price</Form.Label>
+                  <InputGroup className="mb-3">
+                    <InputGroup.Text>$</InputGroup.Text>
+                    <Form.Control
+                      name="price"
+                    />
+                  </InputGroup>
+                </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Orderable</Form.Label>
@@ -121,14 +126,13 @@ export const New = () => {
       <Card>
         <Card.Body>
           <Alert variant="success">
-            <Alert.Heading>Sucessful Update!</Alert.Heading>
+            <Alert.Heading><FontAwesomeIcon icon={faPenToSquare}/> Sucessful Creation!</Alert.Heading>
             <p>
               You just added a new menu item to the database. I'm proud of you. Good job.
             </p>
             <hr />
               <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
             </Alert>
-
         </Card.Body>
       </Card>
     </>
