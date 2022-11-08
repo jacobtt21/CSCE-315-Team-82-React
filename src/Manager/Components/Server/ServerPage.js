@@ -59,12 +59,6 @@ export const ServerPage = () => {
 
     setFood(menu)
   }
-
-  const Burritoref = useRef();
-  const Bowlsref = useRef();
-  const Tacosref = useRef();
-  const Sidesref = useRef();
-  const Drinksref = useRef();
   
 
   return food ? (
