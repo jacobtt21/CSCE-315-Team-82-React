@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Table from 'react-bootstrap/Table';
 import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 
 import Axios from 'axios';
 
@@ -33,7 +34,7 @@ export const MenuItems = () => {
       <div className="p-3">
         <Card>
           <Card.Header>
-            <h3 className="d-inline align-middle">Menu Items</h3>
+            <h3 className="d-inline align-middle">Menu Items </h3><Badge pill bg="secondary" className="d-inline align-middle">{menuItems.length}</Badge>
             <Link to="MenuItems/new"><Button variant="primary" className="float-end d-inline">Add Menu Item</Button></Link>
 
           </Card.Header>
