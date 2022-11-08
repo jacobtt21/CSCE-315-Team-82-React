@@ -1,12 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Grid from "./Grid";
-import { OrderContext } from "./lib";
+import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
 
 export const CustomerPage = () => {
   const [food, setFood] = useState("");
   const [order, setOrder] = useState();
+  const [price, setPrice] = useState();
 
   useEffect(() => {
     getFood()
@@ -56,84 +57,92 @@ export const CustomerPage = () => {
     setFood(menu)
   }
 
+  const buy = async () => {
+    // Calls to server
+    window.location.reload(false);
+  }
+
   return food ? (
     <>
       <OrderContext.Provider value={[order, setOrder]}>
-        <main>
-          <div className="title">
-            <h2>Order Cabo Grill</h2>
-          </div>
-          <div className="grid-container2">
-            <div className="FoodHeaderTwo">
-              Your Order
-              {order ? (
-                <>
-                  <Bill foods={order} />
-                  <button
-                  className="btn"
-                  >
-                    Checkout
-                  </button>
-                </>
-              ) : (
-                <h4><i>There isn't anything here</i></h4>
-              )}
+        <PriceContext.Provider value={[price, setPrice]}>
+          <main>
+            <div className="title">
+              <h2>Order Cabo Grill</h2>
             </div>
-            <div>
-              <h3 className="FoodHeaderOne" id="burrito">Burritos</h3>
-              <h4><i>Enjoy whatever this is</i></h4>
-              <Grid foods={food[0]} custom={true} />
-              <h3 className="FoodHeader" id="bowl">Bowls</h3>
-              <h4><i>Enjoy a shittier version of chipotle</i></h4>
-              <Grid foods={food[1]} custom={true} />
-              <h3 className="FoodHeader" id="taco">Tacos</h3>
-              <h4><i>Taco'bout tacos, idk</i></h4>
-              <Grid foods={food[2]} custom={true} />
-              <h3 className="FoodHeader" id="salad">Salads</h3>
-              <h4><i>salads</i></h4>
-              <Grid foods={food[3]} custom={true} />
-              <h3 className="FoodHeader" id="side">Sides</h3>
-              <h4><i>Sides and everything else</i></h4>
-              <Grid foods={food[4]} custom={false} />
-              <h3 className="FoodHeader" id="drink">Drinks</h3>
-              <h4><i>I don't care anymore</i></h4>
-              <Grid foods={food[5]} custom={false} />
+            <div className="grid-container2">
+              <div className="FoodHeaderTwo">
+                Your Order
+                {order ? (
+                  <>
+                    <Bill foods={order} />
+                    <button
+                    className="btn"
+                    onClick={buy}
+                    >
+                      Checkout {numberFormat(price)} (Tax Included)
+                    </button>
+                  </>
+                ) : (
+                  <h4><i>There isn't anything here</i></h4>
+                )}
+              </div>
+              <div>
+                <h3 className="FoodHeaderOne" id="burrito">Burritos</h3>
+                <h4><i>Enjoy whatever this is</i></h4>
+                <Grid foods={food[0]} custom={true} />
+                <h3 className="FoodHeader" id="bowl">Bowls</h3>
+                <h4><i>Enjoy a shittier version of chipotle</i></h4>
+                <Grid foods={food[1]} custom={true} />
+                <h3 className="FoodHeader" id="taco">Tacos</h3>
+                <h4><i>Taco'bout tacos, idk</i></h4>
+                <Grid foods={food[2]} custom={true} />
+                <h3 className="FoodHeader" id="salad">Salads</h3>
+                <h4><i>salads</i></h4>
+                <Grid foods={food[3]} custom={true} />
+                <h3 className="FoodHeader" id="side">Sides</h3>
+                <h4><i>Sides and everything else</i></h4>
+                <Grid foods={food[4]} custom={false} />
+                <h3 className="FoodHeader" id="drink">Drinks</h3>
+                <h4><i>I don't care anymore</i></h4>
+                <Grid foods={food[5]} custom={false} />
+              </div>
             </div>
-          </div>
-        </main>
-        <style jsx="true">{`
-          .grid-container2 {
-            width: 90%;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            gap: 25px;
-          }
-          h2 {
-            font-size: 50px;
-          }
-          .title {
-            width: 90%;
-            margin: -100px auto;
-            padding: 10px;
-            border-bottom: 2px solid black;
-          }
-          .FoodHeaderOne {
-            font-size: 30px; 
-            margin-top: 120px;
-            padding: 10px;
-          }
-          .FoodHeaderTwo {
-            font-size: 30px; 
-            margin-top: 120px;
-            padding: 10px;
-            border-right: solid;
-          }
-          .FoodHeader {
-            font-size: 30px; 
-            padding: 10px;
-          }
-        `}</style>
+          </main>
+          <style jsx="true">{`
+            .grid-container2 {
+              width: 90%;
+              margin: auto;
+              display: grid;
+              grid-template-columns: 1fr 3fr;
+              gap: 25px;
+            }
+            h2 {
+              font-size: 50px;
+            }
+            .title {
+              width: 90%;
+              margin: -100px auto;
+              padding: 10px;
+              border-bottom: 2px solid black;
+            }
+            .FoodHeaderOne {
+              font-size: 30px; 
+              margin-top: 120px;
+              padding: 10px;
+            }
+            .FoodHeaderTwo {
+              font-size: 30px; 
+              margin-top: 120px;
+              padding: 10px;
+              border-right: solid;
+            }
+            .FoodHeader {
+              font-size: 30px; 
+              padding: 10px;
+            }
+          `}</style>
+        </PriceContext.Provider>
       </OrderContext.Provider>
     </>
   ) : (

@@ -1,10 +1,11 @@
 import React from "react";
-import { OrderContext } from "./lib";
+import { OrderContext, PriceContext } from "./lib";
 import { useContext, useState } from "react";
 import Popup from 'reactjs-popup';
 
 export default function FoodCard({ item, custom }) {
   const [order, setOrder] = useContext(OrderContext)
+  const [, setPrice] = useContext(PriceContext)
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
 
@@ -17,11 +18,18 @@ export default function FoodCard({ item, custom }) {
       }
       currentCart.push(item)
       setOrder(currentCart)
+      var price;
+      var j;
+      for (j = 0; j < currentCart.length; ++j) {
+        price += order[i].price
+      }
+      setPrice(price * 1.0825)
     }
     else {
       let currentCart = [];
       currentCart.push(item)
       setOrder(currentCart)
+      setPrice(item.price * 1.0825)
     }
   };
 
@@ -34,11 +42,18 @@ export default function FoodCard({ item, custom }) {
       }
       currentCart.push(item)
       setOrder(currentCart)
+      var priceHolder = 0;
+      var j;
+      for (j = 0; j < currentCart.length; ++j) {
+        priceHolder = priceHolder + parseFloat(currentCart[i].price);
+      }
+      setPrice(priceHolder * 1.0825)
     }
     else {
       let currentCart = [];
       currentCart.push(item)
       setOrder(currentCart)
+      setPrice(item.price * 1.0825)
     }
     closeModal()
   };
