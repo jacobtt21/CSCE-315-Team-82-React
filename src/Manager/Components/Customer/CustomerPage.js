@@ -67,7 +67,14 @@ export const CustomerPage = () => {
             <div className="FoodHeaderTwo">
               Your Order
               {order ? (
-                <Bill foods={order} />
+                <>
+                  <Bill foods={order} />
+                  <button
+                  className="btn"
+                  >
+                    Checkout
+                  </button>
+                </>
               ) : (
                 <h4><i>There isn't anything here</i></h4>
               )}
@@ -75,22 +82,22 @@ export const CustomerPage = () => {
             <div>
               <h3 className="FoodHeaderOne" id="burrito">Burritos</h3>
               <h4><i>Enjoy whatever this is</i></h4>
-              <Grid foods={food[0]} />
+              <Grid foods={food[0]} custom={true} />
               <h3 className="FoodHeader" id="bowl">Bowls</h3>
               <h4><i>Enjoy a shittier version of chipotle</i></h4>
-              <Grid foods={food[1]} />
+              <Grid foods={food[1]} custom={true} />
               <h3 className="FoodHeader" id="taco">Tacos</h3>
               <h4><i>Taco'bout tacos, idk</i></h4>
-              <Grid foods={food[2]} />
+              <Grid foods={food[2]} custom={true} />
               <h3 className="FoodHeader" id="salad">Salads</h3>
               <h4><i>salads</i></h4>
-              <Grid foods={food[3]} />
+              <Grid foods={food[3]} custom={true} />
               <h3 className="FoodHeader" id="side">Sides</h3>
               <h4><i>Sides and everything else</i></h4>
-              <Grid foods={food[4]} />
+              <Grid foods={food[4]} custom={false} />
               <h3 className="FoodHeader" id="drink">Drinks</h3>
               <h4><i>I don't care anymore</i></h4>
-              <Grid foods={food[5]} />
+              <Grid foods={food[5]} custom={false} />
             </div>
           </div>
         </main>
