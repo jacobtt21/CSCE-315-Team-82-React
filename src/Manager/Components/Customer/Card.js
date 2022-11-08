@@ -1,9 +1,12 @@
 import React from "react";
 import { OrderContext } from "./lib";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import Popup from 'reactjs-popup';
 
-export default function FoodCard({ item }) {
+export default function FoodCard({ item, custom }) {
   const [order, setOrder] = useContext(OrderContext)
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
 
   const Add = () => {
     if (order) {
@@ -22,17 +25,50 @@ export default function FoodCard({ item }) {
     }
   };
 
+  const contentStyle = {
+    background: "rgba(255,255,255, 1)",
+    borderRadius: 15,
+    padding: 10,
+    width: 800,
+    border: "none",
+    textAlign: "center"
+  };
+
+
   return (
     <>
       <div className="card">
         <h1 className="name">{item.name}</h1>
         <h1 className="name">${item.price}</h1>
-        <button
-        className="btn"
-        onClick={Add}
-        >
-          Click to add
-        </button>
+        {custom ? (
+          <div>
+            <button type="button" className="btn" onClick={() => setOpen(o => !o)}>
+              Add to Order
+            </button>
+            <Popup 
+            open={open} 
+            contentStyle={contentStyle}
+            overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
+            closeOnDocumentClick onClose={closeModal}
+            >
+              <div>
+                <h1>Cutomize Your {item.name}</h1>
+                <style jsx="true">{`
+                  h1 {
+                    font-size: 30px;
+                  }
+                `}</style>
+              </div>
+            </Popup>
+          </div>
+        ) : (
+          <button
+          className="btn"
+          onClick={Add}
+          >
+            Add to Order
+          </button>
+        )}
       </div>
       <style jsx="true">{`
         .name {
