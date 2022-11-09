@@ -21,7 +21,7 @@ export const CustomerPage = () => {
     let salads = [];
     let bowls = [];
 
-    const res = await fetch('http://127.0.0.1:5000/fetch-menu-items', {
+    const res = await fetch(process.env.REACT_APP_API_URL + '/fetch-menu-items', {
       method: "GET",
     });
     const responseData = await res.json();
