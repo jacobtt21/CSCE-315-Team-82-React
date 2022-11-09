@@ -64,7 +64,7 @@ export const Inventory = () => {
                         <td>{formatPrice(item.price)}</td>
                         <td>{item.quantity}</td>
                         <td><span class="badge bg-secondary">{item.type.toUpperCase() || "NONE"}</span></td>
-                        <td><Link to={`InventoryItems/${item.item_id}`}>edit</Link></td>
+                        <td><Link to={`InventoryItems/${item.item_id}/edit`}>edit</Link></td>
                       </tr>
                       )
                     )
