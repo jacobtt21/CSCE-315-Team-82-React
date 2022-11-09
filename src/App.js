@@ -6,7 +6,7 @@ import { MenuItems } from "./Manager/Components/MenuItems/MenuItems";
 import { Inventory } from "./Manager/Components/Inventory";
 import { ExtraFeatures } from "./Manager/Components/ExtraFeatures";
 import { CustomerPage } from "./Manager/Components/Customer/CustomerPage";
-import {Server} from "./Manager/Components/Server/Server";
+import {ServerPage} from "./Manager/Components/Server/ServerPage";
 import { Edit as MenuItemEdit } from "./Manager/Components/MenuItems/Edit";
 import { New as MenuItemNew } from "./Manager/Components/MenuItems/New";
 
@@ -24,7 +24,7 @@ function App() {
             <Route path= "/CustomerPage" component={CustomerPage} />
             <Route exact path= "/MenuItems/:id/edit" component={MenuItemEdit} />
             <Route exact path= "/MenuItems/new" component={MenuItemNew} />
-            <Route exact path = "/Server" component={Server}/>
+            <Route exact path = "/ServerPage" component={ServerPage}/>
           </Switch>
         </div>
       </Router>
