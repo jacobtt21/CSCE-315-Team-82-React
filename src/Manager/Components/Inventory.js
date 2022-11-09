@@ -21,7 +21,7 @@ export const Inventory = () => {
   const [InventoryItems, setInventoryItems] = useState([]);
 
   useEffect(()=>{
-    Axios.get('http://127.0.0.1:5000/fetch-items')
+    Axios.get(process.env.REACT_APP_API_URL+'/fetch-items')
       .then(res => {
         const InventoryItems = res.data;
         console.log(InventoryItems);

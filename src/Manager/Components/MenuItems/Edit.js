@@ -33,7 +33,7 @@ export const Edit = () => {
   const { id } = useParams();
 
   useEffect(()=>{
-    Axios.get(`http://127.0.0.1:5000/get-order-type/${id}`)
+    Axios.get(process.env.REACT_APP_API_URL+`/get-order-type/${id}`)
       .then(res => {
         const orderType = res.data;
         setOrderType(orderType[0]);
@@ -41,7 +41,7 @@ export const Edit = () => {
   },[]);
 
   useEffect(()=>{
-    Axios.get("http://127.0.0.1:5000/fetch-items")
+    Axios.get(process.env.REACT_APP_API_URL+"/fetch-items")
       .then(res => {
         const items = res.data;
         setItems(items);
@@ -53,7 +53,7 @@ export const Edit = () => {
     e.preventDefault();
     const form = document.querySelector("form");
     const formData = new FormData(form);
-    Axios.post(`http://127.0.0.1:5000/edit-menu-item/${id}`, formData, {})
+    Axios.post(process.env.REACT_APP_API_URL+`/edit-menu-item/${id}`, formData, {})
       .then((res) => {
         setSubmitted(true);
       })
@@ -64,7 +64,7 @@ export const Edit = () => {
 
   const deleteHandler = () => {
     // e.preventDefault();
-    Axios.post(`http://127.0.0.1:5000/delete-menu-item/${id}`)
+    Axios.post(process.env.REACT_APP_API_URL+`/delete-menu-item/${id}`)
       .then((res) => {
         setDeleted(true);
       })

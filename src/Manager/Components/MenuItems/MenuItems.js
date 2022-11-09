@@ -22,7 +22,7 @@ export const MenuItems = () => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(()=>{
-    Axios.get('http://127.0.0.1:5000/fetch-menu-items')
+    Axios.get(process.env.REACT_APP_API_URL+'/fetch-menu-items')
       .then(res => {
         const menuItems = res.data;
         console.log(menuItems);

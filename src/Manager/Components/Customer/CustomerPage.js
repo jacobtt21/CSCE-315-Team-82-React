@@ -21,7 +21,7 @@ export const CustomerPage = () => {
     let salads = [];
     let bowls = [];
 
-    const res = await fetch('http://127.0.0.1:5000/fetch-menu-items', {
+    const res = await fetch(process.env.REACT_APP_API_URL+'/fetch-menu-items', {
       method: "GET",
     });
     const responseData = await res.json();
@@ -92,7 +92,7 @@ export const CustomerPage = () => {
                 <h4><i>Enjoy whatever this is</i></h4>
                 <Grid foods={food[0]} custom={true} />
                 <h3 className="FoodHeader" id="bowl">Bowls</h3>
-                <h4><i>Enjoy a shittier version of chipotle</i></h4>
+                <h4><i>Enjoy a worse version of chipotle</i></h4>
                 <Grid foods={food[1]} custom={true} />
                 <h3 className="FoodHeader" id="taco">Tacos</h3>
                 <h4><i>Taco'bout tacos, idk</i></h4>
@@ -104,7 +104,7 @@ export const CustomerPage = () => {
                 <h4><i>Sides and everything else</i></h4>
                 <Grid foods={food[4]} custom={false} />
                 <h3 className="FoodHeader" id="drink">Drinks</h3>
-                <h4><i>I don't care anymore</i></h4>
+                <h4><i>I care a lot still</i></h4>
                 <Grid foods={food[5]} custom={false} />
               </div>
             </div>
