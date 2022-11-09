@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Grid from "./Grid";
 import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
+import Button from "react-bootstrap/Button";
 
 export const CustomerPage = () => {
   const [food, setFood] = useState("");
@@ -73,20 +74,21 @@ export const CustomerPage = () => {
               </div>
               <div className="grid-container2">
                 <div className="FoodHeaderTwo">
-                  Your Order
-                  {order ? (
-                    <>
-                      <Bill foods={order} />
-                      <button
-                      className="btn"
-                      onClick={buy}
-                      >
-                        Checkout {numberFormat(price)} (Tax Included)
-                      </button>
-                    </>
-                  ) : (
-                    <h4><i>There isn't anything here</i></h4>
-                  )}
+                  <div className="stick">
+                    Your Order
+                    {order ? (
+                      <>
+                        <Bill foods={order} />
+                        <Button 
+                        variant="success" 
+                        onClick={buy}>
+                          Checkout {numberFormat(price)} (Tax Included)
+                        </Button>
+                      </>
+                    ) : (
+                      <h4><i>There isn't anything here</i></h4>
+                    )}
+                  </div>
                 </div>
                 <div>
                   <h3 className="FoodHeaderOne" id="burrito">Burritos</h3>
@@ -137,6 +139,16 @@ export const CustomerPage = () => {
                 margin-top: 120px;
                 padding: 10px;
                 border-right: solid;
+              }
+              .stick {
+                position: -webkit-sticky;
+                position: sticky;
+                top: 10;
+                padding: 5px;
+                background-color: #cae8ca;
+                border: 2px solid #4CAF50;
+                border-radius: 15px;
+                padding: 10px;
               }
               .FoodHeader {
                 font-size: 30px;
