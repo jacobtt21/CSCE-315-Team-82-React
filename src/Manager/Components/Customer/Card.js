@@ -19,12 +19,12 @@ export default function FoodCard({ item, custom }) {
       }
       currentCart.push(item)
       setOrder(currentCart)
-      var price;
+      var priceHolder = 0;
       var j;
       for (j = 0; j < currentCart.length; ++j) {
-        price += order[i].price
+        priceHolder = priceHolder + parseFloat(currentCart[j].price);
       }
-      setPrice(price * 1.0825)
+      setPrice(priceHolder * 1.0825)
     }
     else {
       let currentCart = [];
@@ -46,7 +46,7 @@ export default function FoodCard({ item, custom }) {
       var priceHolder = 0;
       var j;
       for (j = 0; j < currentCart.length; ++j) {
-        priceHolder = priceHolder + parseFloat(currentCart[i].price);
+        priceHolder = priceHolder + parseFloat(currentCart[j].price);
       }
       setPrice(priceHolder * 1.0825)
     }
