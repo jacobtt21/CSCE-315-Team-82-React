@@ -27,16 +27,16 @@ export const EditInventory = () => {
   const [submitted, setSubmitted] = useState("");
   const [deleted, setDeleted] = useState("");
 
-  const [orderType, setOrderType] = useState([]);
+  const [item, setItem] = useState([]);
   const [items, setItems] = useState([]);
 
   const { id } = useParams();
 
   useEffect(()=>{
-    Axios.get(process.env.REACT_APP_API_URL+`/get-order-type/${id}`)
+    Axios.get(process.env.REACT_APP_API_URL+`/get-item/${id}`)
       .then(res => {
-        const orderType = res.data;
-        setOrderType(orderType[0]);
+        const item = res.data;
+        setItem(item[0]);
       })
   },[]);
 
@@ -53,7 +53,7 @@ export const EditInventory = () => {
     e.preventDefault();
     const form = document.querySelector("form");
     const formData = new FormData(form);
-    Axios.post(process.env.REACT_APP_API_URL+`/edit-menu-item/${id}`, formData, {})
+    Axios.post(process.env.REACT_APP_API_URL+`/edit-inventory-item/${id}`, formData, {})
       .then((res) => {
         setSubmitted(true);
       })
@@ -86,62 +86,31 @@ export const EditInventory = () => {
               <Form autoComplete="off" onSubmit={onSubmitHandler}>
                 <Form.Group className="mb-3">
                   <Form.Label>Name</Form.Label>
-                  <Form.Control name="name" defaultValue={orderType.name}/>
+                  <Form.Control name="name" defaultValue={item.name}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Nickname</Form.Label>
-                  <Form.Control name="nickname" defaultValue={orderType.nickname}/>
+                  <Form.Label>Quantity</Form.Label>
+                  <Form.Control name="quantity" defaultValue={item.quantity}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Minimum Needed</Form.Label>
+                  <Form.Control name="minimum_needed" defaultValue={item.minimum_needed}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                   <Form.Label>Type</Form.Label>
-                  <Form.Control name="type" list="typeList" defaultValue={orderType.type}/>
+                  <Form.Control name="type" list="typeList" defaultValue={item.type}/>
                   <datalist id="typeList">
-                    <option value="Burrito">Burrito</option>
-                    <option value="Taco">Taco</option>
-                    <option value="Bowl">Bowl</option>
-                    <option value="Salad">Salad</option>
-                    <option value="Side">Side</option>
-                    <option value="Drink">Drink</option>
+                    <option value="Packaging">Packaging</option>
+                    <option value="Ingredient">Ingredient</option>
+                    <option value="Cleaning">Cleaning</option>
                   </datalist>
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Price</Form.Label>
-                  <InputGroup className="mb-3">
-                    <InputGroup.Text>$</InputGroup.Text>
-                    <Form.Control
-                      name="price"
-                      defaultValue={orderType.price}
-                    />
-                  </InputGroup>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Orderable</Form.Label>
-                  <Form.Select name="orderable">
-                    {console.log(orderType.orderable)}
-                    {option("TRUE", "TRUE", orderType.orderable)}
-                    {option("FALSE", "FALSE", orderType.orderable)}
-                  </Form.Select>
-                </Form.Group>
-
-
-                <Form.Group className="mb-3">
-                  <Form.Label>Main Item</Form.Label>
-                  <Form.Select name="item_key">
-                  {
-                    items.map(function(e) {
-                      return option(e.item_id, e.name, orderType.item_key);
-                    })
-                  }
-                  { option("", "NONE", "") }
-                  </Form.Select>
-                </Form.Group>
-
                 <Button type="submit" variant="primary">Submit</Button>
-                <Link to={"/MenuItems"}><Button variant="secondary">Cancel</Button></Link>
+                <Link to={"/Inventory"}><Button variant="secondary">Cancel</Button></Link>
 
               </Form>
             </Card.Body>
@@ -179,10 +148,10 @@ export const EditInventory = () => {
             <Alert variant="success">
               <Alert.Heading><FontAwesomeIcon icon={faPenToSquare}/> Sucessful Update!</Alert.Heading>
               <p>
-                You have successfully updated a menu item. I'm proud of you. Good job.
+                You have successfully updated a inventory item. I'm proud of you. Good job.
               </p>
               <hr />
-                <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
+                <Link to={"/Inventory"}><Button variant="light">Back</Button></Link>
               </Alert>
 
           </Card.Body>
