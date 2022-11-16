@@ -25,12 +25,9 @@ export default function FoodCard({ item }) {
   return (
     <>
       <div className="card">
-        <h1 className="name">{item.name}</h1>
-        <button
-        className="btn bttn"
+      <button className="name btn bttn"
         onClick={Add}
-        >
-          Add to Order
+        >{item.name}
         </button>
       </div>
       <style jsx>{`
@@ -43,7 +40,7 @@ export default function FoodCard({ item }) {
           border: 3px solid #f8fafc;
         }
         .bttn {
-          width: 25%;
+          width: 100%;
           margin: auto;
           background-color: #316685;
           color: white;

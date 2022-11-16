@@ -15,9 +15,8 @@ export default function Grid({ foods }) {
       </div>
       <style jsx>{`
         .grid-container {
-          width: 90%;
+          width: 100%;
           text-align: left;
-          button-align: right;
           margin-bottom: 2%;
           display: grid;
           grid-template-columns: 1fr;
