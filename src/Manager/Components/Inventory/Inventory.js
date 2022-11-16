@@ -22,7 +22,7 @@ export const Inventory = () => {
   const [InventoryItems, setInventoryItems] = useState([]);
 
   useEffect(()=>{
-    Axios.get(process.env.REACT_APP_API_URL+'/fetch-items')
+    Axios.get(process.env.REACT_APP_API_URL + '/fetch-items')
       .then(res => {
         const InventoryItems = res.data;
         console.log(InventoryItems);

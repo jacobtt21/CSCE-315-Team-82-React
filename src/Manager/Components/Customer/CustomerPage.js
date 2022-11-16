@@ -22,7 +22,7 @@ export const CustomerPage = () => {
     let salads = [];
     let bowls = [];
 
-    const res = await fetch(process.env.REACT_APP_API_URL+'/fetch-menu-items', {
+    const res = await fetch(process.env.REACT_APP_API_URL + '/fetch-menu-items', {
       method: "GET",
     });
     const responseData = await res.json();
