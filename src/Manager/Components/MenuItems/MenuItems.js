@@ -8,7 +8,7 @@ import Axios from 'axios';
 
 import {Link} from "react-router-dom";
 
-function myFunction(price) {
+function priceFormatter(price) {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -46,8 +46,8 @@ export const MenuItems = () => {
                     <th>Key</th>
                     <th>Name</th>
                     <th>Nickname</th>
-                    <th>Type</th>
                     <th>Price</th>
+                    <th>Type</th>
                     <th>Orderable</th>
                     <th>Main Item</th>
                     <th>Actions</th>
@@ -66,8 +66,8 @@ export const MenuItems = () => {
                         <td>{item.order_id}</td>
                         <td>{item.name}</td>
                         <td>{item.nickname}</td>
-                        <td>{item.type}</td>
-                        <td>{myFunction(item.price)}</td>
+                        <td>{priceFormatter(item.price)}</td>
+                        <td><span class="badge bg-secondary">{item.type.toUpperCase() || "NONE"}</span></td>
                         <td>{item.orderable ? <span class="badge bg-success">TRUE</span> : <span class="badge bg-danger">FALSE</span>}</td>
                         <td>{item.mainitemname ? item.mainitemname : "NONE"}</td>
                         <td><Link to={`MenuItems/${item.order_id}/edit`}>edit</Link></td>

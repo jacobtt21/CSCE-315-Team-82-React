@@ -2,6 +2,7 @@ import React from "react";
 import { OrderContext, PriceContext } from "./lib";
 import { useContext, useState } from "react";
 import Popup from 'reactjs-popup';
+import Button from "react-bootstrap/Button";
 
 export default function FoodCard({ item, custom }) {
   const [order, setOrder] = useContext(OrderContext)
@@ -18,12 +19,12 @@ export default function FoodCard({ item, custom }) {
       }
       currentCart.push(item)
       setOrder(currentCart)
-      var price;
+      var priceHolder = 0;
       var j;
       for (j = 0; j < currentCart.length; ++j) {
-        price += order[i].price
+        priceHolder = priceHolder + parseFloat(currentCart[j].price);
       }
-      setPrice(price * 1.0825)
+      setPrice(priceHolder * 1.0825)
     }
     else {
       let currentCart = [];
@@ -45,7 +46,7 @@ export default function FoodCard({ item, custom }) {
       var priceHolder = 0;
       var j;
       for (j = 0; j < currentCart.length; ++j) {
-        priceHolder = priceHolder + parseFloat(currentCart[i].price);
+        priceHolder = priceHolder + parseFloat(currentCart[j].price);
       }
       setPrice(priceHolder * 1.0825)
     }
@@ -74,10 +75,14 @@ export default function FoodCard({ item, custom }) {
         <h1 className="name">{item.name}</h1>
         <h1 className="name">${item.price}</h1>
         {custom ? (
+          <>
+          <Button 
+          variant="primary" 
+          onClick={() => setOpen(o => !o)}
+          >
+            Add to Order
+          </Button>
           <div>
-            <button type="button" className="btn" onClick={() => setOpen(o => !o)}>
-              Add to Order
-            </button>
             <Popup 
             open={open} 
             contentStyle={contentStyle}
@@ -112,12 +117,12 @@ export default function FoodCard({ item, custom }) {
                 <label>&nbsp;Lettuce</label><br />
                 <input type="checkbox" />
                 <label>&nbsp;Salsa</label><br />
-                <button
-                className="btn"
+                <Button 
+                variant="dark" 
                 onClick={AddCustom}
                 >
                   Add to Order
-                </button>
+                </Button>
                 <style jsx="true">{`
                   h1 {
                     font-size: 30px;
@@ -130,13 +135,14 @@ export default function FoodCard({ item, custom }) {
               </div>
             </Popup>
           </div>
+          </>
         ) : (
-          <button
-          className="btn"
+          <Button 
+          variant="primary" 
           onClick={Add}
           >
             Add to Order
-          </button>
+          </Button>
         )}
       </div>
       <style jsx="true">{`

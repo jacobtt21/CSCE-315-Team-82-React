@@ -29,7 +29,7 @@ export const New = () => {
   const [items, setItems] = useState([]);
 
   useEffect(()=>{
-    Axios.get("http://127.0.0.1:5000/fetch-items")
+    Axios.get(process.env.REACT_APP_API_URL+"/fetch-items")
       .then(res => {
         const items = res.data;
         setItems(items);
@@ -41,7 +41,7 @@ export const New = () => {
     e.preventDefault();
     const form = document.querySelector("form");
     const formData = new FormData(form);
-    Axios.post(`http://127.0.0.1:5000/new-menu-item`, formData, {})
+    Axios.post(process.env.REACT_APP_API_URL+`/new-menu-item`, formData, {})
       .then((res) => {
         setSubmitted(true);
       })
