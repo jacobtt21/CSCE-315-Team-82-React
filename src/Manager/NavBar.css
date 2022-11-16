@@ -20,12 +20,13 @@
   }
   
   .nav-logo {
-    color: #f5b921;
+    color: #ee9135;
     align-items: center;
+    font-family: "Georgia", Times, serif;
     margin-left: 20px;
     cursor: pointer;
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 3.5rem;
     flex-grow: 1;
   }
   

@@ -10,13 +10,14 @@ export const ExtraFeatures = () => {
   const handleChange = (event) => {setDescription((event).target.value)}
   const handleSubmit = (event) => {(event).preventDefault(); console.log(description)}
   return (
-    <div>
+    <>
+    <div className="normal-style">
       <Card>
           <Card.Header>
-            <h3 className="d-inline align-middle">Extra Features</h3>
+            <h1 className="left">Extra Features</h1>
           </Card.Header>
           <Card.Body>
-      <p>Enter Date</p>
+      <h1>Enter Date</h1>
       <form>
         <input
           type = "text"
@@ -27,11 +28,25 @@ export const ExtraFeatures = () => {
         </input>
       </form>
       <p ></p>
-      <Button variant="primary">Sales Report</Button>
-      <Button variant="primary">Excess Inventory Report</Button>
-      <Button variant="primary">Sale Bundle Report</Button>
+      <button className="btn">Sales Report</button>
+      <button className="btn">Excess Inventory Report</button>
+      <button className="btn">Sale Bundle Report</button>
       </Card.Body>
       </Card>
     </div>
+    <style jsx>{`
+    .btn {
+      width: 20%;
+      margin-left: 10%;
+      background-color: #1f5156;
+      color: white;
+      margin-right: 10%;
+      margin-bottom: 5%;
+    }
+    .left {
+      text-align: left;
+    }
+  `}</style>
+  </>
   );
 };
