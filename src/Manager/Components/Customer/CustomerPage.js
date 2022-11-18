@@ -76,7 +76,7 @@ export const CustomerPage = () => {
                 <div className="FoodHeaderTwo">
                   <div className="stick">
                     Your Order
-                    {order ? (
+                    {order.length > 0 ? (
                       <>
                         <Bill foods={order} />
                         <Button 
@@ -125,18 +125,18 @@ export const CustomerPage = () => {
               }
               .title {
                 width: 90%;
-                margin: -100px auto;
+                margin: auto auto;
                 padding: 10px;
                 border-bottom: 2px solid black;
               }
               .FoodHeaderOne {
                 font-size: 30px;
-                margin-top: 120px;
+                margin-top: 10px;
                 padding: 10px;
               }
               .FoodHeaderTwo {
                 font-size: 30px;
-                margin-top: 120px;
+                margin-top: 10px;
                 padding: 10px;
                 border-right: solid;
               }
