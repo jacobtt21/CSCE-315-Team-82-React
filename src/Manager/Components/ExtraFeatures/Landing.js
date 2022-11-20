@@ -1,14 +1,8 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Table from 'react-bootstrap/Table';
-import Card from 'react-bootstrap/Card';
+import { Link } from "react-router-dom";
 
 
 export const ExtraFeatures = () => {
-  const [description, setDescription] = useState("");
-  const handleChange = (event) => {setDescription((event).target.value)}
-  const handleSubmit = (event) => {(event).preventDefault(); console.log(description)}
   return (
     <>
       <div class="container py-4">
@@ -23,7 +17,7 @@ export const ExtraFeatures = () => {
             <div class="h-80 p-5 bg-light border rounded-3">
               <h2>Sales Report</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lectus ex, elementum sed sagittis id, ultricies et magna. Morbi vel consequat est. Fusce tristique enim ut ipsum dictum, vel feugiat elit placerat.</p>
-              <button class="btn btn-outline-secondary" type="button">View Report</button>
+              <Link to="/ExtraFeatures/SalesReport"><button class="btn btn-outline-secondary" type="button">View Report</button></Link>
             </div>
           </div>
 
@@ -47,7 +41,7 @@ export const ExtraFeatures = () => {
 
           <div class="col-md-6">
             <div class="h-80 p-5 bg-light border rounded-3">
-              <h2>Bundles Report</h2>
+              <h2>Pairings Report</h2>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lectus ex, elementum sed sagittis id, ultricies et magna. Morbi vel consequat est. Fusce tristique enim ut ipsum dictum, vel feugiat elit placerat.</p>
               <button class="btn btn-outline-secondary" type="button">View Report</button>
             </div>
