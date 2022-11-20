@@ -82,6 +82,9 @@ function NavBar() {
                 Server View
               </NavLink>
             </li>
+            <li className="nav-item">
+              <button class="btn btn-secondary" type="button">Logout</button>
+            </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
