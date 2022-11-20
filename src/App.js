@@ -2,6 +2,7 @@ import "./App.css";
 import NavBar from "./Manager/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./Manager/Components/Home";
+import { Welcome } from "./Manager/Components/Welcome";
 import { MenuItems } from "./Manager/Components/MenuItems/MenuItems";
 import { Inventory } from "./Manager/Components/Inventory/Inventory";
 import { ExtraFeatures } from "./Manager/Components/ExtraFeatures/Landing";
@@ -27,6 +28,7 @@ function App() {
       "google_translate_element"
     );
   };
+
   useEffect(() => {
     var addScript = document.createElement("script");
     addScript.setAttribute(
@@ -36,6 +38,7 @@ function App() {
     document.body.appendChild(addScript);
     window.googleTranslateElementInit = googleTranslateElementInit;
   }, []);
+
   return (
     <>
       <Router>
@@ -43,7 +46,8 @@ function App() {
         <div className="pages">
           <div id="google_translate_element"></div>
           <Switch>
-            <Route exact path="/" component={Home} />
+            {/* <Route exact path="/" component={Home} /> */}
+            <Route exact path="/" component={Welcome} />
             <Route exact path= "/MenuItems" component={MenuItems} />
             <Route exact path= "/Inventory" component={Inventory} />
             <Route exact path= "/ExtraFeatures" component={ExtraFeatures} />
