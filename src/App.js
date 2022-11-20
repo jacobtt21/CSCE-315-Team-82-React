@@ -17,8 +17,6 @@ import { RestockReport } from "./Manager/Components/ExtraFeatures/RestockReport"
 import { ExcessReport } from "./Manager/Components/ExtraFeatures/ExcessReport";
 import { PairingsReport } from "./Manager/Components/ExtraFeatures/PairingsReport";
 
-import { useEffect } from "react";
-
 function App() {
   const googleTranslateElementInit = () => {
     new window.google.translate.TranslateElement(
