@@ -46,8 +46,8 @@ function App() {
         <div className="pages">
           <div id="google_translate_element"></div>
           <Switch>
-            {/* <Route exact path="/" component={Home} /> */}
             <Route exact path="/" component={Welcome} />
+            <Route exact path="/home" component={Home} />
             <Route exact path= "/MenuItems" component={MenuItems} />
             <Route exact path= "/Inventory" component={Inventory} />
             <Route exact path= "/ExtraFeatures" component={ExtraFeatures} />
