@@ -31,7 +31,7 @@ export const Welcome = () => {
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
 
   const onSuccess = (res) => {
-    Axios.get(process.env.REACT_APP_API_URL + `/authenticate/${res.profileObj.googleId}`)
+    Axios.get(process.env.REACT_APP_API_URL + `/authenticate/${res.profileObj.email}`)
     .then(res => {
       if (res.data.authenticated) {
         localStorage.setItem("jwt", res.data.jwt);
