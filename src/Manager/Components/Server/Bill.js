@@ -1,4 +1,5 @@
 import React from "react";
+import ItemBill from "./Item";
 
 export default function Bill({ foods }) {
 
@@ -8,7 +9,7 @@ export default function Bill({ foods }) {
         {foods.map((item, i) => {
           return (
             <div key={i}>
-              <h5>{i + 1}. {item.name} ${item.price}</h5>
+              <ItemBill item={item} index={i} />
             </div>
           );
         })}

@@ -76,7 +76,7 @@ export const CustomerPage = () => {
                 <div className="FoodHeaderTwo">
                   <div className="stick">
                     Your Order
-                    {order.length > 0 ? (
+                    {order ? (
                       <>
                         <Bill foods={order} />
                         <Button 

@@ -104,15 +104,15 @@ export default function FoodCard({ item, custom }) {
                 type="checkbox" 
                 onSelect={console.log()}
                 />
-                <label>&nbsp;Cheese</label><br />
+                <label class="container">Cheese
+                <input type="checkbox" class="check"/></label>
+                <label class= "container">Veggies</label>
                 <input type="checkbox" />
-                <label>&nbsp;Veggies</label><br />
+                <label class="container">Sour Cream</label>
                 <input type="checkbox" />
-                <label>&nbsp;Sour Cream</label><br />
+                <label class="container">Lettuce</label>
                 <input type="checkbox" />
-                <label>&nbsp;Lettuce</label><br />
-                <input type="checkbox" />
-                <label>&nbsp;Salsa</label><br />
+                <label class="container">Salsa</label><br />
                 <button 
                 className="btn buttn" 
                 onClick={AddCustom}
@@ -126,6 +126,28 @@ export default function FoodCard({ item, custom }) {
                   h2 {
                     margin-top: 15px;
                     font-size: 20px;
+                  }
+                  check {
+                    top: 0;
+                    left: 0;
+                    height: 25px;
+                    width: 25px;
+                    background-color: #eee;
+                  }
+                  .container {
+                    display: block;
+                    position: relative;
+                    padding-left: 35px;
+                    margin-bottom: 12px;
+                    cursor: pointer;
+                    font-size: 22px;
+                  }
+                  .container input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                    height: 0;
+                    width: 0;
                   }
                 `}</style>
               </div>

@@ -101,8 +101,8 @@ export const ServerPage = () => {
             </main>
             <style jsx="true">{`
               .grid-container2 {
-                width: 90%;
-                margin: auto;
+                width: auto;
+                margin-top: 0;
                 display: grid;
                 grid-template-columns: 1fr 3fr;
                 gap: 25px;
@@ -112,18 +112,18 @@ export const ServerPage = () => {
               }
               .title {
                 width: 90%;
-                margin: -100px auto;
+                margin: auto;
                 padding: 10px;
                 border-bottom: 2px solid black;
               }
               .FoodHeaderOne {
                 font-size: 30px;
-                margin-top: 120px;
+                margin-top: 5%;
                 padding: 10px;
               }
               .FoodHeaderTwo {
                 font-size: 30px;
-                margin-top: 120px;
+                margin-top: 5%;
                 padding: 10px;
                 border-right: solid;
               }
@@ -131,6 +131,7 @@ export const ServerPage = () => {
                 position: -webkit-sticky;
                 position: sticky;
                 top: 10;
+                width: auto;
                 padding: 5px;
                 border-radius: 15px;
                 padding: 10px;

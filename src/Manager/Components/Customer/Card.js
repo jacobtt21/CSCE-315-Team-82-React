@@ -2,7 +2,6 @@ import React from "react";
 import { OrderContext, PriceContext } from "./lib";
 import { useContext, useState } from "react";
 import Popup from 'reactjs-popup';
-import Button from "react-bootstrap/Button";
 
 export default function FoodCard({ item, custom }) {
   const [order, setOrder] = useContext(OrderContext)
