@@ -10,7 +10,7 @@ export const ServerPage = () => {
   const [food, setFood] = useState("");
   const [order, setOrder] = useState();
   const [price, setPrice] = useState();
-  
+
   useEffect(() => {
     getFood()
   }, []);
@@ -59,16 +59,14 @@ export const ServerPage = () => {
 
     setFood(menu)
   }
-  
+
 
   return food ? (
     <>
-      <div className="classic-style">
+      <div className="p-3">
         <OrderContext.Provider value={[order, setOrder]}>
           <PriceContext.Provider value={[price, setPrice]}>
-            <main>
-              <div className="title">
-              </div>
+            {/* <main> */}
               <div className="grid-container2">
                 <div className="FoodHeaderTwo">
                   <div className="stick">
@@ -98,7 +96,7 @@ export const ServerPage = () => {
                   <Grid foods={food[5]} custom={false} />
                 </div>
               </div>
-            </main>
+            {/* </main> */}
             <style jsx="true">{`
               .grid-container2 {
                 width: 90%;
@@ -110,20 +108,18 @@ export const ServerPage = () => {
               h2 {
                 font-size: 50px;
               }
-              .title {
-                width: 90%;
-                margin: -100px auto;
-                padding: 10px;
-                border-bottom: 2px solid black;
-              }
+              // .title {
+              //   width: 90%;
+              //   margin: -100px auto;
+              //   padding: 10px;
+              //   border-bottom: 2px solid black;
+              // }
               .FoodHeaderOne {
                 font-size: 30px;
-                margin-top: 120px;
                 padding: 10px;
               }
               .FoodHeaderTwo {
                 font-size: 30px;
-                margin-top: 120px;
                 padding: 10px;
                 border-right: solid;
               }
