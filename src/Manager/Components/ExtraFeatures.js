@@ -1,9 +1,3 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Table from 'react-bootstrap/Table';
-import Card from 'react-bootstrap/Card';
-
 
 export const ExtraFeatures = () => {
   const [description, setDescription] = useState("");
