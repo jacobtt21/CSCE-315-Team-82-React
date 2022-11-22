@@ -2,8 +2,22 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
+import { useGlobalState } from "../state";
+import { useHistory } from "react-router-dom";
+
 function NavBar() {
+
   const [click, setClick] = useState(false);
+  const [authenticated, setAuthenticated] = useGlobalState('authenticated');
+  const redirect = useHistory();
+
+  const handleLogOut = () => {
+    setAuthenticated(false);
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("full_name");
+    redirect.push("/");
+    window.location.reload();
+  };
 
   const handleClick = () => setClick(!click);
   return (
@@ -81,6 +95,9 @@ function NavBar() {
               >
                 Server View
               </NavLink>
+            </li>
+            <li className="nav-item">
+              <button class="btn btn-secondary" type="button" onClick={handleLogOut}>Logout</button>
             </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>
