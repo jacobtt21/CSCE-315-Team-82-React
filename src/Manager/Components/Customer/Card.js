@@ -158,14 +158,14 @@ export default function FoodCard({ item, custom }) {
         .bttn {
           width: 100%;
           margin: auto;
-          background-color: #1f5156;
+          background-color: #53898d;
           color: white;
           margin-right: 0;
         }
         .buttn {
           width: 25%;
           margin: auto;
-          background-color: #1f5156;
+          background-color: #53898d;
           color: white;
           margin-right: 0;
         }

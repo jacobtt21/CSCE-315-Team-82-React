@@ -23,7 +23,7 @@ export default function Bill({ foods }) {
         .btton {
           width: 100%;
           margin: auto;
-          background-color: #1f5156;
+          background-color: #53898d;
           color: white;
           margin-right: 0;
         }

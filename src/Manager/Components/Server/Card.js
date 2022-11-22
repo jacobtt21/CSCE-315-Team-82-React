@@ -169,20 +169,20 @@ export default function FoodCard({ item, custom }) {
         }
         .card {
           margin-left: 0%;
-          width: 100%;
+          width: 50%;
           border: 3px solid #f8fafc;
         }
         .bttn {
           width: 100%;
           margin: auto;
-          background-color: #1f5156;
+          background-color: #53898d;
           color: white;
-          margin-right: 0;
+          margin-left: 0;
         }
         .buttn {
           width: 25%;
           margin: auto;
-          background-color: #1f5156;
+          background-color: #53898d;
           color: white;
           margin-right: 0;
         }
