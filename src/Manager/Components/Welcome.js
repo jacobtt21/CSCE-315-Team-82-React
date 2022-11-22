@@ -3,9 +3,9 @@ import { useEffect } from "react";
 
 import "./Welcome.css";
 
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+// import { GoogleOAuthProvider } from 'react-oauth/google';
 
 
 export const Welcome = () => {
@@ -38,7 +38,7 @@ export const Welcome = () => {
             <h1 class="display-5 fw-bold">Welcome to Cabo Grill.</h1>
             <p class="col-md-8 fs-4">This is a privledged page for use by Cabo Grill employees only. It requires Google Authentication to enter.</p>
             <div id="signInButton">
-              <GoogleOAuthProvider>
+              {/* <GoogleOAuthProvider> */}
                 <GoogleLogin
                   clientId={process.env.REACT_APP_OAUTH_CLIENT_ID}
                   onSuccess={onSuccess}
@@ -47,7 +47,7 @@ export const Welcome = () => {
                   cookiePolicy={'single_host_origin'}
                   isSignedIn={true}
                 />
-              </GoogleOAuthProvider>
+              {/* </GoogleOAuthProvider> */}
             </div>
           </div>
         </div>
