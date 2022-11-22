@@ -10,6 +10,8 @@ import Axios from 'axios';
 
 import Alert from 'react-bootstrap/Alert';
 
+import { useGlobalState } from "../../state";
+
 function displayLoginFailure(failure) {
   if (failure) {
     return (
@@ -26,11 +28,16 @@ export const Welcome = () => {
 
   const redirect = useHistory();
   const [loginFailure, setLoginFailure] = useState(false);
+  const [authenticated, setAuthenticated] = useGlobalState('authenticated');
 
   const onSuccess = (res) => {
     Axios.get(process.env.REACT_APP_API_URL + `/authenticate/${res.profileObj.googleId}`)
     .then(res => {
       if (res.data.authenticated) {
+        localStorage.setItem("jwt", res.data.jwt);
+        localStorage.setItem("full_name", res.data.full_name);
+
+        setAuthenticated(true);
         redirect.push("/home");
       } else {
         onFailure(null);
@@ -63,7 +70,6 @@ export const Welcome = () => {
 
     gapi.load('client:auth2', start);
   });
-
 
   return (
     <>
