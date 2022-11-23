@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Grid from "./Grid";
 import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
-
+import Axios from 'axios';
 
 export const ServerPage = () => {
 
@@ -59,7 +59,21 @@ export const ServerPage = () => {
 
     setFood(menu)
   }
+
+  const [submitted, setSubmitted] = useState("");
   
+  const onCheckoutHandler = e => {
+    e.preventDefault();
+    const form = document.querySelector("form");
+    const formData = new FormData(form);
+    Axios.post(process.env.REACT_APP_API_URL+`/new-bill`, formData, {})
+      .then((res) => {
+        setSubmitted(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return food ? (
     <>
@@ -76,7 +90,12 @@ export const ServerPage = () => {
                     {order ? (
                       <>
                         <Bill foods={order} />
-                        <h4> </h4>
+                        <button 
+                        className="btton btn"
+                        type="submit"
+                        onClick={onCheckoutHandler}> 
+                          Checkout {numberFormat(price)} (Tax Included)
+                        </button>
                       </>
                     ) : (
                       <h4> </h4>

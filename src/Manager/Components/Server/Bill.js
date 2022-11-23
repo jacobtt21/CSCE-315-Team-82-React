@@ -13,7 +13,6 @@ export default function Bill({ foods }) {
             </div>
           );
         })}
-        <button className="btton btn"> Checkout </button>
       </div>
       <style jsx="true">{`
         .bill {
