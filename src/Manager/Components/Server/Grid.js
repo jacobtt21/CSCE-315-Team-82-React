@@ -1,14 +1,14 @@
 import React from "react";
 import FoodCard from "./Card";
 
-export default function Grid({ foods }) {
+export default function Grid({ foods, custom }) {
   return (
     <>
       <div className="grid-container">
         {foods.map((item, i) => {
           return (
             <div key={i}>
-              <FoodCard item={item} />
+              <FoodCard item={item} custom={custom} />
             </div>
           );
         })}

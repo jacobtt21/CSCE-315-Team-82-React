@@ -1,4 +1,5 @@
 import React from "react";
+import ItemBill from "./Item";
 
 export default function Bill({ foods }) {
 
@@ -8,11 +9,10 @@ export default function Bill({ foods }) {
         {foods.map((item, i) => {
           return (
             <div key={i}>
-              <h5>{i + 1}. {item.name} ${item.price}</h5>
+              <ItemBill item={item} index={i} />
             </div>
           );
         })}
-        <button className="btton btn"> Checkout </button>
       </div>
       <style jsx="true">{`
         .bill {
@@ -22,7 +22,7 @@ export default function Bill({ foods }) {
         .btton {
           width: 100%;
           margin: auto;
-          background-color: #316685;
+          background-color: #53898d;
           color: white;
           margin-right: 0;
         }
