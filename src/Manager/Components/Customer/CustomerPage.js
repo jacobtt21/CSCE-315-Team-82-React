@@ -76,7 +76,7 @@ export const CustomerPage = () => {
                 <div className="FoodHeaderTwo">
                   <div className="stick">
                     Your Order
-                    {order.length > 0 ? (
+                    {order ? (
                       <>
                         <Bill foods={order} />
                         <Button 
@@ -145,8 +145,9 @@ export const CustomerPage = () => {
                 position: sticky;
                 top: 10;
                 padding: 5px;
-                background-color: #cae8ca;
-                border: 2px solid #4CAF50;
+                background-color: #f8fafc;
+                border: 2px solid #f8fafc;
+                box-shadow: 5px 10px 8px #e2e8f0;
                 border-radius: 15px;
                 padding: 10px;
               }

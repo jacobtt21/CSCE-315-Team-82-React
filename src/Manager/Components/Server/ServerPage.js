@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Grid from "./Grid";
 import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
-
+import Axios from 'axios';
 
 export const ServerPage = () => {
 
@@ -60,13 +60,28 @@ export const ServerPage = () => {
     setFood(menu)
   }
 
+  const [submitted, setSubmitted] = useState("");
+  
+  const onCheckoutHandler = e => {
+    e.preventDefault();
+    const form = document.querySelector("form");
+    const formData = new FormData(form);
+    Axios.post(process.env.REACT_APP_API_URL+`/new-bill`, formData, {})
+      .then((res) => {
+        setSubmitted(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return food ? (
     <>
       <div className="p-3">
         <OrderContext.Provider value={[order, setOrder]}>
           <PriceContext.Provider value={[price, setPrice]}>
-            {/* <main> */}
+          <div className="title">
+          </div>
               <div className="grid-container2">
                 <div className="FoodHeaderTwo">
                   <div className="stick">
@@ -74,7 +89,12 @@ export const ServerPage = () => {
                     {order ? (
                       <>
                         <Bill foods={order} />
-                        <h4> </h4>
+                        <button 
+                        className="btton btn"
+                        type="submit"
+                        onClick={onCheckoutHandler}> 
+                          Checkout {numberFormat(price)} (Tax Included)
+                        </button>
                       </>
                     ) : (
                       <h4> </h4>
@@ -96,11 +116,11 @@ export const ServerPage = () => {
                   <Grid foods={food[5]} custom={false} />
                 </div>
               </div>
-            {/* </main> */}
             <style jsx="true">{`
               .grid-container2 {
-                width: 90%;
-                margin: auto;
+                width: 100%;
+                margin-top: 0;
+                margin-left: 5%;
                 display: grid;
                 grid-template-columns: 1fr 3fr;
                 gap: 25px;
@@ -108,25 +128,31 @@ export const ServerPage = () => {
               h2 {
                 font-size: 50px;
               }
-              // .title {
-              //   width: 90%;
-              //   margin: -100px auto;
-              //   padding: 10px;
-              //   border-bottom: 2px solid black;
-              // }
+              .title {
+                width: 90%;
+                margin: auto;
+                padding: 10px;
+                border-bottom: 2px solid black;
+              }
               .FoodHeaderOne {
                 font-size: 30px;
+                margin-top: 5%;
                 padding: 10px;
+                width: 50%;
+                text-align: center;
               }
               .FoodHeaderTwo {
                 font-size: 30px;
+                margin-top: 5%;
                 padding: 10px;
                 border-right: solid;
+                text-align: center;
               }
               .stick {
                 position: -webkit-sticky;
                 position: sticky;
                 top: 10;
+                width: auto;
                 padding: 5px;
                 border-radius: 15px;
                 padding: 10px;
@@ -134,6 +160,8 @@ export const ServerPage = () => {
               .FoodHeader {
                 font-size: 30px;
                 padding: 10px;
+                width: 50%;
+                text-align: center;
               }
             `}</style>
           </PriceContext.Provider>
