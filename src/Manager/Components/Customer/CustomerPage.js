@@ -45,6 +45,7 @@ export const CustomerPage = () => {
       }
       else {
         sides.push(responseData[i]);
+        console.log(responseData[i])
       }
     }
 
