@@ -78,12 +78,18 @@ export const CustomerPage = () => {
                     Your Order
                     {order ? (
                       <>
-                        <Bill foods={order} />
-                        <Button 
-                        variant="success" 
-                        onClick={buy}>
-                          Checkout {numberFormat(price)} (Tax Included)
-                        </Button>
+                        {order.length > 0 ? (
+                          <>
+                          <Bill foods={order} />
+                          <Button 
+                          variant="success" 
+                          onClick={buy}>
+                            Checkout {numberFormat(price)} (Tax Included)
+                          </Button>
+                          </>
+                        ) : (
+                          <h4><i>There isn't anything here</i></h4>
+                        )}
                       </>
                     ) : (
                       <h4><i>There isn't anything here</i></h4>
