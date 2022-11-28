@@ -10,7 +10,7 @@ export const ServerPage = () => {
   const [food, setFood] = useState("");
   const [order, setOrder] = useState();
   const [price, setPrice] = useState();
-  
+
   useEffect(() => {
     getFood()
   }, []);
@@ -77,12 +77,11 @@ export const ServerPage = () => {
 
   return food ? (
     <>
-      <div className="classic-style">
+      <div className="p-3">
         <OrderContext.Provider value={[order, setOrder]}>
           <PriceContext.Provider value={[price, setPrice]}>
-            <main>
-              <div className="title">
-              </div>
+          <div className="title">
+          </div>
               <div className="grid-container2">
                 <div className="FoodHeaderTwo">
                   <div className="stick">
@@ -117,7 +116,6 @@ export const ServerPage = () => {
                   <Grid foods={food[5]} custom={false} />
                 </div>
               </div>
-            </main>
             <style jsx="true">{`
               .grid-container2 {
                 width: 100%;

@@ -39,6 +39,10 @@ export const Welcome = () => {
 
         setAuthenticated(true);
         redirect.push("/home");
+
+        // prevent future auto sign-in
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.disconnect();
       } else {
         onFailure(null);
       }

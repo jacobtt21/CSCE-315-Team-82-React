@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderContext, PriceContext } from "./lib";
+import { OrderContext, PriceContext, numberFormat } from "./lib";
 import { useContext, useState } from "react";
 import Popup from 'reactjs-popup';
 
@@ -76,7 +76,7 @@ export default function FoodCard({ item, custom }) {
           className="bttn btn name" 
           onClick={() => setOpen(o => !o)}
           >
-            {item.name}
+            {item.name} {numberFormat(item.price)}
           </button>
           <div>
             <Popup 
@@ -88,11 +88,10 @@ export default function FoodCard({ item, custom }) {
               <div className="normal-style">
                 <h1>Cutomize Your {item.name}</h1>
                 <h2>Choose your rice *</h2>
-                <select>
-                  <option value="brown">Brown</option>
-                  <option value="white">White</option>
-                  <option value="no">No Rice</option>
-                </select>
+                <button value="brown" className="btn butn">Brown</button>
+                <button value="white" className="btn butn">White</button>
+                <button value="no" className="btn butn">No Rice</button>
+                
                 <h2>Choose your beans *</h2>
                 <select>
                   <option value="brown">Pinto</option>
@@ -100,18 +99,21 @@ export default function FoodCard({ item, custom }) {
                   <option value="no">No Beans</option>
                 </select>
                 <h2>Choose your toppings</h2>
-                <input 
-                type="checkbox" 
-                onSelect={console.log()}
-                />
-                <label class="container">Cheese
-                <input type="checkbox" class="check"/></label>
+                
+                
+                <input type="checkbox" class="check"/>
+                <label class="container">Cheese</label>
+                
+                <input type="checkbox" class="check"/>
                 <label class= "container">Veggies</label>
-                <input type="checkbox" />
+                
+                <input type="checkbox" class="check"/>
                 <label class="container">Sour Cream</label>
-                <input type="checkbox" />
+                
+                <input type="checkbox" class="check"/>
                 <label class="container">Lettuce</label>
-                <input type="checkbox" />
+                
+                <input type="checkbox" class="check"/>
                 <label class="container">Salsa</label><br />
                 <button 
                 className="btn buttn" 
@@ -124,28 +126,26 @@ export default function FoodCard({ item, custom }) {
                     font-size: 30px;
                   }
                   h2 {
-                    margin-top: 15px;
+                    margin: 2%;
                     font-size: 20px;
                   }
-                  check {
+                  .check {
                     top: 0;
                     left: 0;
                     height: 25px;
                     width: 25px;
                     background-color: #eee;
+                    display: inline;
+                    cursor: pointer;
                   }
                   .container {
-                    display: block;
-                    position: relative;
-                    padding-left: 35px;
-                    margin-bottom: 12px;
-                    cursor: pointer;
+                    display: inline;
+                    margin-bottom: 10%;
                     font-size: 22px;
                   }
                   .container input {
-                    position: absolute;
+                    display: inline;
                     opacity: 0;
-                    cursor: pointer;
                     height: 0;
                     width: 0;
                   }
@@ -159,7 +159,7 @@ export default function FoodCard({ item, custom }) {
           className="name bttn btn" 
           onClick={Add}
           >
-            {item.name}
+            {item.name}{numberFormat(item.price)}
           </button>
         )}
       </div>
@@ -179,9 +179,23 @@ export default function FoodCard({ item, custom }) {
           color: white;
           margin-left: 0;
         }
+        .btn:hover {
+          box-shadow: 5px 10px 8px #e2e8f0;
+        }
+        .butn:focus, .focus {
+          background-color: #000000;
+          color: white;
+        }
+        .butn {
+          margin: auto;
+          background-color: #53898d;
+          color: white;
+          margin-left: 1%;
+        }
         .buttn {
           width: 25%;
           margin: auto;
+          margin-top: 5%;
           background-color: #53898d;
           color: white;
           margin-right: 0;
