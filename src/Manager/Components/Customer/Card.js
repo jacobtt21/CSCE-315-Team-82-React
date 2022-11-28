@@ -2,7 +2,6 @@ import React from "react";
 import { OrderContext, PriceContext } from "./lib";
 import { useContext, useState } from "react";
 import Popup from 'reactjs-popup';
-import Button from "react-bootstrap/Button";
 
 export default function FoodCard({ item, custom }) {
   const [order, setOrder] = useContext(OrderContext)
@@ -76,12 +75,12 @@ export default function FoodCard({ item, custom }) {
         <h1 className="name">${item.price}</h1>
         {custom ? (
           <>
-          <Button 
-          variant="primary" 
+          <button 
+          className="bttn name btn" 
           onClick={() => setOpen(o => !o)}
           >
             Add to Order
-          </Button>
+          </button>
           <div>
             <Popup 
             open={open} 
@@ -89,7 +88,7 @@ export default function FoodCard({ item, custom }) {
             overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
             closeOnDocumentClick onClose={closeModal}
             >
-              <div>
+              <div className="normal-style">
                 <h1>Cutomize Your {item.name}</h1>
                 <h2>Choose your rice *</h2>
                 <select>
@@ -117,12 +116,12 @@ export default function FoodCard({ item, custom }) {
                 <label>&nbsp;Lettuce</label><br />
                 <input type="checkbox" />
                 <label>&nbsp;Salsa</label><br />
-                <Button 
-                variant="dark" 
+                <button 
+                className="btn buttn" 
                 onClick={AddCustom}
                 >
                   Add to Order
-                </Button>
+                </button>
                 <style jsx="true">{`
                   h1 {
                     font-size: 30px;
@@ -137,12 +136,12 @@ export default function FoodCard({ item, custom }) {
           </div>
           </>
         ) : (
-          <Button 
-          variant="primary" 
+          <button 
+          className="btn bttn" 
           onClick={Add}
           >
             Add to Order
-          </Button>
+          </button>
         )}
       </div>
       <style jsx="true">{`
@@ -155,6 +154,20 @@ export default function FoodCard({ item, custom }) {
           border: 3px solid #f8fafc;
           padding: 10px;
           box-shadow: 5px 10px 8px #e2e8f0;
+        }
+        .bttn {
+          width: 100%;
+          margin: auto;
+          background-color: #53898d;
+          color: white;
+          margin-right: 0;
+        }
+        .buttn {
+          width: 25%;
+          margin: auto;
+          background-color: #53898d;
+          color: white;
+          margin-right: 0;
         }
       `}</style>
     </>
