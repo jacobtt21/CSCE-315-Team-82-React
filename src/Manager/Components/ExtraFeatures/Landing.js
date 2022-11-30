@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const ExtraFeatures = () => {
+
   return (
     <>
       <div class="container py-4">
