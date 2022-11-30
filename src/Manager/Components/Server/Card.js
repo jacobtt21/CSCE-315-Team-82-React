@@ -88,12 +88,13 @@ export default function FoodCard({ item, custom }) {
               <div className="normal-style">
                 <h1>Cutomize Your {item.name}</h1>
                 <h2>Choose your rice *</h2>
-                <button value="brown" className="btn butn">Brown</button>
-                <button value="white" className="btn butn">White</button>
-                <button value="no" className="btn butn">No Rice</button>
-                
+                <select className="butn">
+                  <option value="brown">Brown</option>
+                  <option value="white">White</option>
+                  <option value="no">No Rice</option>
+                </select>
                 <h2>Choose your beans *</h2>
-                <select>
+                <select className="butn">
                   <option value="brown">Pinto</option>
                   <option value="white">Black</option>
                   <option value="no">No Beans</option>
@@ -182,15 +183,13 @@ export default function FoodCard({ item, custom }) {
         .btn:hover {
           box-shadow: 5px 10px 8px #e2e8f0;
         }
-        .butn:focus, .focus {
-          background-color: #000000;
-          color: white;
-        }
         .butn {
+          width:  20%;
+          height: 2.5rem;
+          font-size: 1.5rem;
+          text-align: center;
           margin: auto;
-          background-color: #53898d;
-          color: white;
-          margin-left: 1%;
+          color: black;
         }
         .buttn {
           width: 25%;
