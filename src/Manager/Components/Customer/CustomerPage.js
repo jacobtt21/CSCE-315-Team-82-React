@@ -61,6 +61,24 @@ export const CustomerPage = () => {
 
   const buy = async () => {
     // Calls to server
+    const formData = new FormData();
+    formData.append("price", price)
+    formData.append("served", "1")
+    const res = await fetch(process.env.REACT_APP_API_URL + '/new-bill', {
+      method: "POST",
+      body: formData
+    })
+    const id = await res.json();
+    console.log(id[0].bill_id)
+    for (var i = 0; i < order.length; ++i) {
+      const formData2 = new FormData();
+      formData2.append("bid", id[0].bill_id)
+      formData2.append("fid", order[i].order_id)
+      await fetch(process.env.REACT_APP_API_URL + '/take-order', {
+        method: "POST",
+        body: formData2
+      })
+    }
     window.location.reload(false);
   }
 
