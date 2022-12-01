@@ -1,6 +1,7 @@
 import React from "react";
 import { OrderContext, PriceContext } from "./lib";
 import { useContext } from "react";
+import Button from "react-bootstrap/Button";
 
 export default function ItemBill({ item, index }) {
   const [order, setOrder] = useContext(OrderContext)
@@ -20,27 +21,20 @@ export default function ItemBill({ item, index }) {
     for (j = 0; j < currentCart.length; ++j) {
       priceHolder = priceHolder + parseFloat(currentCart[j].price);
     }
-    setPrice(priceHolder * 1.0825)
+    setPrice((priceHolder * 1.0825).toFixed(2))
   }
 
   return (
     <>
       <h5>
         {index + 1}. {item.name} ${item.price} &nbsp;
-        <button 
-        className="btn danger" 
+        <Button 
+        variant="danger" 
         onClick={remove}
         >
           X
-        </button>
+        </Button>
       </h5>
-      <style jsx="true">{`
-        .danger {
-          color: white;
-          background-color: #ff0000;
-          border-radius: 15%;
-        }
-      `}</style>
     </>
   )
 };

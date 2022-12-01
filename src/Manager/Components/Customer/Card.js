@@ -91,13 +91,13 @@ export default function FoodCard({ item, custom }) {
               <div className="normal-style">
                 <h1>Cutomize Your {item.name}</h1>
                 <h2>Choose your rice *</h2>
-                <select>
+                <select className="butn">
                   <option value="brown">Brown</option>
                   <option value="white">White</option>
                   <option value="no">No Rice</option>
                 </select>
                 <h2>Choose your beans *</h2>
-                <select>
+                <select className="butn">
                   <option value="brown">Pinto</option>
                   <option value="white">Black</option>
                   <option value="no">No Beans</option>
@@ -105,17 +105,18 @@ export default function FoodCard({ item, custom }) {
                 <h2>Choose your toppings</h2>
                 <input 
                 type="checkbox" 
+                class="check"
                 onSelect={console.log()}
                 />
-                <label>&nbsp;Cheese</label><br />
-                <input type="checkbox" />
-                <label>&nbsp;Veggies</label><br />
-                <input type="checkbox" />
-                <label>&nbsp;Sour Cream</label><br />
-                <input type="checkbox" />
-                <label>&nbsp;Lettuce</label><br />
-                <input type="checkbox" />
-                <label>&nbsp;Salsa</label><br />
+                <label class="container">&nbsp;Cheese</label>
+                <input type="checkbox" class="check"/>
+                <label class="container">&nbsp;Veggies</label>
+                <input type="checkbox" class="check"/>
+                <label class="container">&nbsp;Sour Cream</label>
+                <input type="checkbox" class="check"/>
+                <label class="container">&nbsp;Lettuce</label>
+                <input type="checkbox" class="check"/>
+                <label class="container">&nbsp;Salsa</label>
                 <button 
                 className="btn buttn" 
                 onClick={AddCustom}
@@ -127,8 +128,28 @@ export default function FoodCard({ item, custom }) {
                     font-size: 30px;
                   }
                   h2 {
-                    margin-top: 15px;
+                    margin: 2%;
                     font-size: 20px;
+                  }
+                  .check {
+                    top: 0;
+                    left: 0;
+                    height: 25px;
+                    width: 25px;
+                    background-color: #eee;
+                    display: inline;
+                    cursor: pointer;
+                  }
+                  .container {
+                    display: inline;
+                    margin-bottom: 10%;
+                    font-size: 22px;
+                  }
+                  .container input {
+                    display: inline;
+                    opacity: 0;
+                    height: 0;
+                    width: 0;
                   }
                 `}</style>
               </div>
@@ -162,9 +183,18 @@ export default function FoodCard({ item, custom }) {
           color: white;
           margin-right: 0;
         }
+        .butn {
+          width:  20%;
+          height: 2.5rem;
+          font-size: 1.5rem;
+          text-align: center;
+          margin: auto;
+          color: black;
+        }
         .buttn {
           width: 25%;
           margin: auto;
+          margin-top: 5%;
           background-color: #53898d;
           color: white;
           margin-right: 0;

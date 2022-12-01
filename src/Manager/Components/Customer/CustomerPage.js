@@ -117,22 +117,22 @@ export const CustomerPage = () => {
                 </div>
                 <div>
                   <h3 className="FoodHeaderOne" id="burrito">Burritos</h3>
-                  <h4><i>Enjoy whatever this is</i></h4>
+                  <h4><i>Best Wrapped Food in the MSC</i></h4>
                   <Grid foods={food[0]} custom={true} />
                   <h3 className="FoodHeader" id="bowl">Bowls</h3>
-                  <h4><i>Enjoy a worse version of chipotle</i></h4>
+                  <h4><i>Enjoy Everything but Cereal</i></h4>
                   <Grid foods={food[1]} custom={true} />
                   <h3 className="FoodHeader" id="taco">Tacos</h3>
-                  <h4><i>Taco'bout tacos, idk</i></h4>
+                  <h4><i>Taco'bout Tacos</i></h4>
                   <Grid foods={food[2]} custom={true} />
                   <h3 className="FoodHeader" id="salad">Salads</h3>
-                  <h4><i>salads</i></h4>
+                  <h4><i>The Best Greens North of the Tracks</i></h4>
                   <Grid foods={food[3]} custom={true} />
                   <h3 className="FoodHeader" id="side">Sides</h3>
-                  <h4><i>Sides and everything else</i></h4>
+                  <h4><i>Sides and Everything Else</i></h4>
                   <Grid foods={food[4]} custom={false} />
                   <h3 className="FoodHeader" id="drink">Drinks</h3>
-                  <h4><i>I care a lot still</i></h4>
+                  <h4><i>Best Beverages in Texas</i></h4>
                   <Grid foods={food[5]} custom={false} />
                 </div>
               </div>

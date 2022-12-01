@@ -36,6 +36,7 @@ export const Welcome = () => {
       if (res.data.authenticated) {
         localStorage.setItem("jwt", res.data.jwt);
         localStorage.setItem("full_name", res.data.full_name);
+        localStorage.setItem("user_id", res.data.user_id);
 
         setAuthenticated(true);
         redirect.push("/home");

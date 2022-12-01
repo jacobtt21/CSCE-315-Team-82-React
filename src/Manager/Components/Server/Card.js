@@ -23,13 +23,13 @@ export default function FoodCard({ item, custom }) {
       for (j = 0; j < currentCart.length; ++j) {
         priceHolder = priceHolder + parseFloat(currentCart[j].price);
       }
-      setPrice(priceHolder * 1.0825)
+      setPrice((priceHolder * 1.0825).toFixed(2))
     }
     else {
       let currentCart = [];
       currentCart.push(item)
       setOrder(currentCart)
-      setPrice(item.price * 1.0825)
+      setPrice((item.price * 1.0825).toFixed(2))
     }
   };
 
@@ -47,13 +47,13 @@ export default function FoodCard({ item, custom }) {
       for (j = 0; j < currentCart.length; ++j) {
         priceHolder = priceHolder + parseFloat(currentCart[j].price);
       }
-      setPrice(priceHolder * 1.0825)
+      setPrice((priceHolder * 1.0825).toFixed(2))
     }
     else {
       let currentCart = [];
       currentCart.push(item)
       setOrder(currentCart)
-      setPrice(item.price * 1.0825)
+      setPrice((item.price * 1.0825).toFixed(2))
     }
     closeModal()
   };
