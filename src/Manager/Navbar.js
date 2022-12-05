@@ -108,8 +108,11 @@ function NavBar() {
                 </ul>
               </li>
             </ul>
-              <button class="btn btn-outline-light" type="submit" onClick={handleLogOut}>Logout</button>
           </div>
+          <div id="translate-box" class="me-4">
+            <div id="google_translate_element"></div>
+          </div>
+          <button class="btn btn-outline-light" type="submit" onClick={handleLogOut}>Logout</button>
         </div>
       </nav>
       {/* <nav className="navbar">

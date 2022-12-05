@@ -86,7 +86,7 @@ function App() {
       <>
         <Router>
           <div className="pages">
-            <div id="google_translate_element"></div>
+            {/* <div id="google_translate_element"></div> */}
             <Welcome />
           </div>
         </Router>
