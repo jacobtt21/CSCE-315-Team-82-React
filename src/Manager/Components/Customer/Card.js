@@ -75,86 +75,86 @@ export default function FoodCard({ item, custom }) {
         <h1 className="name">${item.price}</h1>
         {custom ? (
           <>
-          <button 
-          className="bttn name btn" 
-          onClick={() => setOpen(o => !o)}
-          >
-            Add to Order
-          </button>
-          <div>
-            <Popup 
-            open={open} 
-            contentStyle={contentStyle}
-            overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
-            closeOnDocumentClick onClose={closeModal}
+            <button 
+            className="bttn name btn" 
+            onClick={() => setOpen(o => !o)}
             >
-              <div className="normal-style">
-                <h1>Cutomize Your {item.name}</h1>
-                <h2>Choose your rice *</h2>
-                <select className="butn">
-                  <option value="brown">Brown</option>
-                  <option value="white">White</option>
-                  <option value="no">No Rice</option>
-                </select>
-                <h2>Choose your beans *</h2>
-                <select className="butn">
-                  <option value="brown">Pinto</option>
-                  <option value="white">Black</option>
-                  <option value="no">No Beans</option>
-                </select>
-                <h2>Choose your toppings</h2>
-                <input 
-                type="checkbox" 
-                class="check"
-                onSelect={console.log()}
-                />
-                <label class="container">&nbsp;Cheese</label>
-                <input type="checkbox" class="check"/>
-                <label class="container">&nbsp;Veggies</label>
-                <input type="checkbox" class="check"/>
-                <label class="container">&nbsp;Sour Cream</label>
-                <input type="checkbox" class="check"/>
-                <label class="container">&nbsp;Lettuce</label>
-                <input type="checkbox" class="check"/>
-                <label class="container">&nbsp;Salsa</label>
-                <button 
-                className="btn buttn" 
-                onClick={AddCustom}
-                >
-                  Add to Order
-                </button>
-                <style jsx="true">{`
-                  h1 {
-                    font-size: 30px;
-                  }
-                  h2 {
-                    margin: 2%;
-                    font-size: 20px;
-                  }
-                  .check {
-                    top: 0;
-                    left: 0;
-                    height: 25px;
-                    width: 25px;
-                    background-color: #eee;
-                    display: inline;
-                    cursor: pointer;
-                  }
-                  .container {
-                    display: inline;
-                    margin-bottom: 10%;
-                    font-size: 22px;
-                  }
-                  .container input {
-                    display: inline;
-                    opacity: 0;
-                    height: 0;
-                    width: 0;
-                  }
-                `}</style>
-              </div>
-            </Popup>
-          </div>
+              Add to Order
+            </button>
+            <div>
+              <Popup 
+              open={open} 
+              contentStyle={contentStyle}
+              overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
+              closeOnDocumentClick onClose={closeModal}
+              >
+                <div className="normal-style">
+                  <h1>Cutomize Your {item.name}</h1>
+                  <h2>Choose your rice *</h2>
+                  <select className="butn">
+                    <option value="brown">Brown</option>
+                    <option value="white">White</option>
+                    <option value="no">No Rice</option>
+                  </select>
+                  <h2>Choose your beans *</h2>
+                  <select className="butn">
+                    <option value="brown">Pinto</option>
+                    <option value="white">Black</option>
+                    <option value="no">No Beans</option>
+                  </select>
+                  <h2>Choose your toppings</h2>
+                  <input 
+                  type="checkbox" 
+                  class="check"
+                  onSelect={console.log()}
+                  />
+                  <label class="container">&nbsp;Cheese</label>
+                  <input type="checkbox" class="check"/>
+                  <label class="container">&nbsp;Veggies</label>
+                  <input type="checkbox" class="check"/>
+                  <label class="container">&nbsp;Sour Cream</label>
+                  <input type="checkbox" class="check"/>
+                  <label class="container">&nbsp;Lettuce</label>
+                  <input type="checkbox" class="check"/>
+                  <label class="container">&nbsp;Salsa</label>
+                  <button 
+                  className="btn buttn" 
+                  onClick={AddCustom}
+                  >
+                    Add to Order
+                  </button>
+                  <style jsx="true">{`
+                    h1 {
+                      font-size: 30px;
+                    }
+                    h2 {
+                      margin: 2%;
+                      font-size: 20px;
+                    }
+                    .check {
+                      top: 0;
+                      left: 0;
+                      height: 25px;
+                      width: 25px;
+                      background-color: #eee;
+                      display: inline;
+                      cursor: pointer;
+                    }
+                    .container {
+                      display: inline;
+                      margin-bottom: 10%;
+                      font-size: 22px;
+                    }
+                    .container input {
+                      display: inline;
+                      opacity: 0;
+                      height: 0;
+                      width: 0;
+                    }
+                  `}</style>
+                </div>
+              </Popup>
+            </div>
           </>
         ) : (
           <button 
