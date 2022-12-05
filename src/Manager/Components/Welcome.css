@@ -12,3 +12,13 @@
 	/* padding: 10px; */
 	border-radius: 20px;
 }
+
+@media (max-width: 1400px) {
+	.col:last-child {
+		padding-top: 20px;
+	}
+
+	.map {
+		text-align: center;
+	}
+}
