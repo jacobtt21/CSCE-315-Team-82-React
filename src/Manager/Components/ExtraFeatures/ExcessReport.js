@@ -20,7 +20,7 @@ export const ExcessReport = () => {
 
   const onSubmitHandler = e => {
     e.preventDefault();
-    formData = new FormData();
+    const formData = new FormData();
     formData.append("start_date", "9-07-22");
     formData.append("end_date", "9-21-22");
     Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report`, formData, {})
