@@ -25,24 +25,7 @@ function App() {
 
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
 
-  const googleTranslateElementInit = () => {
-    new window.google.translate.TranslateElement(
-      {
-        pageLanguage: "en",
-        autoDisplay: false
-      },
-      "google_translate_element"
-    );
-  };
-
   useEffect(() => {
-    var addScript = document.createElement("script");
-    addScript.setAttribute(
-      "src",
-      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    );
-    document.body.appendChild(addScript);
-    window.googleTranslateElementInit = googleTranslateElementInit;
 
     var jwt = localStorage.getItem("jwt");
 
@@ -60,7 +43,6 @@ function App() {
         <Router>
           <NavBar />
           <div className="pages">
-            <div id="google_translate_element"></div>
             <Switch>
             <Route exact path="/" component={Home} />
               <Route exact path="/home" component={Home} />
