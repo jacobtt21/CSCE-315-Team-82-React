@@ -67,7 +67,7 @@ export const MenuItems = () => {
                         <td>{item.name}</td>
                         <td>{item.nickname}</td>
                         <td>{priceFormatter(item.price)}</td>
-                        <td><span class="badge bg-secondary">{item.type.toUpperCase() || "NONE"}</span></td>
+                        <td><span class="badge bg-secondary">{(item.type || "").toUpperCase() || "NONE"}</span></td>
                         <td>{item.orderable ? <span class="badge bg-success">TRUE</span> : <span class="badge bg-danger">FALSE</span>}</td>
                         <td>{item.mainitemname ? item.mainitemname : "NONE"}</td>
                         <td><Link to={`MenuItems/${item.order_id}/edit`}>edit</Link></td>

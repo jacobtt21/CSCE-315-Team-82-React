@@ -4,11 +4,15 @@ import Grid from "./Grid";
 import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
 import Button from "react-bootstrap/Button";
+import Popup from 'reactjs-popup';
 
 export const CustomerPage = () => {
   const [food, setFood] = useState("");
   const [order, setOrder] = useState();
   const [price, setPrice] = useState();
+  const [orderNo, setOrderNo] = useState('');
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
 
   useEffect(() => {
     getFood()
@@ -45,6 +49,7 @@ export const CustomerPage = () => {
       }
       else {
         sides.push(responseData[i]);
+        console.log(responseData[i])
       }
     }
 
@@ -58,10 +63,42 @@ export const CustomerPage = () => {
     setFood(menu)
   }
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   const buy = async () => {
     // Calls to server
-    window.location.reload(false);
+    const formData = new FormData();
+    formData.append("price", price)
+    formData.append("served", "1")
+    const res = await fetch(process.env.REACT_APP_API_URL + '/new-bill', {
+      method: "POST",
+      body: formData
+    })
+    const id = await res.json();
+    setOrderNo(id[0].bill_id)
+    for (var i = 0; i < order.length; ++i) {
+      const formData2 = new FormData();
+      formData2.append("bid", id[0].bill_id)
+      formData2.append("fid", order[i].order_id)
+      await fetch(process.env.REACT_APP_API_URL + '/take-order', {
+        method: "POST",
+        body: formData2
+      })
+    }
+    setOpen(o => !o)
+    sleep(7000).then(() => { window.location.reload(false); });
   }
+
+  const contentStyle = {
+    background: "rgba(255,255,255, 1)",
+    borderRadius: 15,
+    padding: 10,
+    width: 800,
+    border: "none",
+    textAlign: "center"
+  };
 
   return food ? (
     <>
@@ -69,6 +106,27 @@ export const CustomerPage = () => {
         <OrderContext.Provider value={[order, setOrder]}>
           <PriceContext.Provider value={[price, setPrice]}>
             <main>
+              <div>
+                <Popup 
+                open={open} 
+                contentStyle={contentStyle}
+                overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
+                closeOnDocumentClick onClose={closeModal}
+                >
+                  <div className="normal-style">
+                    <h1>Your Order Number: {orderNo}</h1>
+                    <h2>Thanks for choosing Cabo Grill!</h2>
+                    <style jsx="true">{`
+                      h1 {
+                        font-size: 40px;
+                      }
+                      h2 {
+                        font-size: 30px;
+                      }
+                    `}</style>
+                  </div>
+                </Popup>
+              </div>
               <div className="title">
                 <h2>Order Cabo Grill</h2>
               </div>
@@ -78,12 +136,18 @@ export const CustomerPage = () => {
                     Your Order
                     {order ? (
                       <>
-                        <Bill foods={order} />
-                        <Button 
-                        variant="success" 
-                        onClick={buy}>
-                          Checkout {numberFormat(price)} (Tax Included)
-                        </Button>
+                        {order.length > 0 ? (
+                          <>
+                          <Bill foods={order} />
+                          <Button 
+                          variant="success" 
+                          onClick={buy}>
+                            Checkout {numberFormat(price)} (Tax Included)
+                          </Button>
+                          </>
+                        ) : (
+                          <h4><i>There isn't anything here</i></h4>
+                        )}
                       </>
                     ) : (
                       <h4><i>There isn't anything here</i></h4>
@@ -92,23 +156,22 @@ export const CustomerPage = () => {
                 </div>
                 <div>
                   <h3 className="FoodHeaderOne" id="burrito">Burritos</h3>
-                  <h4><i>Enjoy whatever this is</i></h4>
-                  
-                  
+                  <h4><i>Best Wrapped Food in the MSC</i></h4>
+                  <Grid foods={food[0]} custom={true} />
                   <h3 className="FoodHeader" id="bowl">Bowls</h3>
-                  <h4><i>Enjoy a worse version of chipotle</i></h4>
+                  <h4><i>Enjoy Everything but Cereal</i></h4>
                   <Grid foods={food[1]} custom={true} />
                   <h3 className="FoodHeader" id="taco">Tacos</h3>
-                  <h4><i>Taco'bout tacos, idk</i></h4>
+                  <h4><i>Taco'bout Tacos</i></h4>
                   <Grid foods={food[2]} custom={true} />
                   <h3 className="FoodHeader" id="salad">Salads</h3>
-                  <h4><i>salads</i></h4>
+                  <h4><i>The Best Greens North of the Tracks</i></h4>
                   <Grid foods={food[3]} custom={true} />
                   <h3 className="FoodHeader" id="side">Sides</h3>
-                  <h4><i>Sides and everything else</i></h4>
+                  <h4><i>Sides and Everything Else</i></h4>
                   <Grid foods={food[4]} custom={false} />
                   <h3 className="FoodHeader" id="drink">Drinks</h3>
-                  <h4><i>I care a lot still</i></h4>
+                  <h4><i>Best Beverages in Texas</i></h4>
                   <Grid foods={food[5]} custom={false} />
                 </div>
               </div>

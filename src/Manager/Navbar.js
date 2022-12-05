@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
@@ -12,6 +12,27 @@ function NavBar() {
   const [click, setClick] = useState(false);
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
   const redirect = useHistory();
+
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        autoDisplay: false
+      },
+      "google_translate_element"
+    );
+  };
+
+
+  useEffect(() => {
+    var addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.body.appendChild(addScript);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
 
   const handleLogOut = () => {
     setAuthenticated(false);
@@ -108,8 +129,11 @@ function NavBar() {
                 </ul>
               </li>
             </ul>
-              <button class="btn btn-outline-light" type="submit" onClick={handleLogOut}>Logout</button>
           </div>
+          <div id="translate-box" class="me-4">
+            <div id="google_translate_element"></div>
+          </div>
+          <button class="btn btn-outline-light" type="submit" onClick={handleLogOut}>Logout</button>
         </div>
       </nav>
       {/* <nav className="navbar">
