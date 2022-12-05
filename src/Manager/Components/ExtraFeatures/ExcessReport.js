@@ -23,7 +23,7 @@ export const ExcessReport = () => {
     const form = document.querySelector("form");
     const formData = new FormData(form);
     
-    Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report`)
+    Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report`, formData, {})
       .then((res) => {
         setSubmitted(true);
       })
@@ -41,16 +41,13 @@ export const ExcessReport = () => {
             <Form autoComplete="off" onSubmit={onSubmitHandler}>
               <Form.Group className="mb-3">
                 <Form.Label>Start Date</Form.Label>
-                <Form.Control start_date="start date"/>
+                <Form.Control name="start date"/>
               </Form.Group>
-
 
               <Form.Group className="mb-3">
                 <Form.Label>End Date</Form.Label>
                 <InputGroup className="mb-3">
-                  <Form.Control
-                    name="end date"
-                  />
+                  <Form.Control name="end date"/>
                 </InputGroup>
               </Form.Group>
 
