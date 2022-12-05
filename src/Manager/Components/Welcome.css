@@ -1,3 +1,14 @@
 #signInButton {
 	width: 450px;
 }
+
+/* .map {
+	margin: auto;
+	padding: 10px;
+	text-align: center;
+} */
+
+.maps {
+	/* padding: 10px; */
+	border-radius: 20px;
+}
