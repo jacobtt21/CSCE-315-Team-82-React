@@ -36,6 +36,7 @@ export const Welcome = () => {
       if (res.data.authenticated) {
         localStorage.setItem("jwt", res.data.jwt);
         localStorage.setItem("full_name", res.data.full_name);
+        localStorage.setItem("user_id", res.data.user_id);
 
         setAuthenticated(true);
         redirect.push("/home");
@@ -81,6 +82,21 @@ export const Welcome = () => {
         <div class="p-5 mb-4 bg-light rounded-3">
           <div class="container-fluid py-5">
             <h1 class="display-5 fw-bold">Welcome to Cabo Grill.</h1>
+            <div className="map">
+              <iframe width="800" className="maps" height="550" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJo_s93dqDRoYRExG5PA0eSiY&key=AIzaSyBTJPkhF-S0KT4BqTqSvjYPblupU80woSA"></iframe>
+            </div>
+            <style jsx>{`
+              .map {
+                margin: auto;
+                padding: 10px;
+                text-align: center;
+                margin-bottom: 80px;
+              }
+              .maps {
+                padding: 10px;
+                border-radius: 20px;
+              }
+            `}</style>
             <p class="col-md-8 fs-4">This is a privledged page for use by Cabo Grill employees only. It requires Google Authentication to enter.</p>
             <div id="signInButton">
                 <GoogleLogin

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Grid from "./Grid";
 import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
-import Axios from 'axios';
+import Button from "react-bootstrap/Button";
 
 export const ServerPage = () => {
 
@@ -60,19 +60,27 @@ export const ServerPage = () => {
     setFood(menu)
   }
 
-  const [submitted, setSubmitted] = useState("");
-  
-  const onCheckoutHandler = e => {
-    e.preventDefault();
-    const form = document.querySelector("form");
-    const formData = new FormData(form);
-    Axios.post(process.env.REACT_APP_API_URL+`/new-bill`, formData, {})
-      .then((res) => {
-        setSubmitted(true);
+  const buy = async () => {
+    // Calls to server
+    const formData = new FormData();
+    formData.append("price", price)
+    formData.append("served", localStorage.getItem("user_id"))
+    const res = await fetch(process.env.REACT_APP_API_URL + '/new-bill', {
+      method: "POST",
+      body: formData
+    })
+    const id = await res.json();
+    console.log(id[0].bill_id)
+    for (var i = 0; i < order.length; ++i) {
+      const formData2 = new FormData();
+      formData2.append("bid", id[0].bill_id)
+      formData2.append("fid", order[i].order_id)
+      await fetch(process.env.REACT_APP_API_URL + '/take-order', {
+        method: "POST",
+        body: formData2
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    }
+    window.location.reload(false);
   }
 
   return food ? (
@@ -88,13 +96,18 @@ export const ServerPage = () => {
                     Customer's Order
                     {order ? (
                       <>
-                        <Bill foods={order} />
-                        <button 
-                        className="btton btn"
-                        type="submit"
-                        onClick={onCheckoutHandler}> 
-                          Checkout {numberFormat(price)} (Tax Included)
-                        </button>
+                        {order.length > 0 ? (
+                          <>
+                          <Bill foods={order} />
+                          <Button 
+                          variant="success"
+                          onClick={buy}> 
+                            Checkout {numberFormat(price)} (Tax Included)
+                          </Button>
+                          </>
+                        ) : (
+                          <h4> </h4>
+                        )}
                       </>
                     ) : (
                       <h4> </h4>
@@ -118,7 +131,7 @@ export const ServerPage = () => {
               </div>
             <style jsx="true">{`
               .grid-container2 {
-                width: 100%;
+                width: auto;
                 margin-top: 0;
                 margin-left: 5%;
                 display: grid;
