@@ -14,25 +14,16 @@ import Axios from 'axios';
 
 export const ExcessReport = () => {
   const [item, setItem] = useState([]);
+  const [submitted, setSubmitted] = useState("");
   const {start_date} = useParams();
   const {end_date} = useParams();
-
-  useEffect(()=>{
-    Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report/9-07-22/9-21-22`)
-      .then(response => {
-        return response.data
-      })
-      .then(data => {
-        setItem(data)
-      })
-  },[]);
 
   const onSubmitHandler = e => {
     e.preventDefault();
     const form = document.querySelector("form");
     const formData = new FormData(form);
     
-    Axios.post(process.env.REACT_APP_API_URL+`/edit-menu-item/${id}`, formData, {})
+    Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report`)
       .then((res) => {
         setSubmitted(true);
       })
@@ -40,9 +31,10 @@ export const ExcessReport = () => {
         console.log(err);
       });
   }
-  // const htmlForm = () => {
-  return (
-    <>
+  
+  const htmlForm = () => {
+    return (
+      <>
       <div className="p-3">
       <Card>
           <Card.Body>
@@ -70,9 +62,18 @@ export const ExcessReport = () => {
         </Card>
       </div>
     </>
-  )
+    ) 
+  }
+
+  const htmlSubmitted = () => {
+    <>
+    </>
+  }
+
+  // if (!submitted) {
+  //   return htmlSubmitted();
+  // } else {
+  //   return htmlForm();
   // }
-
+  return htmlForm();
 }
-
-export default ExcessReport
