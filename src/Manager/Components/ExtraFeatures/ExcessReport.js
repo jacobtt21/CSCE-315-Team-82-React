@@ -14,28 +14,63 @@ import Axios from 'axios';
 
 export const ExcessReport = () => {
   const [item, setItem] = useState([]);
+  const [submitted, setSubmitted] = useState("");
+  const {start_date} = useParams();
+  const {end_date} = useParams();
 
-  useEffect(()=>{
-    Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report/9-07-22/9-21-22`)
-      .then(response => {
-        return response.data
+  const onSubmitHandler = e => {
+    e.preventDefault();
+    formData = new FormData();
+    formData.append("start_date", "9-07-22");
+    formData.append("end_date", "9-21-22");
+    Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report`, formData, {})
+      .then((res) => {
+        setSubmitted(true);
       })
-      .then(data => {
-        setItem(data)
-      })
-  },[]);
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  
+  const htmlForm = () => {
+    return (
+      <>
+      <div className="p-3">
+      <Card>
+          <Card.Body>
+            <Form autoComplete="off" onSubmit={onSubmitHandler}>
+              <Form.Group className="mb-3">
+                <Form.Label>Start Date</Form.Label>
+                <Form.Control name="start date"/>
+              </Form.Group>
 
-  return (
-    <div>
-      {item.length > 0 && (
-        <ul>
-          {item.map(item => (
-            <li key={item.id}>{item.name}</li>
-          ))}
-        </ul>
-      )}
-    </div>
-  )
+              <Form.Group className="mb-3">
+                <Form.Label>End Date</Form.Label>
+                <InputGroup className="mb-3">
+                  <Form.Control name="end date"/>
+                </InputGroup>
+              </Form.Group>
+
+              <Button type="submit" variant="primary">Submit</Button>
+              <Link to={"/Landing"}><Button variant="secondary">Back</Button></Link>
+
+            </Form>
+          </Card.Body>
+        </Card>
+      </div>
+    </>
+    ) 
+  }
+
+  const htmlSubmitted = () => {
+    <>
+    </>
+  }
+
+  // if (!submitted) {
+  //   return htmlSubmitted();
+  // } else {
+  //   return htmlForm();
+  // }
+  return htmlForm();
 }
-
-export default ExcessReport
