@@ -25,8 +25,6 @@ export const PairingsReport = () => {
     Axios.get(process.env.REACT_APP_API_URL+`/get-pairings-report/${start_date}/${end_date}`)
       .then((res) => {
         setSubmitted(true);
-        // const excessItems = res.data;
-        // console.log(excessItems);
         return res.data
       })
       .then((data) => {

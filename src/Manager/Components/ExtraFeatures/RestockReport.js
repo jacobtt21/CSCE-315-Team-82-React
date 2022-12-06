@@ -14,7 +14,7 @@ import Axios from 'axios';
 
 
 export const RestockReport = () => {
-  const [excessItems, setExcessItems] = useState([]);
+  const [restockItems, setRestockItems] = useState([]);
   const [submitted, setSubmitted] = useState("");
 
   const onSubmitHandler = e => {
@@ -22,12 +22,10 @@ export const RestockReport = () => {
     Axios.get(process.env.REACT_APP_API_URL+`/get-restock-report/`)
       .then((res) => {
         setSubmitted(true);
-        // const excessItems = res.data;
-        // console.log(excessItems);
         return res.data
       })
       .then((data) => {
-        setExcessItems(data);
+        setRestockItems(data);
       })
       .catch((err) => {
         console.log(err);
@@ -59,7 +57,7 @@ export const RestockReport = () => {
     //   <>
     //   <div class="submitted-container">
     //     <h2>Items in excess: </h2>
-    //     {excessItems.map(excessItem => (
+    //     {restockItems.map(excessItem => (
     //       <li key={excessItem.item_id}>{excessItem.name}</li>
     //     ))}
     //     <Link to="/ExtraFeatures"><button class="btn btn-outline-secondary" type="button">View Report</button></Link>
@@ -86,7 +84,7 @@ export const RestockReport = () => {
         <Card.Body>
           <Card.Title>Items That Need to be Restocked:</Card.Title>
           <Card.Text>
-          {excessItems.map(excessItem => (
+          {restockItems.map(excessItem => (
             <li key={excessItem.item_id}> {excessItem.quantity} {excessItem.name} currently instock needs {excessItem.deficit} more </li>
           ))}
           </Card.Text>

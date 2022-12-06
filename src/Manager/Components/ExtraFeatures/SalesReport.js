@@ -25,8 +25,6 @@ export const SalesReport = () => {
     Axios.get(process.env.REACT_APP_API_URL+`/get-pairings-report/${start_date}/${end_date}/${item_name}`)
       .then((res) => {
         setSubmitted(true);
-        // const excessItems = res.data;
-        // console.log(excessItems);
         return res.data
       })
       .then((data) => {
