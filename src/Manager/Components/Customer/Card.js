@@ -73,6 +73,11 @@ export default function FoodCard({ item, custom }) {
       <div className="card">
         <h1 className="name">{item.name}</h1>
         <h1 className="name">${item.price}</h1>
+        {item.image && (
+          <img
+          src={item.image}
+          />
+        )}
         {custom ? (
           <>
             <button 
@@ -198,6 +203,11 @@ export default function FoodCard({ item, custom }) {
           background-color: #53898d;
           color: white;
           margin-right: 0;
+        }
+        img {
+          max-width: 200px;
+          margin: 30px auto;
+          border-radius: 20px;
         }
       `}</style>
     </>

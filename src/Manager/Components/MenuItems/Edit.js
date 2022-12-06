@@ -140,6 +140,12 @@ export const Edit = () => {
                   </Form.Select>
                 </Form.Group>
 
+                <Form.Group className="mb-3">
+                  <Form.Label>Image URL</Form.Label>
+                  <Form.Control name="image" defaultValue={orderType.image}/>
+                </Form.Group>
+
+
                 <Button type="submit" variant="primary">Submit</Button>
                 <Link to={"/MenuItems"}><Button variant="secondary">Cancel</Button></Link>
 
