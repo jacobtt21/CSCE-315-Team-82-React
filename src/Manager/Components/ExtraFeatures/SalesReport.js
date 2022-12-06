@@ -62,10 +62,10 @@ export const SalesReport = () => {
                 <InputGroup className="mb-3">
                   <Form.Control name="item name" onChange={(e) => setItemName(e.target.value)} />
                 </InputGroup>
-              </Form.Group>
+                </Form.Group>
 
               <Button type="submit" variant="primary">Submit</Button>
-              <Link to={"/Landing"}><Button variant="secondary">Back</Button></Link>
+              <Link to={"/ExtraFeatures"}><Button variant="secondary">Back</Button></Link>
 
             </Form>
           </Card.Body>
@@ -76,25 +76,6 @@ export const SalesReport = () => {
   }
 
   const htmlSubmitted = () => {
-    // return (
-    //   <>
-    //   <div class="submitted-container">
-    //     <h2>Items in excess: </h2>
-    //     {excessItems.map(excessItem => (
-    //       <li key={excessItem.item_id}>{excessItem.name}</li>
-    //     ))}
-    //     <Link to="/ExtraFeatures"><button class="btn btn-outline-secondary" type="button">View Report</button></Link>
-    //   </div>
-    //   <style jsx="true">{`
-    //     .submitted-container {
-    //       display: flex;
-    //       justify-content: center;
-    //       align-items: center;
-    //       height: 100vh;
-    //     }
-    //   `}</style>
-    //   </>
-    // ) 
     return (
       <Card style={{
         backgroundColor: "#eee",
@@ -105,10 +86,10 @@ export const SalesReport = () => {
         textAlign: "center"
       }}>
         <Card.Body>
-          <Card.Title>Number of {item_name} sold:</Card.Title>
+          <Card.Title>Sales Report:</Card.Title>
           <Card.Text>
-          {Item1.map(item1 => (
-            <li>{item1.cnt}</li>
+          {Item1.map(curr_item => (
+            <li key={curr_item.item_id}>{curr_item.name}</li>
           ))}
           </Card.Text>
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>
