@@ -32,24 +32,27 @@ export const CustomerPage = () => {
     const responseData = await res.json();
     var i;
     for (i = 0; i < responseData.length; ++i) {
-      if (responseData[i].type === "Bowl") {
+      if (responseData[i].type === "Bowl" && responseData[i].orderable) {
         bowls.push(responseData[i]);
       }
-      else if (responseData[i].type === "Tacos") {
+      else if (responseData[i].type === "Tacos" && responseData[i].orderable) {
         tacos.push(responseData[i]);
       }
-      else if (responseData[i].type === "Salad") {
+      else if (responseData[i].type === "Salad" && responseData[i].orderable) {
         salads.push(responseData[i]);
       }
-      else if (responseData[i].type === "Drink") {
+      else if (responseData[i].type === "Drink" && responseData[i].orderable) {
         drinks.push(responseData[i]);
       }
-      else if (responseData[i].type === "Burrito") {
+      else if (responseData[i].type === "Burrito" && responseData[i].orderable) {
         burritos.push(responseData[i]);
       }
-      else {
+      else if (responseData[i].orderable){
         sides.push(responseData[i]);
         console.log(responseData[i])
+      }
+      else {
+        
       }
     }
 
