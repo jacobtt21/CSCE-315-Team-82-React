@@ -109,7 +109,7 @@ export const EditInventory = () => {
                   </datalist>
                 </Form.Group>
 
-                <Button type="submit" variant="primary">Submit</Button>
+                <Button type="submit" variant="primary" className="me-1">Submit</Button>
                 <Link to={"/Inventory"}><Button variant="secondary">Cancel</Button></Link>
 
               </Form>
