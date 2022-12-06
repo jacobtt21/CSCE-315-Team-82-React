@@ -17,8 +17,7 @@ export const RestockReport = () => {
   const [excessItems, setExcessItems] = useState([]);
   const [submitted, setSubmitted] = useState("");
 
-  const onSubmitHandler = e => {
-    e.preventDefault();
+  useEffect(()=>{
     Axios.get(process.env.REACT_APP_API_URL+`/get-restock-report/`)
       .then((res) => {
         setSubmitted(true);
@@ -32,48 +31,9 @@ export const RestockReport = () => {
       .catch((err) => {
         console.log(err);
       });
-  }
-
-
-  const htmlForm = () => {
-    return (
-      <>
-      <div className="p-3">
-      <Card>
-          <Card.Body>
-            <Form autoComplete="off" onSubmit={onSubmitHandler}>
-
-              <Button type="submit" variant="primary">Submit</Button>
-              <Link to={"/Landing"}><Button variant="secondary">Back</Button></Link>
-
-            </Form>
-          </Card.Body>
-        </Card>
-      </div>
-    </>
-    ) 
-  }
+  },[]);
 
   const htmlSubmitted = () => {
-    // return (
-    //   <>
-    //   <div class="submitted-container">
-    //     <h2>Items in excess: </h2>
-    //     {excessItems.map(excessItem => (
-    //       <li key={excessItem.item_id}>{excessItem.name}</li>
-    //     ))}
-    //     <Link to="/ExtraFeatures"><button class="btn btn-outline-secondary" type="button">View Report</button></Link>
-    //   </div>
-    //   <style jsx="true">{`
-    //     .submitted-container {
-    //       display: flex;
-    //       justify-content: center;
-    //       align-items: center;
-    //       height: 100vh;
-    //     }
-    //   `}</style>
-    //   </>
-    // ) 
     return (
       <Card style={{
         backgroundColor: "#eee",
@@ -93,13 +53,9 @@ export const RestockReport = () => {
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>
         </Card.Body>
       </Card>
-    );       
+    )       
   }
 
-  if (submitted) {
-    return htmlSubmitted();
-  } else {
-    return htmlForm();
-  }
+  return htmlSubmitted();
 }
 

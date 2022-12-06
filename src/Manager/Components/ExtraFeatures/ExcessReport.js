@@ -19,6 +19,21 @@ export const ExcessReport = () => {
   const [start_date, setStartDate] = useState("");
   const [end_date, setEndDate] = useState("");
 
+  // function sleep(ms) {
+  //   return new Promise(resolve => setTimeout(resolve, ms));
+  // }
+
+  // const submit = async() => {
+  //   const formData = new FormData();
+  //   formData.append("start_date", "9-01-22")
+  //   formData.append("end_date", "9-07-22")
+  //   const res = await fetch(process.env.REACT_APP_API_URL + '/get-excess-report', {
+  //     method: "GET",
+  //     body: formData
+  //   })
+  //   const id = await res.json();
+  //   // sleep(7000).then(() => { window.location.reload(false); });
+  // }
   const onSubmitHandler = e => {
     e.preventDefault();
     Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report/${start_date}/${end_date}`)
