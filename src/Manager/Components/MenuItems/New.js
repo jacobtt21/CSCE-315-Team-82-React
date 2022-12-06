@@ -41,6 +41,7 @@ export const New = () => {
     e.preventDefault();
     const form = document.querySelector("form");
     const formData = new FormData(form);
+    console.log(formData);
     Axios.post(process.env.REACT_APP_API_URL+`/new-menu-item`, formData, {})
       .then((res) => {
         setSubmitted(true);
@@ -111,6 +112,11 @@ export const New = () => {
                 }
                 { option("", "NONE", "") }
                 </Form.Select>
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Image URL</Form.Label>
+                <Form.Control name="image" defaultValue="" />
               </Form.Group>
 
               <Button type="submit" variant="primary">Submit</Button>
