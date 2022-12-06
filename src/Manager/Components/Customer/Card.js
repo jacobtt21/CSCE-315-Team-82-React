@@ -73,6 +73,9 @@ export default function FoodCard({ item, custom }) {
       <div className="card">
         <h1 className="name">{item.name}</h1>
         <h1 className="name">${item.price}</h1>
+        <img
+        src={item.image ? item.image : 'https://media.istockphoto.com/id/894875516/vector/exclamation-point-sign-in-red-triangle-vector-icon.jpg?s=612x612&w=0&k=20&c=AYMHwOnNCaWz8j3ubjC24cBrlk_ei_oCB3kS-UwvZtU='}
+        />
         {custom ? (
           <>
             <button 
@@ -198,6 +201,11 @@ export default function FoodCard({ item, custom }) {
           background-color: #53898d;
           color: white;
           margin-right: 0;
+        }
+        img {
+          max-width: 200px;
+          margin: 30px auto;
+          border-radius: 20px;
         }
       `}</style>
     </>
