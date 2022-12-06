@@ -40,9 +40,47 @@ function NavBar() {
     setAuthenticated(false);
     localStorage.removeItem("jwt");
     localStorage.removeItem("full_name");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("highContrast");
+    localStorage.removeItem("dyslexia");
     redirect.push("/");
     window.location.reload();
   };
+
+  const highContrastChange = () => {
+    if (document.getElementById('highContrast').checked) {
+      localStorage.setItem("highContrast", "true");
+      document.getElementById('highContrast').checked = true;
+    } else {
+      localStorage.setItem("highContrast", "false");
+      document.getElementById('highContrast').checked = false;
+    }
+    window.dispatchEvent(new Event('storage'));
+  };
+
+  const dyslexiaChange = () => {
+    if (document.getElementById('dyslexia').checked) {
+      localStorage.setItem("dyslexia", "true");
+    } else {
+      localStorage.setItem("dyslexia", "false");
+    }
+    window.dispatchEvent(new Event('storage'));
+  };
+
+  const populateCheckboxes = () => {
+
+    // document.getElementById("highContrast").checked = false;
+    // document.getElementById("dyslexia").checked = false;
+
+    if(localStorage.getItem("highContrast") === "true") {
+      document.getElementById("highContrast").checked = true;
+      // document.getElementById("highContrast").click();
+    }
+    if(localStorage.getItem("dyslexia") === "true") {
+      document.getElementById("dyslexia").checked = true;
+      // document.getElementById("dyslexia").click();
+    }
+  }
 
   const handleClick = () => setClick(!click);
   return (
@@ -132,7 +170,7 @@ function NavBar() {
               </li>
             </ul>
           </div>
-          <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><FontAwesomeIcon icon={faUniversalAccess}/> Accessibility</button>
+          <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={populateCheckboxes}><FontAwesomeIcon icon={faUniversalAccess}/> Accessibility</button>
           <button class="btn btn-outline-light" type="submit" onClick={handleLogOut}>Logout</button>
         </div>
       </nav>
@@ -155,19 +193,19 @@ function NavBar() {
                       </div>
                       <hr class="my-4" />
                       <h4 class="mb-0">Display</h4>
-                      <p>Click to toggle these two visual comprehension improvement modes.</p>
+                      <p>Click to toggle these two visual comprehension modes.</p>
                       <div class="list-group mb-5 shadow">
                         <label class="list-group-item d-flex gap-2">
-                          <input class="form-check-input flex-shrink-0" type="checkbox" value=""></input>
+                          <input id="highContrast" class="form-check-input flex-shrink-0" type="checkbox" onClick={highContrastChange}></input>
                           <span>
-                            High Contrast Mode - NOT DONE YET
-                            <p class="d-block text-muted mb-0">Increases the contrast and line weight of all text.</p>
+                            High Contrast Mode
+                            <p class="d-block text-muted mb-0">Increases the contrast and font weight of all text.</p>
                           </span>
                         </label>
                         <label class="list-group-item d-flex gap-2">
-                          <input class="form-check-input flex-shrink-0" type="checkbox" value=""></input>
+                          <input id="dyslexia" class="form-check-input flex-shrink-0" type="checkbox" onChange={dyslexiaChange}></input>
                           <span>
-                            Dyslexia Mode - NOT DONE YET
+                            Dyslexia Mode
                             <p class="d-block text-muted mb-0">Changes all font to a dyslexia friendly font.</p>
                           </span>
                         </label>
