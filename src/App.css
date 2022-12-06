@@ -18,6 +18,11 @@
   src: local('dyslexic'), url(./fonts/dyslexic.otf) format('opentype');
 }
 
-.dyslexic-mode {
+.dyslexia-mode {
   font-family: dyslexic !important;
+}
+
+.high-contrast-mode {
+  font-weight: bolder !important;
+  letter-spacing: 0.5px !important;
 }

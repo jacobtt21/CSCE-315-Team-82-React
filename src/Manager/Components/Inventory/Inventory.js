@@ -32,10 +32,15 @@ export const Inventory = () => {
 
   return (
     <>
-      <div className="p-3">
+      <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <span class="fs-4">Inventory Items</span>
+          </a>
+        </header>
         <Card>
           <Card.Header>
-            <h3 className="d-inline align-middle">Inventory Items</h3> <Badge pill bg="secondary" className="d-inline align-middle">{InventoryItems.length}</Badge>
+          <h4 className="d-inline  align-middle">Table</h4> <Badge pill bg="secondary" className="d-inline align-middle">{InventoryItems.length}</Badge>
           </Card.Header>
           <Card.Body>
             <Table striped bordered hover responsive>

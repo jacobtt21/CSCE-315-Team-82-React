@@ -32,12 +32,16 @@ export const MenuItems = () => {
 
   return (
     <>
-      <div className="p-3">
+      <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+            <span class="fs-4">Menu Items</span>
+          </a>
+        </header>
         <Card>
-          <Card.Header>
-            <h3 className="d-inline align-middle">Menu Items </h3><Badge pill bg="secondary" className="d-inline align-middle">{menuItems.length}</Badge>
+          <Card.Header className="d-inline">
+          <h4 className="d-inline  align-middle">Table</h4> <Badge pill bg="secondary" className="d-inline align-middle">{menuItems.length}</Badge>
             <Link to="MenuItems/new"><Button variant="primary" className="float-end d-inline">Add Menu Item</Button></Link>
-
           </Card.Header>
           <Card.Body>
             <Table striped bordered hover responsive>

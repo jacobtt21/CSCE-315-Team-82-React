@@ -63,7 +63,7 @@ export const SalesReport = () => {
                 </InputGroup>
               </Form.Group>
 
-              <Button type="submit" variant="primary">Submit</Button>
+              <Button type="submit" variant="primary" className="me-1">Submit</Button>
               <Link to={"/ExtraFeatures"}><Button variant="secondary">Back</Button></Link>
 
             </Form>
@@ -71,7 +71,7 @@ export const SalesReport = () => {
         </Card>
       </div>
     </>
-    ) 
+    )
   }
 
   const htmlSubmitted = () => {
@@ -94,7 +94,7 @@ export const SalesReport = () => {
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>
         </Card.Body>
       </Card>
-    );       
+    );
   }
 
   if (submitted) {

@@ -119,7 +119,7 @@ export const New = () => {
                 <Form.Control name="image" defaultValue="" />
               </Form.Group>
 
-              <Button type="submit" variant="primary">Submit</Button>
+              <Button type="submit" variant="primary" className="me-1">Submit</Button>
               <Link to={"/MenuItems"}><Button variant="secondary">Cancel</Button></Link>
 
             </Form>
