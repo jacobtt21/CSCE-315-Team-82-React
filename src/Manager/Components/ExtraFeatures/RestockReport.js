@@ -17,8 +17,7 @@ export const RestockReport = () => {
   const [restockItems, setRestockItems] = useState([]);
   const [submitted, setSubmitted] = useState("");
 
-  const onSubmitHandler = e => {
-    e.preventDefault();
+  useEffect(()=>{
     Axios.get(process.env.REACT_APP_API_URL+`/get-restock-report/`)
       .then((res) => {
         setSubmitted(true);
@@ -30,27 +29,7 @@ export const RestockReport = () => {
       .catch((err) => {
         console.log(err);
       });
-  }
-
-
-  const htmlForm = () => {
-    return (
-      <>
-      <div className="p-3">
-      <Card>
-          <Card.Body>
-            <Form autoComplete="off" onSubmit={onSubmitHandler}>
-
-              <Button type="submit" variant="primary">Submit</Button>
-              <Link to={"/Landing"}><Button variant="secondary">Back</Button></Link>
-
-            </Form>
-          </Card.Body>
-        </Card>
-      </div>
-    </>
-    ) 
-  }
+  },[]);
 
   const htmlSubmitted = () => {
     // return (
@@ -91,13 +70,9 @@ export const RestockReport = () => {
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>
         </Card.Body>
       </Card>
-    );       
+    )       
   }
 
-  if (submitted) {
-    return htmlSubmitted();
-  } else {
-    return htmlForm();
-  }
+  return htmlSubmitted();
 }
 
