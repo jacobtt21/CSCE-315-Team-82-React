@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
+
 // import Calendar from 'react-calendar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -72,7 +73,7 @@ export const ExcessReport = () => {
               </Form.Group>
 
               <Button type="submit" variant="primary">Submit</Button>
-              <Link to={"/Landing"}><Button variant="secondary">Back</Button></Link>
+              <Link to={"/ExtraFeatures"}><Button variant="secondary">Back</Button></Link>
 
             </Form>
           </Card.Body>

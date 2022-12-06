@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
+
 // import Calendar from 'react-calendar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,21 +23,21 @@ export const SalesReport = () => {
 
   const onSubmitHandler = e => {
     e.preventDefault();
-    Axios.get(process.env.REACT_APP_API_URL+`/get-pairings-report/${start_date}/${end_date}/${item_name}`)
+    Axios.get(process.env.REACT_APP_API_URL+`/get-sales-report/${start_date}/${end_date}/${item_name}`)
       .then((res) => {
         setSubmitted(true);
         // const excessItems = res.data;
-        // console.log(excessItems);
+        console.log(res.data);
         return res.data
       })
       .then((data) => {
         setItem1(data);
+        console.log(Item1);
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
 
   const htmlForm = () => {
     return (
@@ -62,7 +63,7 @@ export const SalesReport = () => {
                 <InputGroup className="mb-3">
                   <Form.Control name="item name" onChange={(e) => setItemName(e.target.value)} />
                 </InputGroup>
-                </Form.Group>
+              </Form.Group>
 
               <Button type="submit" variant="primary">Submit</Button>
               <Link to={"/ExtraFeatures"}><Button variant="secondary">Back</Button></Link>
@@ -89,7 +90,7 @@ export const SalesReport = () => {
           <Card.Title>Sales Report:</Card.Title>
           <Card.Text>
           {Item1.map(curr_item => (
-            <li key={curr_item.item_id}>{curr_item.name}</li>
+            <li key={curr_item.item_id}>{curr_item.cnt} {item_name}</li>
           ))}
           </Card.Text>
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>
