@@ -72,7 +72,7 @@ export const ExcessReport = () => {
                 </InputGroup>
               </Form.Group>
 
-              <Button type="submit" variant="primary" className="pe-3">Submit</Button>
+              <Button type="submit" variant="primary" className="me-1">Submit</Button>
               <Link to={"/ExtraFeatures"}><Button variant="secondary">Back</Button></Link>
 
             </Form>
