@@ -121,7 +121,6 @@ export const Edit = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Orderable</Form.Label>
                   <Form.Select name="orderable">
-                    {console.log(orderType.orderable)}
                     {option("TRUE", "TRUE", orderType.orderable)}
                     {option("FALSE", "FALSE", orderType.orderable)}
                   </Form.Select>
