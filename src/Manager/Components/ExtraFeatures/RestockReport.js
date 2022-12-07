@@ -64,7 +64,7 @@ export const RestockReport = () => {
           <Card.Title>Items That Need to be Restocked:</Card.Title>
           <Card.Text>
           {restockItems.map(excessItem => (
-            <li key={excessItem.item_id}> {excessItem.quantity} {excessItem.name} currently instock needs {excessItem.deficit} more </li>
+            <dl key={excessItem.deficit}> <strong>{excessItem.quantity} {excessItem.name}</strong> currently instock needs <strong>{excessItem.deficit}</strong> more </dl>
           ))}
           </Card.Text>
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>

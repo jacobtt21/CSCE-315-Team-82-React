@@ -4,7 +4,9 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
-// import Calendar from 'react-calendar';
+import DatePicker from 'react-datepicker';
+
+import "react-datepicker/dist/react-datepicker.css";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
@@ -15,10 +17,12 @@ import Axios from 'axios';
 
 export const PairingsReport = () => {
   const [Item1, setItem1] = useState([]);
-  const [Item2, setItem2] = useState([]);
   const [submitted, setSubmitted] = useState("");
   const [start_date, setStartDate] = useState("");
   const [end_date, setEndDate] = useState("");
+
+
+  console.log(start_date)
 
   const onSubmitHandler = e => {
     e.preventDefault();
@@ -46,13 +50,13 @@ export const PairingsReport = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Start Date</Form.Label>
                 <Form.Control name="start date" onChange={(e) => setStartDate(e.target.value)} />
+                <DatePicker selected={start_date} onChange={(e) => setStartDate(e)}/>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>End Date</Form.Label>
-                <InputGroup className="mb-3">
-                  <Form.Control name="end date" onChange={(e) => setEndDate(e.target.value)} />
-                </InputGroup>
+                <Form.Control name="end date" onChange={(e) => setEndDate(e.target.value)} />
+                <DatePicker selected={end_date} onChange={(e) => setEndDate(e)}/>
               </Form.Group>
 
               <Button type="submit" variant="primary" className="me-1">Submit</Button>
@@ -80,7 +84,7 @@ export const PairingsReport = () => {
           <Card.Title>Items that sold together:</Card.Title>
           <Card.Text>
           {Item1.map(item1 => (
-            <li key={item1.frequency}> {item1.item_1} & {item1.item_2}: {item1.frequency}</li>
+            <ol key={item1.frequency}> {item1.item_1} & {item1.item_2}: {item1.frequency}</ol>
           ))}
           </Card.Text>
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>
