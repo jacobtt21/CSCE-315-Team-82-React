@@ -1,6 +1,11 @@
 import React from "react";
 import ItemBill from "./Item";
-
+/*
+* What it does: Displays the bill
+*
+* @param  foods       Object list of food items
+* @return div
+*/
 export default function Bill({ foods }) {
   return (
     <>

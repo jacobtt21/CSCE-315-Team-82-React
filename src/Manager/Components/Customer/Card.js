@@ -2,13 +2,19 @@ import React from "react";
 import { OrderContext, PriceContext } from "./lib";
 import { useContext, useState } from "react";
 import Popup from 'reactjs-popup';
-
+/*
+* What it does: Displays food items
+*
+* @param item      menu item object
+* @param custom    custom menu item object
+* @return div
+*/
 export default function FoodCard({ item, custom }) {
   const [order, setOrder] = useContext(OrderContext)
   const [, setPrice] = useContext(PriceContext)
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
-
+// Add items to cart and update total proce
   const Add = () => {
     if (order) {
       let currentCart = [];
@@ -32,7 +38,7 @@ export default function FoodCard({ item, custom }) {
       setPrice(item.price * 1.0825)
     }
   };
-
+// Customize item and add to cart, update current price
   const AddCustom = () => {
     if (order) {
       let currentCart = [];
@@ -75,55 +81,55 @@ export default function FoodCard({ item, custom }) {
         <h1 className="name">${item.price}</h1>
         {custom ? (
           <>
-          <button 
-          className="bttn name btn" 
-          onClick={() => setOpen(o => !o)}
-          >
-            Add to Order
-          </button>
-          <div>
-            <Popup 
-            open={open} 
-            contentStyle={contentStyle}
-            overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
-            closeOnDocumentClick onClose={closeModal}
+            <button
+              className="bttn name btn"
+              onClick={() => setOpen(o => !o)}
             >
-              <div className="normal-style">
-                <h1>Cutomize Your {item.name}</h1>
-                <h2>Choose your rice *</h2>
-                <select className="butn">
-                  <option value="brown">Brown</option>
-                  <option value="white">White</option>
-                  <option value="no">No Rice</option>
-                </select>
-                <h2>Choose your beans *</h2>
-                <select className="butn">
-                  <option value="brown">Pinto</option>
-                  <option value="white">Black</option>
-                  <option value="no">No Beans</option>
-                </select>
-                <h2>Choose your toppings</h2>
-                <input 
-                type="checkbox" 
-                class="check"
-                onSelect={console.log()}
-                />
-                <label class="container">&nbsp;Cheese</label>
-                <input type="checkbox" class="check"/>
-                <label class="container">&nbsp;Veggies</label>
-                <input type="checkbox" class="check"/>
-                <label class="container">&nbsp;Sour Cream</label>
-                <input type="checkbox" class="check"/>
-                <label class="container">&nbsp;Lettuce</label>
-                <input type="checkbox" class="check"/>
-                <label class="container">&nbsp;Salsa</label>
-                <button 
-                className="btn buttn" 
-                onClick={AddCustom}
-                >
-                  Add to Order
-                </button>
-                <style jsx="true">{`
+              Add to Order
+            </button>
+            <div>
+              <Popup
+                open={open}
+                contentStyle={contentStyle}
+                overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
+                closeOnDocumentClick onClose={closeModal}
+              >
+                <div className="normal-style">
+                  <h1>Cutomize Your {item.name}</h1>
+                  <h2>Choose your rice *</h2>
+                  <select className="butn">
+                    <option value="brown">Brown</option>
+                    <option value="white">White</option>
+                    <option value="no">No Rice</option>
+                  </select>
+                  <h2>Choose your beans *</h2>
+                  <select className="butn">
+                    <option value="brown">Pinto</option>
+                    <option value="white">Black</option>
+                    <option value="no">No Beans</option>
+                  </select>
+                  <h2>Choose your toppings</h2>
+                  <input
+                    type="checkbox"
+                    class="check"
+                    onSelect={console.log()}
+                  />
+                  <label class="container">&nbsp;Cheese</label>
+                  <input type="checkbox" class="check" />
+                  <label class="container">&nbsp;Veggies</label>
+                  <input type="checkbox" class="check" />
+                  <label class="container">&nbsp;Sour Cream</label>
+                  <input type="checkbox" class="check" />
+                  <label class="container">&nbsp;Lettuce</label>
+                  <input type="checkbox" class="check" />
+                  <label class="container">&nbsp;Salsa</label>
+                  <button
+                    className="btn buttn"
+                    onClick={AddCustom}
+                  >
+                    Add to Order
+                  </button>
+                  <style jsx="true">{`
                   h1 {
                     font-size: 30px;
                   }
@@ -152,14 +158,14 @@ export default function FoodCard({ item, custom }) {
                     width: 0;
                   }
                 `}</style>
-              </div>
-            </Popup>
-          </div>
+                </div>
+              </Popup>
+            </div>
           </>
         ) : (
-          <button 
-          className="btn bttn" 
-          onClick={Add}
+          <button
+            className="btn bttn"
+            onClick={Add}
           >
             Add to Order
           </button>

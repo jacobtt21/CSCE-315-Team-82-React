@@ -22,9 +22,8 @@ import { useGlobalState } from "./state";
 import { isExpired } from "react-jwt";
 
 function App() {
-
+// Establish google translate
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
-
   const googleTranslateElementInit = () => {
     new window.google.translate.TranslateElement(
       {
@@ -46,6 +45,7 @@ function App() {
 
     var jwt = localStorage.getItem("jwt");
 
+    // authentication setup
     if (!jwt || isExpired(jwt)) {
       setAuthenticated(false);
     } else {
@@ -53,7 +53,7 @@ function App() {
     }
 
   }, []);
-
+  // Create Page
   if (authenticated) {
     return (
       <>
