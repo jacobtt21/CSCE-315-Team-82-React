@@ -10,6 +10,7 @@ import { CustomerPage } from "./Manager/Components/Customer/CustomerPage";
 import {ServerPage} from "./Manager/Components/Server/ServerPage";
 import { Edit as MenuItemEdit } from "./Manager/Components/MenuItems/Edit";
 import { EditInventory } from "./Manager/Components/Inventory/EditInventory";
+import { NewInventory as InventoryNew } from "./Manager/Components/Inventory/NewInventory";
 import { New as MenuItemNew } from "./Manager/Components/MenuItems/New";
 import { useEffect, useState } from "react";
 
@@ -87,6 +88,7 @@ function App() {
                 <Route exact path= "/MenuItems/:id/edit" component={MenuItemEdit} />
                 <Route exact path= "/MenuItems/new" component={MenuItemNew} />
                 <Route exact path= "/InventoryItems/:id/edit" component={EditInventory} />
+                <Route exact path= "/Inventory/new" component={InventoryNew} />
                 <Route exact path = "/ServerPage" component={ServerPage}/>
                 <Route exact path = "/ExtraFeatures/SalesReport" component={SalesReport}/>
                 <Route exact path = "/ExtraFeatures/RestockReport" component={RestockReport}/>

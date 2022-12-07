@@ -25,7 +25,6 @@ export const Inventory = () => {
     Axios.get(process.env.REACT_APP_API_URL + '/fetch-items')
       .then(res => {
         const InventoryItems = res.data;
-        console.log(InventoryItems);
         setInventoryItems(InventoryItems);
       })
   },[]);
@@ -41,6 +40,7 @@ export const Inventory = () => {
         <Card>
           <Card.Header>
           <h4 className="d-inline  align-middle">Table</h4> <Badge pill bg="secondary" className="d-inline align-middle">{InventoryItems.length}</Badge>
+          <Link to="Inventory/new"><Button variant="primary" className="float-end d-inline">Add Item</Button></Link>
           </Card.Header>
           <Card.Body>
             <Table striped bordered hover responsive>
@@ -70,7 +70,7 @@ export const Inventory = () => {
                         <td>{formatPrice(item.price)}</td>
                         <td>{item.quantity}</td>
                         <td>{item.minimum_needed}</td>
-                        <td><span class="badge bg-secondary">{item.type.toUpperCase() || "NONE"}</span></td>
+                        <td><span class="badge bg-secondary">{(item.type || "").toUpperCase() || "NONE"}</span></td>
                         <td><Link to={`InventoryItems/${item.item_id}/edit`}>edit</Link></td>
                       </tr>
                       )

@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
-import InputGroup from 'react-bootstrap/InputGroup';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
@@ -64,7 +63,7 @@ export const EditInventory = () => {
 
   const deleteHandler = () => {
     // e.preventDefault();
-    Axios.post(process.env.REACT_APP_API_URL+`/delete-menu-item/${id}`)
+    Axios.post(process.env.REACT_APP_API_URL+`/delete-item/${id}`)
       .then((res) => {
         setDeleted(true);
       })
@@ -80,7 +79,7 @@ export const EditInventory = () => {
         <Card>
             <Card.Header>
               <h3 className="d-inline align-middle">Edit</h3>
-              <Button variant="danger" onClick={() => {if(window.confirm('Are you sure you want to delete this item?')){ deleteHandler()};}} className="float-end d-inline">Delete Menu Item</Button>
+              <Button variant="danger" onClick={() => {if(window.confirm('Are you sure you want to delete this item?')){ deleteHandler()};}} className="float-end d-inline">Delete Item</Button>
             </Card.Header>
             <Card.Body>
               <Form autoComplete="off" onSubmit={onSubmitHandler}>
@@ -97,6 +96,11 @@ export const EditInventory = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Minimum Needed</Form.Label>
                   <Form.Control name="minimum_needed" defaultValue={item.minimum_needed}/>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Amount Used Per Order</Form.Label>
+                  <Form.Control name="amount_used_per_order" defaultValue={item.amount_used_per_order}/>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -128,10 +132,10 @@ export const EditInventory = () => {
             <Alert variant="success">
               <Alert.Heading><FontAwesomeIcon icon={faTrash}/> Sucessful Deletion!</Alert.Heading>
               <p>
-                You have successfully deleted a menu item. Scary!
+                You have successfully deleted an item. Scary!
               </p>
               <hr />
-                <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
+                <Link to={"/Inventory"}><Button variant="light">Back</Button></Link>
               </Alert>
 
           </Card.Body>
