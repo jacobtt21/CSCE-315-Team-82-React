@@ -11,10 +11,12 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { useParams, Link } from "react-router-dom";
 import Axios from 'axios';
 
-
+/*
+* What it does: Generates a fleshed out excess report of excess items for a set date range
+*/
 export const ExcessReport = () => {
   const [item, setItem] = useState([]);
-
+// Contact database and obtain generated excess report
   useEffect(()=>{
     Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report/9-07-22/9-21-22`)
       .then(response => {
@@ -24,7 +26,7 @@ export const ExcessReport = () => {
         setItem(data)
       })
   },[]);
-
+// Display report
   return (
     <div>
       {item.length > 0 && (

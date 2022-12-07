@@ -7,7 +7,7 @@ import Badge from 'react-bootstrap/Badge';
 import Axios from 'axios';
 
 import {Link} from "react-router-dom";
-
+// Set initial formatting for price
 function formatPrice(price) {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -16,7 +16,7 @@ function formatPrice(price) {
 
   return formatter.format(price);
 }
-
+// Fetch inventory
 export const Inventory = () => {
 
   const [InventoryItems, setInventoryItems] = useState([]);

@@ -11,7 +11,7 @@ import Axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 
 import { useGlobalState } from "../../state";
-
+// If failure to log in, display error
 function displayLoginFailure(failure) {
   if (failure) {
     return (

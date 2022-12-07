@@ -21,7 +21,7 @@ function option ( value, display, actual) {
   }
   return <option value={value}>{display}</option>;
 }
-
+// Create a new menu item
 export const New = () => {
 
   const [submitted, setSubmitted] = useState("");

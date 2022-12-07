@@ -10,7 +10,7 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
 import { useParams, Link } from "react-router-dom";
 import Axios from 'axios';
-
+// Select option for use
 function option ( value, display, actual) {
 
   if (actual === true) actual = "TRUE";
@@ -21,7 +21,7 @@ function option ( value, display, actual) {
   }
   return <option value={value}>{display}</option>;
 }
-
+// Edit Database Inventory Contents
 export const EditInventory = () => {
 
   const [submitted, setSubmitted] = useState("");
@@ -31,7 +31,7 @@ export const EditInventory = () => {
   const [items, setItems] = useState([]);
 
   const { id } = useParams();
-
+// Get items
   useEffect(()=>{
     Axios.get(process.env.REACT_APP_API_URL+`/get-item/${id}`)
       .then(res => {
@@ -39,7 +39,7 @@ export const EditInventory = () => {
         setItem(item[0]);
       })
   },[]);
-
+// Fetch items
   useEffect(()=>{
     Axios.get(process.env.REACT_APP_API_URL+"/fetch-items")
       .then(res => {
@@ -48,7 +48,7 @@ export const EditInventory = () => {
         console.log(items);
       })
   },[]);
-
+// To handle submissions
   const onSubmitHandler = e => {
     e.preventDefault();
     const form = document.querySelector("form");
@@ -61,7 +61,7 @@ export const EditInventory = () => {
         console.log(err);
       });
   }
-
+// On inventory item deletion
   const deleteHandler = () => {
     // e.preventDefault();
     Axios.post(process.env.REACT_APP_API_URL+`/delete-menu-item/${id}`)
