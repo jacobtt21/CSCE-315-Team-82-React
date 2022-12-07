@@ -46,13 +46,13 @@ export const PairingsReport = () => {
             <Form autoComplete="off" onSubmit={onSubmitHandler}>
               <Form.Group className="mb-3">
                 <Form.Label>Start Date</Form.Label>
-                <Form.Control id="start_date" onChange={(e) => setStartDate(e.target.value)} />
+                <Form.Control id="start_date" onChange={(e) => setStartDate(e.target.value)} placeholder="MM-DD-YYYY"/>
                 {/* <DatePicker name="start_date" dateFormat="MM-DD-YYYY" onChange={(e) => setStartDate(e)}/> */}
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>End Date</Form.Label>
-                <Form.Control id="end_date" onChange={(e) => setEndDate(e.target.value)} />
+                <Form.Control id="end_date" onChange={(e) => setEndDate(e.target.value)} placeholder="MM-DD-YYYY"/>
                 {/* <DatePicker name="end_date" dateFormat="MM-DD-YYYY" onChange={(e) => setEndDate(e)}/> */}
               </Form.Group>
 

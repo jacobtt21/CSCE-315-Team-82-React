@@ -67,13 +67,13 @@ export const SalesReport = () => {
             <Form autoComplete="off" onSubmit={onSubmitHandler}>
               <Form.Group className="mb-3">
                 <Form.Label>Start Date</Form.Label>
-                <Form.Control name="start_date" onChange={(e) => setStartDate(e.target.value)} />
+                <Form.Control name="start_date" onChange={(e) => setStartDate(e.target.value)} placeholder="MM-DD-YYYY"/>
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>End Date</Form.Label>
                 <InputGroup className="mb-3">
-                  <Form.Control name="end_date" onChange={(e) => setEndDate(e.target.value)} />
+                  <Form.Control name="end_date" onChange={(e) => setEndDate(e.target.value)} placeholder="MM-DD-YYYY"/>
                 </InputGroup>
               </Form.Group>
 
