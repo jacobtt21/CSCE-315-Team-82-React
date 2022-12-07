@@ -2,39 +2,60 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 // import Calendar from 'react-calendar';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import LineChart from "./LineChart";
 
 import { useParams, Link } from "react-router-dom";
 import Axios from 'axios';
 
 
 export const SalesReport = () => {
-  const [Item1, setItem1] = useState([]);
-  const [item_name, setItemName] = useState([]);
+  const [response, setResponse] = useState([]);
   const [submitted, setSubmitted] = useState("");
   const [start_date, setStartDate] = useState("");
   const [end_date, setEndDate] = useState("");
 
+  const [menuItems, setMenuItems] = useState([]);
+
   const onSubmitHandler = e => {
     e.preventDefault();
-    Axios.get(process.env.REACT_APP_API_URL+`/get-sales-report/${start_date}/${end_date}/${item_name}`)
+
+    const form = document.querySelector("form");
+    const formData = new FormData(form);
+
+    Axios.get(process.env.REACT_APP_API_URL+`/get-sales-report/${start_date}/${end_date}/${formData.get("order_id")}`)
       .then((res) => {
         setSubmitted(true);
         return res.data
       })
       .then((data) => {
-        setItem1(data);
-        console.log(Item1);
+        setResponse(data);
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  useEffect(()=>{
+    Axios.get(process.env.REACT_APP_API_URL + '/fetch-menu-items')
+      .then(res => {
+        const menuItems = res.data;
+        setMenuItems(menuItems);
+      })
+  },[]);
+
+  function option ( value, display, actual) {
+
+    if (actual === true) actual = "TRUE";
+    if (actual === false) actual = "FALSE";
+
+    if (value === actual) {
+      return <option value={value} selected>{display}</option>
+    }
+    return <option value={value}>{display}</option>;
   }
 
   const htmlForm = () => {
@@ -46,21 +67,25 @@ export const SalesReport = () => {
             <Form autoComplete="off" onSubmit={onSubmitHandler}>
               <Form.Group className="mb-3">
                 <Form.Label>Start Date</Form.Label>
-                <Form.Control name="start date" onChange={(e) => setStartDate(e.target.value)} />
+                <Form.Control name="start_date" onChange={(e) => setStartDate(e.target.value)} />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>End Date</Form.Label>
                 <InputGroup className="mb-3">
-                  <Form.Control name="end date" onChange={(e) => setEndDate(e.target.value)} />
+                  <Form.Control name="end_date" onChange={(e) => setEndDate(e.target.value)} />
                 </InputGroup>
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Item Name</Form.Label>
-                <InputGroup className="mb-3">
-                  <Form.Control name="item name" onChange={(e) => setItemName(e.target.value)} />
-                </InputGroup>
+                <Form.Label>Order Type</Form.Label>
+                <Form.Select name="order_id">
+                {
+                  menuItems.map(function(e) {
+                    return option(e.order_id, e.name, "");
+                  })
+                }
+                </Form.Select>
               </Form.Group>
 
               <Button type="submit" variant="primary" className="me-1">Submit</Button>
@@ -87,9 +112,7 @@ export const SalesReport = () => {
         <Card.Body>
           <Card.Title>Sales Report:</Card.Title>
           <Card.Text>
-          {Item1.map(curr_item => (
-            <li key={curr_item.item_id}>{curr_item.cnt} {item_name}</li>
-          ))}
+            <LineChart chartData={response} style={{width:1000}}/>
           </Card.Text>
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>
         </Card.Body>

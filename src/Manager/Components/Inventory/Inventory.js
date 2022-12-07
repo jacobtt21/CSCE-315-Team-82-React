@@ -50,6 +50,7 @@ export const Inventory = () => {
                     <th>Name</th>
                     <th>Price</th>
                     <th>Quantity</th>
+                    <th>Minimum Needed</th>
                     <th>Type</th>
                     <th>Action</th>
                   </tr>
@@ -68,6 +69,7 @@ export const Inventory = () => {
                         <td>{item.name}</td>
                         <td>{formatPrice(item.price)}</td>
                         <td>{item.quantity}</td>
+                        <td>{item.minimum_needed}</td>
                         <td><span class="badge bg-secondary">{item.type.toUpperCase() || "NONE"}</span></td>
                         <td><Link to={`InventoryItems/${item.item_id}/edit`}>edit</Link></td>
                       </tr>
