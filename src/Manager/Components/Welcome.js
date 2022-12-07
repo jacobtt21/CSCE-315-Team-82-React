@@ -10,6 +10,8 @@ import Axios from 'axios';
 
 import Alert from 'react-bootstrap/Alert';
 
+import logo from '../../images/cabo-grill-logo.png';
+
 import { useGlobalState } from "../../state";
 
 function displayLoginFailure(failure) {
@@ -83,6 +85,7 @@ export const Welcome = () => {
           <div class="container py-5">
             <div class="row">
               <div class="col">
+                <img id="login-logo" src={logo} alt="" width="100" height="100"></img>
                 <h1 class="display-5 fw-bold">Welcome to Cabo Grill!</h1>
                 <p class="col-md-11 fs-4">
                   Cabo Grill offers a build-you-own dining with TexMex cuisine! Please visit us at the MSC!

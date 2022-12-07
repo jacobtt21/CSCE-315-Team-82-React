@@ -22,3 +22,9 @@
 		text-align: center;
 	}
 }
+
+#login-logo {
+	/* margin: auto;
+	display: block; */
+	margin-bottom: 30px;
+}
