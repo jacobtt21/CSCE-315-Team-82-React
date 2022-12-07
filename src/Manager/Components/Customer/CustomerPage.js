@@ -4,7 +4,15 @@ import Grid from "./Grid";
 import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
 import Button from "react-bootstrap/Button";
+
+/*
+* What it does: Generates customer page html
+*
+* @return   customer page
+*/
+
 import Popup from 'reactjs-popup';
+
 
 export const CustomerPage = () => {
   const [food, setFood] = useState("");
@@ -25,7 +33,7 @@ export const CustomerPage = () => {
     let drinks = [];
     let salads = [];
     let bowls = [];
-
+// Call from database to get all menu items and sort them by food type
     const res = await fetch(process.env.REACT_APP_API_URL + '/fetch-menu-items', {
       method: "GET",
     });
@@ -66,9 +74,13 @@ export const CustomerPage = () => {
     setFood(menu)
   }
 
+// Obtain price and quantity from database
+
+
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
 
   const buy = async () => {
     // Calls to server
@@ -141,12 +153,12 @@ export const CustomerPage = () => {
                       <>
                         {order.length > 0 ? (
                           <>
-                          <Bill foods={order} />
-                          <Button 
-                          variant="success" 
-                          onClick={buy}>
-                            Checkout {numberFormat(price)} (Tax Included)
-                          </Button>
+                            <Bill foods={order} />
+                            <Button
+                              variant="success"
+                              onClick={buy}>
+                              Checkout {numberFormat(price)} (Tax Included)
+                            </Button>
                           </>
                         ) : (
                           <h4><i>There isn't anything here</i></h4>

@@ -23,7 +23,7 @@ import { useGlobalState } from "./state";
 import { isExpired } from "react-jwt";
 
 function App() {
-
+// Establish google translate
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
   const [highContrastMode, setHighContrastMode] = useState(false);
   const [dyslexiaMode, setDysledyslexiaMode] = useState(false);
@@ -34,6 +34,7 @@ function App() {
     var highContrast = localStorage.getItem("highContrast");
     var dyslexia = localStorage.getItem("dyslexia");
 
+    // authentication setup
     if (!jwt || isExpired(jwt)) {
       setAuthenticated(false);
     } else {
@@ -70,7 +71,7 @@ function App() {
     });
 
   }, []);
-
+  // Create Page
   if (authenticated) {
     return (
       <>
