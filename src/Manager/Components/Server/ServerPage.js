@@ -4,12 +4,15 @@ import Grid from "./Grid";
 import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
 import Button from "react-bootstrap/Button";
+import Popup from 'reactjs-popup';
 
 export const ServerPage = () => {
 
   const [food, setFood] = useState("");
   const [order, setOrder] = useState();
   const [price, setPrice] = useState();
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
 
   useEffect(() => {
     getFood()
@@ -63,6 +66,10 @@ export const ServerPage = () => {
     setFood(menu)
   }
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   const buy = async () => {
     // Calls to server
     const formData = new FormData();
@@ -83,14 +90,45 @@ export const ServerPage = () => {
         body: formData2
       })
     }
-    window.location.reload(false);
+    setOpen(o => !o)
+    sleep(10000).then(() => { window.location.reload(false); });
   }
+
+  const contentStyle = {
+    background: "rgba(255,255,255, 1)",
+    borderRadius: 15,
+    padding: 10,
+    width: 500,
+    border: "none",
+    textAlign: "center"
+  };
 
   return food ? (
     <>
       <div className="p-3">
         <OrderContext.Provider value={[order, setOrder]}>
           <PriceContext.Provider value={[price, setPrice]}>
+          <div>
+            <Popup 
+            open={open} 
+            contentStyle={contentStyle}
+            overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
+            closeOnDocumentClick onClose={closeModal}
+            >
+              <div className="normal-style">
+                <h1> Customer's Total: </h1>
+                <h2> {numberFormat(price)}</h2>
+                <style jsx="true">{`
+                  h1 {
+                    font-size: 40px;
+                  }
+                  h2 {
+                    font-size: 30px;
+                  }
+                `}</style>
+              </div>
+            </Popup>
+          </div>
           <div className="title">
           </div>
               <div className="grid-container2">
