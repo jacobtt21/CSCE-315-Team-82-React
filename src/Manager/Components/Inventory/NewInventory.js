@@ -21,28 +21,17 @@ function option ( value, display, actual) {
   }
   return <option value={value}>{display}</option>;
 }
-// Create a new menu item
-export const New = () => {
+
+export const NewInventory = () => {
 
   const [submitted, setSubmitted] = useState("");
-
-  const [items, setItems] = useState([]);
-
-  useEffect(()=>{
-    Axios.get(process.env.REACT_APP_API_URL+"/fetch-items")
-      .then(res => {
-        const items = res.data;
-        setItems(items);
-        console.log(items);
-      })
-  },[]);
 
   const onSubmitHandler = e => {
     e.preventDefault();
     const form = document.querySelector("form");
     const formData = new FormData(form);
     console.log(formData);
-    Axios.post(process.env.REACT_APP_API_URL+`/new-menu-item`, formData, {})
+    Axios.post(process.env.REACT_APP_API_URL+`/new-item`, formData, {})
       .then((res) => {
         setSubmitted(true);
       })
@@ -66,20 +55,12 @@ export const New = () => {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Nickname</Form.Label>
-                <Form.Control name="nickname" defaultValue=""/>
-              </Form.Group>
-
-              <Form.Group className="mb-3">
                 <Form.Label>Type</Form.Label>
                 <Form.Control name="type" list="typeList" defaultValue=""/>
                 <datalist id="typeList">
-                  <option value="Burrito">Burrito</option>
-                  <option value="Taco">Taco</option>
-                  <option value="Bowl">Bowl</option>
-                  <option value="Salad">Salad</option>
-                  <option value="Side">Side</option>
-                  <option value="Drink">Drink</option>
+                  <option value="Packaging">Packaging</option>
+                  <option value="Ingredient">Ingredient</option>
+                  <option value="Cleaning">Cleaning</option>
                 </datalist>
               </Form.Group>
 
@@ -94,33 +75,22 @@ export const New = () => {
                 </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Orderable</Form.Label>
-                <Form.Select name="orderable">
-                  {option("TRUE", "TRUE", "")}
-                  {option("FALSE", "FALSE", "")}
-                </Form.Select>
-              </Form.Group>
-
-
-              <Form.Group className="mb-3">
-                <Form.Label>Main Item</Form.Label>
-                <Form.Select name="item_key">
-                {
-                  items.map(function(e) {
-                    return option(e.item_id, e.name, "NONE");
-                  })
-                }
-                { option("", "NONE", "") }
-                </Form.Select>
+                <Form.Label>Quantity</Form.Label>
+                <Form.Control name="quantity" defaultValue=""/>
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Image URL</Form.Label>
-                <Form.Control name="image" defaultValue="" />
+                <Form.Label>Minimum Needed</Form.Label>
+                <Form.Control name="minimum_needed" defaultValue=""/>
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Amount Used Per Order</Form.Label>
+                <Form.Control name="amount_used_per_order" defaultValue=""/>
               </Form.Group>
 
               <Button type="submit" variant="primary" className="me-1">Submit</Button>
-              <Link to={"/MenuItems"}><Button variant="secondary">Cancel</Button></Link>
+              <Link to={"/Inventory"}><Button variant="secondary">Cancel</Button></Link>
 
             </Form>
           </Card.Body>
@@ -134,10 +104,10 @@ export const New = () => {
           <Alert variant="success">
             <Alert.Heading><FontAwesomeIcon icon={faPenToSquare}/> Sucessful Creation!</Alert.Heading>
             <p>
-              You just added a new menu item to the database. I'm proud of you. Good job.
+              You just added a new item to the database. I'm proud of you. Good job.
             </p>
             <hr />
-              <Link to={"/MenuItems"}><Button variant="light">Back</Button></Link>
+              <Link to={"/Inventory"}><Button variant="light">Back</Button></Link>
             </Alert>
         </Card.Body>
       </Card>

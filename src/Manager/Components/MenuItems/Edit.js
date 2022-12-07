@@ -121,7 +121,6 @@ export const Edit = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Orderable</Form.Label>
                   <Form.Select name="orderable">
-                    {console.log(orderType.orderable)}
                     {option("TRUE", "TRUE", orderType.orderable)}
                     {option("FALSE", "FALSE", orderType.orderable)}
                   </Form.Select>
@@ -140,7 +139,13 @@ export const Edit = () => {
                   </Form.Select>
                 </Form.Group>
 
-                <Button type="submit" variant="primary">Submit</Button>
+                <Form.Group className="mb-3">
+                  <Form.Label>Image URL</Form.Label>
+                  <Form.Control name="image" defaultValue={orderType.image}/>
+                </Form.Group>
+
+
+                <Button type="submit" variant="primary" className="me-1">Submit</Button>
                 <Link to={"/MenuItems"}><Button variant="secondary">Cancel</Button></Link>
 
               </Form>

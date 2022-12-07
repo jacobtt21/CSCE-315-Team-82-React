@@ -4,15 +4,23 @@ import Grid from "./Grid";
 import { OrderContext, PriceContext, numberFormat } from "./lib";
 import Bill from "./Bill";
 import Button from "react-bootstrap/Button";
+
 /*
 * What it does: Generates customer page html
 *
 * @return   customer page
 */
+
+import Popup from 'reactjs-popup';
+
+
 export const CustomerPage = () => {
   const [food, setFood] = useState("");
   const [order, setOrder] = useState();
   const [price, setPrice] = useState();
+  const [orderNo, setOrderNo] = useState('');
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
 
   useEffect(() => {
     getFood()
@@ -32,24 +40,27 @@ export const CustomerPage = () => {
     const responseData = await res.json();
     var i;
     for (i = 0; i < responseData.length; ++i) {
-      if (responseData[i].type === "Bowl") {
+      if (responseData[i].type === "Bowl" && responseData[i].orderable) {
         bowls.push(responseData[i]);
       }
-      else if (responseData[i].type === "Tacos") {
+      else if (responseData[i].type === "Tacos" && responseData[i].orderable) {
         tacos.push(responseData[i]);
       }
-      else if (responseData[i].type === "Salad") {
+      else if (responseData[i].type === "Salad" && responseData[i].orderable) {
         salads.push(responseData[i]);
       }
-      else if (responseData[i].type === "Drink") {
+      else if (responseData[i].type === "Drink" && responseData[i].orderable) {
         drinks.push(responseData[i]);
       }
-      else if (responseData[i].type === "Burrito") {
+      else if (responseData[i].type === "Burrito" && responseData[i].orderable) {
         burritos.push(responseData[i]);
       }
-      else {
+      else if (responseData[i].orderable){
         sides.push(responseData[i]);
         console.log(responseData[i])
+      }
+      else {
+        
       }
     }
 
@@ -62,7 +73,15 @@ export const CustomerPage = () => {
     menu.push(drinks)
     setFood(menu)
   }
+
 // Obtain price and quantity from database
+
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
   const buy = async () => {
     // Calls to server
     const formData = new FormData();
@@ -73,7 +92,7 @@ export const CustomerPage = () => {
       body: formData
     })
     const id = await res.json();
-    console.log(id[0].bill_id)
+    setOrderNo(id[0].bill_id)
     for (var i = 0; i < order.length; ++i) {
       const formData2 = new FormData();
       formData2.append("bid", id[0].bill_id)
@@ -83,8 +102,18 @@ export const CustomerPage = () => {
         body: formData2
       })
     }
-    window.location.reload(false);
+    setOpen(o => !o)
+    sleep(7000).then(() => { window.location.reload(false); });
   }
+
+  const contentStyle = {
+    background: "rgba(255,255,255, 1)",
+    borderRadius: 15,
+    padding: 10,
+    width: 800,
+    border: "none",
+    textAlign: "center"
+  };
 
   return food ? (
     <>
@@ -92,6 +121,27 @@ export const CustomerPage = () => {
         <OrderContext.Provider value={[order, setOrder]}>
           <PriceContext.Provider value={[price, setPrice]}>
             <main>
+              <div>
+                <Popup 
+                open={open} 
+                contentStyle={contentStyle}
+                overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
+                closeOnDocumentClick onClose={closeModal}
+                >
+                  <div className="normal-style">
+                    <h1>Your Order Number: {orderNo}</h1>
+                    <h2>Thanks for choosing Cabo Grill!</h2>
+                    <style jsx="true">{`
+                      h1 {
+                        font-size: 40px;
+                      }
+                      h2 {
+                        font-size: 30px;
+                      }
+                    `}</style>
+                  </div>
+                </Popup>
+              </div>
               <div className="title">
                 <h2>Order Cabo Grill</h2>
               </div>

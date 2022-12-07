@@ -3,10 +3,6 @@
   padding: 0;
 }
 
-body {
-  background-color: #b5fac7;
-}
-
 .classic-style {
   color: #000000;
   text-align: center;
@@ -15,4 +11,18 @@ body {
 .normal-style {
   color: #000000;
   text-align: center;
+}
+
+@font-face {
+  font-family: 'dyslexic';
+  src: local('dyslexic'), url(./fonts/dyslexic.otf) format('opentype');
+}
+
+.dyslexia-mode {
+  font-family: dyslexic !important;
+}
+
+.high-contrast-mode {
+  font-weight: bolder !important;
+  letter-spacing: 0.5px !important;
 }

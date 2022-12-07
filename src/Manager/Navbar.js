@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUniversalAccess } from '@fortawesome/free-solid-svg-icons'
 
 import { useGlobalState } from "../state";
 import { useHistory } from "react-router-dom";
@@ -13,13 +16,71 @@ function NavBar() {
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
   const redirect = useHistory();
 
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        autoDisplay: false
+      },
+      "google_translate_element"
+    );
+  };
+
+  useEffect(() => {
+    var addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.head.appendChild(addScript);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
+
   const handleLogOut = () => {
     setAuthenticated(false);
     localStorage.removeItem("jwt");
     localStorage.removeItem("full_name");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("highContrast");
+    localStorage.removeItem("dyslexia");
     redirect.push("/");
     window.location.reload();
   };
+
+  const highContrastChange = () => {
+    if (document.getElementById('highContrast').checked) {
+      localStorage.setItem("highContrast", "true");
+      document.getElementById('highContrast').checked = true;
+    } else {
+      localStorage.setItem("highContrast", "false");
+      document.getElementById('highContrast').checked = false;
+    }
+    window.dispatchEvent(new Event('storage'));
+  };
+
+  const dyslexiaChange = () => {
+    if (document.getElementById('dyslexia').checked) {
+      localStorage.setItem("dyslexia", "true");
+    } else {
+      localStorage.setItem("dyslexia", "false");
+    }
+    window.dispatchEvent(new Event('storage'));
+  };
+
+  const populateCheckboxes = () => {
+
+    // document.getElementById("highContrast").checked = false;
+    // document.getElementById("dyslexia").checked = false;
+
+    if(localStorage.getItem("highContrast") === "true") {
+      document.getElementById("highContrast").checked = true;
+      // document.getElementById("highContrast").click();
+    }
+    if(localStorage.getItem("dyslexia") === "true") {
+      document.getElementById("dyslexia").checked = true;
+      // document.getElementById("dyslexia").click();
+    }
+  }
 
   const handleClick = () => setClick(!click);
   return (
@@ -57,7 +118,7 @@ function NavBar() {
                   className="nav-link active"
                   onClick={handleClick}
                 >
-                  MenuItems
+                  Menu Items
                 </NavLink>
               </li>
               <li class="nav-item">
@@ -108,93 +169,55 @@ function NavBar() {
                 </ul>
               </li>
             </ul>
-              <button class="btn btn-outline-light" type="submit" onClick={handleLogOut}>Logout</button>
           </div>
+          <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={populateCheckboxes}><FontAwesomeIcon icon={faUniversalAccess}/> Accessibility</button>
+          <button class="btn btn-outline-light" type="submit" onClick={handleLogOut}>Logout</button>
         </div>
       </nav>
-      {/* <nav className="navbar">
-        <div className="nav-container">
-          <NavLink exact to="/" className="nav-logo">
-            Cabo Grill
-            <i className="fas fa-code"></i>
-          </NavLink>
-
-          <ul className={click ? "nav-menu active" : "nav-menu"}>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/MenuItems"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Menu Items
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/inventory"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Inventory
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/ExtraFeatures"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Extra Features
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/CustomerPage"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Customer View
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/ServerPage"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Server View
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <button class="btn btn-secondary" type="button" onClick={handleLogOut}>Logout</button>
-            </li>
-          </ul>
-          <div className="nav-icon" onClick={handleClick}>
-            <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"><FontAwesomeIcon icon={faUniversalAccess}/> Accessibility Settings</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <div class="my-4">
+                      <h4 class="mb-0">Language</h4>
+                      <p>Click to translate our site to any language.</p>
+                      <div id="translate-box" class="me-4">
+                        <div id="google_translate_element"></div>
+                      </div>
+                      <hr class="my-4" />
+                      <h4 class="mb-0">Display</h4>
+                      <p>Click to toggle these two visual comprehension modes.</p>
+                      <div class="list-group mb-5 shadow">
+                        <label class="list-group-item d-flex gap-2">
+                          <input id="highContrast" class="form-check-input flex-shrink-0" type="checkbox" onClick={highContrastChange}></input>
+                          <span>
+                            High Contrast Mode
+                            <p class="d-block text-muted mb-0">Increases the contrast and font weight of all text.</p>
+                          </span>
+                        </label>
+                        <label class="list-group-item d-flex gap-2">
+                          <input id="dyslexia" class="form-check-input flex-shrink-0" type="checkbox" onChange={dyslexiaChange}></input>
+                          <span>
+                            Dyslexia Mode
+                            <p class="d-block text-muted mb-0">Changes all font to a dyslexia friendly font.</p>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </nav> */}
+      </div>
     </>
   );
 }

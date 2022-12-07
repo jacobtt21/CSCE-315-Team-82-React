@@ -79,20 +79,28 @@ export default function FoodCard({ item, custom }) {
       <div className="card">
         <h1 className="name">{item.name}</h1>
         <h1 className="name">${item.price}</h1>
+        {item.image && (
+          <img
+          src={item.image}
+          />
+        )}
         {custom ? (
           <>
-            <button
-              className="bttn name btn"
-              onClick={() => setOpen(o => !o)}
+
+            <button 
+            className="bttn name btn" 
+            onClick={() => setOpen(o => !o)}
             >
               Add to Order
             </button>
             <div>
-              <Popup
-                open={open}
-                contentStyle={contentStyle}
-                overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
-                closeOnDocumentClick onClose={closeModal}
+
+              <Popup 
+              open={open} 
+              contentStyle={contentStyle}
+              overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
+              closeOnDocumentClick onClose={closeModal}
+
               >
                 <div className="normal-style">
                   <h1>Cutomize Your {item.name}</h1>
@@ -109,55 +117,59 @@ export default function FoodCard({ item, custom }) {
                     <option value="no">No Beans</option>
                   </select>
                   <h2>Choose your toppings</h2>
-                  <input
-                    type="checkbox"
-                    class="check"
-                    onSelect={console.log()}
+
+                  <input 
+                  type="checkbox" 
+                  class="check"
+                  onSelect={console.log()}
                   />
                   <label class="container">&nbsp;Cheese</label>
-                  <input type="checkbox" class="check" />
+                  <input type="checkbox" class="check"/>
                   <label class="container">&nbsp;Veggies</label>
-                  <input type="checkbox" class="check" />
+                  <input type="checkbox" class="check"/>
                   <label class="container">&nbsp;Sour Cream</label>
-                  <input type="checkbox" class="check" />
+                  <input type="checkbox" class="check"/>
                   <label class="container">&nbsp;Lettuce</label>
-                  <input type="checkbox" class="check" />
+                  <input type="checkbox" class="check"/>
                   <label class="container">&nbsp;Salsa</label>
-                  <button
-                    className="btn buttn"
-                    onClick={AddCustom}
+                  <button 
+                  className="btn buttn" 
+                  onClick={AddCustom}
+
                   >
                     Add to Order
                   </button>
                   <style jsx="true">{`
-                  h1 {
-                    font-size: 30px;
-                  }
-                  h2 {
-                    margin: 2%;
-                    font-size: 20px;
-                  }
-                  .check {
-                    top: 0;
-                    left: 0;
-                    height: 25px;
-                    width: 25px;
-                    background-color: #eee;
-                    display: inline;
-                    cursor: pointer;
-                  }
-                  .container {
-                    display: inline;
-                    margin-bottom: 10%;
-                    font-size: 22px;
-                  }
-                  .container input {
-                    display: inline;
-                    opacity: 0;
-                    height: 0;
-                    width: 0;
-                  }
-                `}</style>
+
+                    h1 {
+                      font-size: 30px;
+                    }
+                    h2 {
+                      margin: 2%;
+                      font-size: 20px;
+                    }
+                    .check {
+                      top: 0;
+                      left: 0;
+                      height: 25px;
+                      width: 25px;
+                      background-color: #eee;
+                      display: inline;
+                      cursor: pointer;
+                    }
+                    .container {
+                      display: inline;
+                      margin-bottom: 10%;
+                      font-size: 22px;
+                    }
+                    .container input {
+                      display: inline;
+                      opacity: 0;
+                      height: 0;
+                      width: 0;
+                    }
+                  `}</style>
+
                 </div>
               </Popup>
             </div>
@@ -204,6 +216,11 @@ export default function FoodCard({ item, custom }) {
           background-color: #53898d;
           color: white;
           margin-right: 0;
+        }
+        img {
+          max-width: 200px;
+          margin: 30px auto;
+          border-radius: 20px;
         }
       `}</style>
     </>
