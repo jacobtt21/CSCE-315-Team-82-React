@@ -8,7 +8,7 @@ export default function FoodCard({ item, custom }) {
   const [, setPrice] = useContext(PriceContext)
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
-
+// Allow server to add item to current cart and update price
   const Add = () => {
     if (order) {
       let currentCart = [];

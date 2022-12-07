@@ -2,11 +2,15 @@ import React from "react";
 import { OrderContext, PriceContext } from "./lib";
 import { useContext } from "react";
 import Button from "react-bootstrap/Button";
-
+/*
+* What it does: Generates visual bill for customers
+*
+* @return   bill
+*/
 export default function ItemBill({ item, index }) {
   const [order, setOrder] = useContext(OrderContext)
   const [, setPrice] = useContext(PriceContext)
-
+// Remove item from cart and update price
   const remove = () => {
     let currentCart = [];
     var i;

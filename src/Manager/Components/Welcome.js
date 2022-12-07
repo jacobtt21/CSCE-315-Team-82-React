@@ -13,7 +13,7 @@ import Alert from 'react-bootstrap/Alert';
 import logo from '../../images/cabo-grill-logo.png';
 
 import { useGlobalState } from "../../state";
-
+// If failure to log in, display error
 function displayLoginFailure(failure) {
   if (failure) {
     return (

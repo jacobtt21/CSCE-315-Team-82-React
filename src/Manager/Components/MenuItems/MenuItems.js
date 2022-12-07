@@ -7,7 +7,7 @@ import Badge from 'react-bootstrap/Badge';
 import Axios from 'axios';
 
 import {Link} from "react-router-dom";
-
+// Format price
 function priceFormatter(price) {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -16,7 +16,7 @@ function priceFormatter(price) {
 
   return formatter.format(price);
 }
-
+// Fetch current menu items
 export const MenuItems = () => {
 
   const [menuItems, setMenuItems] = useState([]);
