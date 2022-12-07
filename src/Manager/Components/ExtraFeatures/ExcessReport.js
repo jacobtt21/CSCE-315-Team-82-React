@@ -19,11 +19,13 @@ import Axios from 'axios';
 export const ExcessReport = () => {
 
   const [item, setItem] = useState([]);
-// Contact database and obtain generated excess report
+  // Contact database and obtain generated excess report
   useEffect(()=>{
     Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report/9-07-22/9-21-22`)
       .then(response => {
         return response.data
+    })
+  });
 
   const [excessItems, setExcessItems] = useState([]);
   const [submitted, setSubmitted] = useState("");
