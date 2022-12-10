@@ -13,6 +13,9 @@ import Alert from 'react-bootstrap/Alert';
 import logo from '../../images/cabo-grill-logo.png';
 
 import { useGlobalState } from "../../state";
+import Button from "react-bootstrap/Button";
+
+
 // If failure to log in, display error
 function displayLoginFailure(failure) {
   if (failure) {
@@ -31,6 +34,8 @@ export const Welcome = () => {
   const redirect = useHistory();
   const [loginFailure, setLoginFailure] = useState(false);
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
+  const [guest_authenticated, setGuestAuthenticated] = useGlobalState('guest_authenticated');
+
 
   const onSuccess = (res) => {
     Axios.get(process.env.REACT_APP_API_URL + `/authenticate/${res.profileObj.email}`)
@@ -78,6 +83,14 @@ export const Welcome = () => {
     gapi.load('client:auth2', start);
   });
 
+
+  const handleClick = () => {
+    setAuthenticated(true);
+    setGuestAuthenticated(true);
+    console.log(guest_authenticated);
+    redirect.push("/CustomerPage");
+  }
+
   return (
     <>
       <div class="container py-4">
@@ -91,7 +104,7 @@ export const Welcome = () => {
                   Cabo Grill offers a build-you-own dining with TexMex cuisine! Please visit us at the MSC!
                 </p>
                 <p class="col-md-11 fs-4">
-                  This page is for employee use only.
+                  Employees: Login with Google <br></br>Customers: Login as a Guest
                 </p>
                 <div id="signInButton">
                     <GoogleLogin
@@ -103,6 +116,11 @@ export const Welcome = () => {
                       isSignedIn={false}
                     />
                 </div>
+
+                <div>
+                  <Button variant="primary" onClick={handleClick}>Guest Login</Button>
+                </div>
+
                 <div class="col-md-11">
                   {displayLoginFailure(loginFailure)}
                 </div>

@@ -10,11 +10,12 @@ import { useHistory } from "react-router-dom";
 
 import logo from '../images/cabo-grill-logo.png';
 
-function NavBar() {
+function GuestNavBar() {
 
   const [click, setClick] = useState(false);
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
   const [guest_authenticated, setGuestAuthenticated] = useGlobalState('guest_authenticated');
+
   const redirect = useHistory();
 
   const googleTranslateElementInit = () => {
@@ -104,53 +105,7 @@ function NavBar() {
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                {/* <a class="nav-link active" aria-current="page" href="#">Home</a> */}
-                <NavLink
-                  exact
-                  to="/"
-                  className="nav-link active"
-                  onClick={handleClick}
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li class="nav-item">
-                <NavLink
-                  exact
-                  to="/MenuItems"
-                  className="nav-link active"
-                  onClick={handleClick}
-                >
-                  Menu Items
-                </NavLink>
-              </li>
-              <li class="nav-item">
-                <NavLink
-                  exact
-                  to="/inventory"
-                  className="nav-link active"
-                  onClick={handleClick}
-                >
-                  Inventory
-                </NavLink>
-              </li>
-              <li class="nav-item">
-                <NavLink
-                  exact
-                  to="/ExtraFeatures"
-                  className="nav-link active"
-                  onClick={handleClick}
-                >
-                  Extra Features
-                </NavLink>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Ordering
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
+              <li>
                     <NavLink
                       exact
                       to="/CustomerPage"
@@ -159,19 +114,7 @@ function NavBar() {
                     >
                       Customer View
                     </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      exact
-                      to="/ServerPage"
-                      className="nav-link active"
-                      onClick={handleClick}
-                    >
-                      Server View
-                    </NavLink>
-                  </li>
-                </ul>
-              </li>
+                </li>
             </ul>
           </div>
           <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={populateCheckboxes}><FontAwesomeIcon icon={faUniversalAccess}/> Accessibility</button>
@@ -226,4 +169,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default GuestNavBar;
