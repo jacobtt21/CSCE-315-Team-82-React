@@ -1,5 +1,6 @@
 import "./App.css";
 import NavBar from "./Manager/Navbar";
+import GuestNavBar from "./Manager/GuestNavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./Manager/Components/Home";
 import { Welcome } from "./Manager/Components/Welcome";
@@ -25,6 +26,7 @@ import { isExpired } from "react-jwt";
 function App() {
 // Establish google translate
   const [authenticated, setAuthenticated] = useGlobalState('authenticated');
+  const [guest_authenticated, setGuestAuthenticated] = useGlobalState('guest_authenticated');
   const [highContrastMode, setHighContrastMode] = useState(false);
   const [dyslexiaMode, setDysledyslexiaMode] = useState(false);
 
@@ -72,7 +74,9 @@ function App() {
 
   }, []);
   // Create Page
-  if (authenticated) {
+  if (authenticated && !guest_authenticated) {
+    console.log("yay regular login")
+
     return (
       <>
         <Router>
@@ -101,7 +105,38 @@ function App() {
         </Router>
       </>
     );
-  } else {
+  } 
+  else if (guest_authenticated && authenticated) {
+    return (
+      <>
+        <Router>
+          <div className={(dyslexiaMode ? "dyslexia-mode" : "") + " " + (highContrastMode ? "high-contrast-mode" : "")}>
+            <GuestNavBar />
+            <div id="pages">
+              <Switch>
+              <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path= "/MenuItems" component={MenuItems} />
+                <Route exact path= "/Inventory" component={Inventory} />
+                <Route exact path= "/ExtraFeatures" component={ExtraFeatures} />
+                <Route exact path= "/CustomerPage" component={CustomerPage} />
+                <Route exact path= "/MenuItems/:id/edit" component={MenuItemEdit} />
+                <Route exact path= "/MenuItems/new" component={MenuItemNew} />
+                <Route exact path= "/InventoryItems/:id/edit" component={EditInventory} />
+                <Route exact path= "/Inventory/new" component={InventoryNew} />
+                <Route exact path = "/ServerPage" component={ServerPage}/>
+                <Route exact path = "/ExtraFeatures/SalesReport" component={SalesReport}/>
+                <Route exact path = "/ExtraFeatures/RestockReport" component={RestockReport}/>
+                <Route exact path = "/ExtraFeatures/ExcessReport" component={ExcessReport}/>
+                <Route exact path = "/ExtraFeatures/PairingsReport" component={PairingsReport}/>
+              </Switch>
+            </div>
+          </div>
+        </Router>
+      </>
+    );  
+  } 
+  else {
     return (
       <>
         <Router>
