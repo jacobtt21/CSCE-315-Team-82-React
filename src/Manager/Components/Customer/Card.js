@@ -79,26 +79,33 @@ export default function FoodCard({ item, custom }) {
       <div className="card">
         <h1 className="name">{item.name}</h1>
         <h1 className="name">${item.price}</h1>
+        <style jsx="true">{`
+          .food-img {
+            object-fit: cover;
+            width: 180px;
+            height: 180px;
+          }
+        `}</style>
         {item.image && (
-          <img
+          <img className="food-img"
           src={item.image}
           />
         )}
         {custom ? (
           <>
 
-            <button 
-            className="bttn name btn" 
+            <button
+            className="bttn name btn"
             onClick={() => setOpen(o => !o)}
             >
               Add to Order
             </button>
             <div>
 
-              <Popup 
-              open={open} 
+              <Popup
+              open={open}
               contentStyle={contentStyle}
-              overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }} 
+              overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
               closeOnDocumentClick onClose={closeModal}
 
               >
@@ -118,8 +125,8 @@ export default function FoodCard({ item, custom }) {
                   </select>
                   <h2>Choose your toppings</h2>
 
-                  <input 
-                  type="checkbox" 
+                  <input
+                  type="checkbox"
                   class="check"
                   onSelect={console.log()}
                   />
@@ -132,8 +139,8 @@ export default function FoodCard({ item, custom }) {
                   <label class="container">&nbsp;Lettuce</label>
                   <input type="checkbox" class="check"/>
                   <label class="container">&nbsp;Salsa</label>
-                  <button 
-                  className="btn buttn" 
+                  <button
+                  className="btn buttn"
                   onClick={AddCustom}
 
                   >
