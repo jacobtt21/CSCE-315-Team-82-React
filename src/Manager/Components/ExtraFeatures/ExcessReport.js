@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
+import "./Landing.css"
 
 // import Calendar from 'react-calendar';
 
@@ -31,22 +32,8 @@ export const ExcessReport = () => {
   const [submitted, setSubmitted] = useState("");
   const [start_date, setStartDate] = useState("");
   const [end_date, setEndDate] = useState("");
+  console.log(start_date);
 
-  // function sleep(ms) {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // }
-
-  // const submit = async() => {
-  //   const formData = new FormData();
-  //   formData.append("start_date", "9-01-22")
-  //   formData.append("end_date", "9-07-22")
-  //   const res = await fetch(process.env.REACT_APP_API_URL + '/get-excess-report', {
-  //     method: "GET",
-  //     body: formData
-  //   })
-  //   const id = await res.json();
-  //   // sleep(7000).then(() => { window.location.reload(false); });
-  // }
   const onSubmitHandler = e => {
     e.preventDefault();
     Axios.get(process.env.REACT_APP_API_URL+`/get-excess-report/${start_date}/${end_date}`)
@@ -76,13 +63,19 @@ export const ExcessReport = () => {
             <Form autoComplete="off" onSubmit={onSubmitHandler}>
               <Form.Group className="mb-3">
                 <Form.Label>Start Date</Form.Label>
-                <Form.Control name="start date" onChange={(e) => setStartDate(e.target.value)} placeholder="MM-DD-YYYY" />
+                <div className="dateSelect">
+                  <input type="date" onChange={e=>setStartDate(e.target.value)}></input>
+                </div>
+
+                {/* <Form.Control name="start date" onChange={(e) => setStartDate(e.target.value)} placeholder="MM-DD-YYYY" /> */}
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>End Date</Form.Label>
                 <InputGroup className="mb-3">
-                  <Form.Control name="end date" onChange={(e) => setEndDate(e.target.value)} placeholder="MM-DD-YYYY"/>
+                  <div className="dateSelect">
+                    <input type="date" onChange={e=>setEndDate(e.target.value)}></input>
+                  </div>
                 </InputGroup>
               </Form.Group>
 
@@ -94,29 +87,11 @@ export const ExcessReport = () => {
         </Card>
       </div>
     </>
+    
     )
   }
 
   const htmlSubmitted = () => {
-    // return (
-    //   <>
-    //   <div class="submitted-container">
-    //     <h2>Items in excess: </h2>
-    //     {excessItems.map(excessItem => (
-    //       <li key={excessItem.item_id}>{excessItem.name}</li>
-    //     ))}
-    //     <Link to="/ExtraFeatures"><button class="btn btn-outline-secondary" type="button">View Report</button></Link>
-    //   </div>
-    //   <style jsx="true">{`
-    //     .submitted-container {
-    //       display: flex;
-    //       justify-content: center;
-    //       align-items: center;
-    //       height: 100vh;
-    //     }
-    //   `}</style>
-    //   </>
-    // )
     return (
       <Card style={{
         backgroundColor: "#eee",
@@ -131,7 +106,6 @@ export const ExcessReport = () => {
           <Card.Text>
           {excessItems.map(excessItem => (
             <li key={excessItem.item_id}>{excessItem.name}</li>
-
           ))}
           </Card.Text>
           <Link to={"/ExtraFeatures"}><Button variant="primary">Done</Button></Link>

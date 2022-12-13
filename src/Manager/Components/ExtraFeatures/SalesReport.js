@@ -67,6 +67,22 @@ export const SalesReport = () => {
             <Form autoComplete="off" onSubmit={onSubmitHandler}>
               <Form.Group className="mb-3">
                 <Form.Label>Start Date</Form.Label>
+                <div className="dateSelect">
+                  <input type="date" onChange={e=>setStartDate(e.target.value)}></input>
+                </div>
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>End Date</Form.Label>
+                <InputGroup className="mb-3">
+                  <div className="dateSelect">
+                    <input type="date" onChange={e=>setEndDate(e.target.value)}></input>
+                  </div>
+                </InputGroup>
+              </Form.Group>
+
+              {/* <Form.Group className="mb-3">
+                <Form.Label>Start Date</Form.Label>
                 <Form.Control name="start_date" onChange={(e) => setStartDate(e.target.value)} placeholder="MM-DD-YYYY"/>
               </Form.Group>
 
@@ -75,7 +91,7 @@ export const SalesReport = () => {
                 <InputGroup className="mb-3">
                   <Form.Control name="end_date" onChange={(e) => setEndDate(e.target.value)} placeholder="MM-DD-YYYY"/>
                 </InputGroup>
-              </Form.Group>
+              </Form.Group> */}
 
               <Form.Group className="mb-3">
                 <Form.Label>Order Type</Form.Label>

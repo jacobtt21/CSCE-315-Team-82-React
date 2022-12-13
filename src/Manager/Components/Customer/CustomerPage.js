@@ -103,7 +103,7 @@ export const CustomerPage = () => {
       })
     }
     setOpen(o => !o)
-    sleep(3000).then(() => { window.location.reload(false); });
+    sleep(7000).then(() => { window.location.reload(false); });
   }
 
   const contentStyle = {
